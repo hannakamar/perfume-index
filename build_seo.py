@@ -12,20 +12,9 @@ VIBE_META = {
         "h1": "Feeling Fresh — Cooling Women's Perfumes for Hot Weather",
         "desc": "Compare official retail vs. verified discounter prices on crisp, cooling women's perfumes built for warm and hot weather.",
         "accent": "#38bdf8",
-        "bg": "#07131a",
-        "surface": "rgba(12, 29, 39, 0.9)",
-        "guide": "Hot-weather women's fragrances rely on high-clarity citrus (yuzu, Sicilian orange, Calabrian bergamot) paired with airy florals like peony, magnolia, and white musk so the scent stays crisp and refreshing rather than heavy in high humidity."
-    },
-    "sexy nights": {
-        "slug": "sexy-nights",
-        "gender": "Women",
-        "title": "Best Sexy Night Perfumes for Women — Date Night & Evening Price Index",
-        "h1": "Sexy Nights — Magnetic Evening & Date-Night Perfumes for Women",
-        "desc": "Compare official retail vs. verified deals on seductive, long-lasting women's evening perfumes with vanilla, amber, and white florals.",
-        "accent": "#f97316",
-        "bg": "#14080c",
-        "surface": "rgba(31, 13, 19, 0.9)",
-        "guide": "Evening and date-night women's fragrances anchor sweet gourmand notes (Madagascar vanilla, roasted tonka bean, cacao) with warm amber and tuberose for an intoxicating scent trail that projects in cool night air."
+        "bg": "#06131d",
+        "surface": "rgba(11, 29, 43, 0.9)",
+        "guide": "Hot-weather women's fragrances rely on high-clarity citrus (yuzu, Sicilian orange, Calabrian bergamot) paired with airy white blossoms like neroli, peony, and white musk so the scent stays crisp and refreshing rather than heavy in high humidity."
     },
     "9 to 5 energy": {
         "slug": "9-to-5-energy",
@@ -38,6 +27,17 @@ VIBE_META = {
         "surface": "rgba(12, 31, 25, 0.9)",
         "guide": "All-day signature scents balance clean citrus-floral openings with structured patchouli, lavender, and white musk bases so they project confidence for 8+ hours without overwhelming a boardroom."
     },
+    "sexy nights": {
+        "slug": "sexy-nights",
+        "gender": "Women",
+        "title": "Best Sexy Night Perfumes for Women — Date Night & Evening Price Index",
+        "h1": "Sexy Nights — Magnetic Evening & Date-Night Perfumes for Women",
+        "desc": "Compare official retail vs. verified deals on seductive, long-lasting women's evening perfumes with vanilla, amber, and white florals.",
+        "accent": "#f97316",
+        "bg": "#14080c",
+        "surface": "rgba(31, 13, 19, 0.9)",
+        "guide": "Evening and date-night women's fragrances anchor sweet gourmand notes (Madagascar vanilla, roasted tonka bean, cacao) with warm amber and tuberose for an intoxicating scent trail that projects in cool night air."
+    },
     "24/7 fresh": {
         "slug": "24-7-fresh",
         "gender": "Men",
@@ -45,8 +45,8 @@ VIBE_META = {
         "h1": "24/7 Fresh — Versatile Daily Men's Fragrances",
         "desc": "Compare official retail vs. verified discounter prices on crisp, clean daily men's colognes with bergamot, mint, and cedarwood.",
         "accent": "#38bdf8",
-        "bg": "#07121c",
-        "surface": "rgba(12, 26, 41, 0.9)",
+        "bg": "#06131d",
+        "surface": "rgba(11, 29, 43, 0.9)",
         "guide": "A true 24/7 daily men's fragrance combines sharp citrus-aromatic top notes (grapefruit, bergamot, mint) with dry woody ambroxan and cedar so it works effortlessly in cool mornings, at the gym, and at the office."
     },
     "main character": {
@@ -55,9 +55,9 @@ VIBE_META = {
         "title": "Best Bold Men's Perfumes for Day or Night (Main Character Index)",
         "h1": "Main Character — Bold Day-to-Night Perfumes for Men",
         "desc": "Compare official retail vs. verified deals on bold, compliment-getting men's fragrances engineered for standout projection day or night.",
-        "accent": "#eab308",
-        "bg": "#120f08",
-        "surface": "rgba(28, 23, 13, 0.9)",
+        "accent": "#10b981",
+        "bg": "#071410",
+        "surface": "rgba(12, 31, 25, 0.9)",
         "guide": "Main-character fragrances pair high-impact openings (pineapple, Sichuan pepper, spicy cardamom) with tenacious smoky birch, patchouli, and ambergris bases so your presence registers the moment you walk in."
     },
     "alpha male": {
@@ -66,9 +66,9 @@ VIBE_META = {
         "title": "Best Night & Clubbing Perfumes for Men (Alpha Male Price Index)",
         "h1": "Alpha Male — High-Projection Night Perfumes for Men",
         "desc": "Compare official retail vs. verified deals on dark, spicy, high-longevity men's night colognes built for after-hours dominance.",
-        "accent": "#ef4444",
-        "bg": "#140907",
-        "surface": "rgba(31, 15, 12, 0.9)",
+        "accent": "#f97316",
+        "bg": "#14080c",
+        "surface": "rgba(31, 13, 19, 0.9)",
         "guide": "Built specifically for nights out and cold weather, these formulations push warm cinnamon, toffee, chestnut, saffron, and amberwood for 10+ hours of heavy sillage."
     }
 }
@@ -586,13 +586,11 @@ def build_all():
     os.makedirs("perfume", exist_ok=True)
     os.makedirs("vibe", exist_ok=True)
 
-    # 1. Generate standalone product pages
     for p in products:
         page_html = build_perfume_page(p, products, base_url, last_optimized)
         with open(os.path.join("perfume", f"{p['id']}.html"), "w", encoding="utf-8") as f:
             f.write(page_html)
 
-    # 2. Generate standalone vibe pages
     for vibe_name, meta in VIBE_META.items():
         matching = [
             p for p in products
@@ -603,7 +601,6 @@ def build_all():
         with open(os.path.join("vibe", f"{meta['slug']}.html"), "w", encoding="utf-8") as f:
             f.write(vibe_html)
 
-    # 3. Pre-render index.html with static cards, table rows & JSON-LD schema
     if os.path.exists("index.html"):
         with open("index.html", "r", encoding="utf-8") as f:
             idx_html = f.read()
@@ -639,7 +636,6 @@ def build_all():
         with open("index.html", "w", encoding="utf-8") as f:
             f.write(idx_html)
 
-    # 4. Generate sitemap.xml & robots.txt
     urls = [
         (f"{base_url}/", "daily", "1.0")
     ]
