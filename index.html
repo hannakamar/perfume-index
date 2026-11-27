@@ -9,16 +9,16 @@
   <style>
     :root {
       --bg: #09090b;
-      --surface: #121216;
-      --surface-hover: #18181f;
-      --border: #262630;
+      --surface: rgba(18, 18, 22, 0.86);
+      --surface-hover: rgba(28, 28, 36, 0.94);
+      --border: rgba(255, 255, 255, 0.11);
       --text: #faf8f5;
       --ivory: #faf8f5;
-      --muted: #a1a1aa;
+      --muted: #b4b4be;
       --accent: #e5b869;
-      --accent-soft: rgba(229, 184, 105, 0.12);
+      --accent-soft: rgba(229, 184, 105, 0.15);
       --green: #10b981;
-      --green-soft: rgba(16, 185, 129, 0.14);
+      --green-soft: rgba(16, 185, 129, 0.16);
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -29,6 +29,40 @@
       color: var(--text);
       line-height: 1.5;
       -webkit-font-smoothing: antialiased;
+      min-height: 100vh;
+      position: relative;
+      transition: background-color 0.5s ease;
+    }
+
+    /* Dynamic Vibe Wallpaper Layer */
+    .vibe-bg-layer {
+      position: fixed;
+      inset: 0;
+      z-index: -2;
+      background-size: cover;
+      background-position: center center;
+      background-repeat: no-repeat;
+      opacity: 0;
+      transform: scale(1.03);
+      transition: opacity 0.65s ease, transform 0.8s ease;
+      pointer-events: none;
+    }
+
+    .vibe-bg-layer.active {
+      opacity: 1;
+      transform: scale(1);
+    }
+
+    /* Readability Vignette & Atmospheric Tint */
+    .vibe-bg-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: -1;
+      background:
+        radial-gradient(circle at 50% 18%, rgba(9, 9, 11, 0.42) 0%, rgba(9, 9, 11, 0.84) 75%, rgba(9, 9, 11, 0.95) 100%),
+        linear-gradient(180deg, rgba(9, 9, 11, 0.55) 0%, rgba(9, 9, 11, 0.78) 100%);
+      transition: background 0.5s ease;
+      pointer-events: none;
     }
 
     /* Two-Step Onboarding Gate */
@@ -36,12 +70,13 @@
       position: fixed;
       inset: 0;
       z-index: 100;
-      background: radial-gradient(circle at 50% 25%, #181820 0%, #09090b 75%);
+      background: radial-gradient(circle at 50% 25%, rgba(24, 24, 32, 0.94) 0%, rgba(9, 9, 11, 0.98) 75%);
       display: flex;
       align-items: center;
       justify-content: center;
       padding: 24px;
       transition: opacity 0.3s ease, visibility 0.3s ease;
+      backdrop-filter: blur(14px);
     }
 
     .vibe-gate.hidden {
@@ -58,8 +93,7 @@
       border-radius: 24px;
       padding: 40px 32px;
       text-align: center;
-      box-shadow: 0 30px 70px rgba(0, 0, 0, 0.8);
-      backdrop-filter: blur(16px);
+      box-shadow: 0 30px 70px rgba(0, 0, 0, 0.85);
     }
 
     .gate-logo {
@@ -106,7 +140,7 @@
     }
 
     .gender-choice-btn {
-      background: var(--surface);
+      background: rgba(255, 255, 255, 0.03);
       border: 1px solid var(--border);
       color: var(--text);
       border-radius: 16px;
@@ -145,7 +179,7 @@
     }
 
     .vibe-choice-btn {
-      background: var(--surface);
+      background: rgba(255, 255, 255, 0.04);
       border: 1px solid var(--border);
       color: var(--text);
       padding: 14px 22px;
@@ -197,8 +231,8 @@
       padding: 16px 0;
       position: sticky;
       top: 0;
-      background: rgba(9, 9, 11, 0.92);
-      backdrop-filter: blur(12px);
+      background: rgba(9, 9, 11, 0.78);
+      backdrop-filter: blur(16px);
       z-index: 40;
     }
 
@@ -220,7 +254,7 @@
       cursor: pointer;
     }
 
-    .brand span { color: var(--accent); }
+    .brand span { color: var(--accent); transition: color 0.3s ease; }
 
     .controls {
       display: flex;
@@ -232,13 +266,13 @@
     .quiz-reopen-btn {
       background: var(--accent-soft);
       color: var(--accent);
-      border: 1px solid rgba(229, 184, 105, 0.45);
+      border: 1px solid var(--accent);
       padding: 7px 13px;
       border-radius: 8px;
       font-size: 0.84rem;
       font-weight: 700;
       cursor: pointer;
-      transition: all 0.15s ease;
+      transition: all 0.2s ease;
     }
 
     .quiz-reopen-btn:hover {
@@ -254,6 +288,7 @@
       border-radius: 8px;
       font-size: 0.9rem;
       outline: none;
+      backdrop-filter: blur(10px);
     }
 
     select:focus, input:focus { border-color: var(--accent); }
@@ -269,12 +304,14 @@
       gap: 8px;
       background: var(--accent-soft);
       color: var(--accent);
-      border: 1px solid rgba(229, 184, 105, 0.35);
+      border: 1px solid var(--accent);
       padding: 6px 14px;
       border-radius: 999px;
       font-size: 0.8rem;
       font-weight: 600;
       margin-bottom: 14px;
+      backdrop-filter: blur(8px);
+      transition: all 0.3s ease;
     }
 
     .hero h1 {
@@ -283,13 +320,15 @@
       letter-spacing: -0.03em;
       max-width: 840px;
       margin: 0 auto 12px;
+      text-shadow: 0 4px 24px rgba(0,0,0,0.65);
     }
 
     .hero p {
-      color: var(--muted);
+      color: #e4e4e7;
       max-width: 680px;
       margin: 0 auto 18px;
       font-size: 1.02rem;
+      text-shadow: 0 2px 14px rgba(0,0,0,0.75);
     }
 
     .region-note {
@@ -300,6 +339,7 @@
       padding: 6px 14px;
       border-radius: 8px;
       border: 1px solid var(--border);
+      backdrop-filter: blur(10px);
     }
 
     .trust-strip {
@@ -315,6 +355,7 @@
       border-radius: 10px;
       padding: 12px 14px;
       font-size: 0.83rem;
+      backdrop-filter: blur(12px);
     }
 
     .trust-item strong {
@@ -322,6 +363,7 @@
       color: var(--accent);
       font-size: 0.86rem;
       margin-bottom: 2px;
+      transition: color 0.3s ease;
     }
 
     .trust-item span { color: var(--muted); }
@@ -358,6 +400,7 @@
       font-size: 0.85rem;
       font-weight: 600;
       transition: all 0.15s ease;
+      backdrop-filter: blur(10px);
     }
 
     .filter-btn.active, .filter-btn:hover,
@@ -371,13 +414,15 @@
       display: none;
       align-items: center;
       justify-content: space-between;
-      background: var(--accent-soft);
-      border: 1px solid rgba(229, 184, 105, 0.4);
-      border-radius: 12px;
-      padding: 10px 16px;
-      margin-bottom: 22px;
+      background: rgba(18, 18, 22, 0.82);
+      border: 1px solid var(--accent);
+      border-radius: 14px;
+      padding: 12px 18px;
+      margin-bottom: 24px;
       flex-wrap: wrap;
       gap: 10px;
+      backdrop-filter: blur(14px);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.45);
     }
 
     .active-vibe-bar.visible {
@@ -385,7 +430,7 @@
     }
 
     .active-vibe-text {
-      font-size: 0.9rem;
+      font-size: 0.92rem;
       color: var(--text);
     }
 
@@ -394,15 +439,23 @@
       text-transform: lowercase;
     }
 
+    .vibe-scene-caption {
+      display: block;
+      font-size: 0.78rem;
+      color: var(--muted);
+      margin-top: 2px;
+    }
+
     .clear-vibe-btn {
-      background: var(--bg);
+      background: rgba(9, 9, 11, 0.85);
       color: var(--text);
       border: 1px solid var(--border);
-      padding: 5px 12px;
-      border-radius: 6px;
+      padding: 6px 12px;
+      border-radius: 8px;
       font-size: 0.8rem;
       font-weight: 600;
       cursor: pointer;
+      transition: all 0.15s ease;
     }
 
     .clear-vibe-btn:hover {
@@ -426,12 +479,13 @@
       transition: transform 0.22s ease, border-color 0.22s ease, box-shadow 0.22s ease;
       perspective: 1100px;
       overflow: visible;
+      backdrop-filter: blur(14px);
     }
 
     .card:hover {
       transform: translateY(-4px);
-      border-color: rgba(229, 184, 105, 0.65);
-      box-shadow: 0 22px 42px rgba(0, 0, 0, 0.6);
+      border-color: var(--accent);
+      box-shadow: 0 22px 42px rgba(0, 0, 0, 0.7);
     }
 
     .stage-wrapper {
@@ -514,7 +568,7 @@
       z-index: 8;
       background: #09090b;
       color: var(--accent);
-      border: 1px solid rgba(229, 184, 105, 0.5);
+      border: 1px solid var(--accent);
       font-size: 0.7rem;
       font-weight: 700;
       padding: 3px 9px;
@@ -575,14 +629,14 @@
       font-size: 0.72rem;
       color: var(--accent);
       background: var(--accent-soft);
-      border: 1px solid rgba(229, 184, 105, 0.25);
+      border: 1px solid rgba(255, 255, 255, 0.14);
       padding: 2px 8px;
       border-radius: 999px;
       text-transform: lowercase;
     }
 
     .price-box {
-      background: rgba(9, 9, 11, 0.65);
+      background: rgba(9, 9, 11, 0.72);
       border: 1px solid var(--border);
       border-radius: 10px;
       padding: 12px;
@@ -633,6 +687,7 @@
       border-radius: 14px;
       overflow-x: auto;
       display: none;
+      backdrop-filter: blur(14px);
     }
 
     table {
@@ -717,6 +772,10 @@
 </head>
 <body>
 
+  <!-- Dynamic Vibe Background Wallpaper & Readability Overlay -->
+  <div class="vibe-bg-layer" id="vibe-bg-layer"></div>
+  <div class="vibe-bg-overlay" id="vibe-bg-overlay"></div>
+
   <!-- Two-Step Entry Gate -->
   <div class="vibe-gate" id="vibe-gate" role="dialog" aria-modal="true" aria-labelledby="gate-title">
     <div class="gate-card">
@@ -746,7 +805,7 @@
       <div id="gate-step-2" style="display:none;">
         <div class="gate-step-label" id="gate-step-2-badge">Step 2 of 2 • Men</div>
         <h2 class="gate-title">Pick your vibe</h2>
-        <p class="gate-subtitle">We’ll curate the highest-value authentic bottles for your mood.</p>
+        <p class="gate-subtitle">We’ll set the scene and curate the highest-value authentic bottles for your mood.</p>
         <div class="vibe-choice-grid" id="vibe-options-container"></div>
         <div class="gate-footer-actions">
           <button type="button" class="gate-link-btn" id="btn-gate-back">← Back to Men / Women</button>
@@ -807,10 +866,11 @@
     <div class="active-vibe-bar" id="active-vibe-bar">
       <div class="active-vibe-text">
         Showing <span id="active-vibe-gender">Men</span> fragrances matching vibe: <strong id="active-vibe-name">24/7 fresh</strong>
+        <span class="vibe-scene-caption" id="active-vibe-caption"></span>
       </div>
       <div style="display:flex; gap:8px;">
         <button type="button" class="clear-vibe-btn" id="btn-switch-vibe">Change Vibe</button>
-        <button type="button" class="clear-vibe-btn" id="btn-clear-vibe">Clear Filter ✕</button>
+        <button type="button" class="clear-vibe-btn" id="btn-clear-vibe">Clear Theme ✕</button>
       </div>
     </div>
 
@@ -857,12 +917,109 @@
       ]
     };
 
+    /* Per-Vibe Fullscreen Background & Accent Theme Engine */
+    const VIBE_THEMES = {
+      "feeling fresh": {
+        image: "./images/bg-feeling-fresh.jpg",
+        accent: "#7dd3fc",
+        accentSoft: "rgba(125, 211, 252, 0.16)",
+        overlay: "radial-gradient(circle at 50% 25%, rgba(12, 32, 48, 0.35) 0%, rgba(9, 13, 20, 0.82) 78%, rgba(9, 9, 11, 0.94) 100%)",
+        caption: "Dewy white florals, crisp citrus botanicals & cool mountain mist."
+      },
+      "sexy nights": {
+        image: "./images/bg-sexy-nights.jpg",
+        accent: "#f59e0b",
+        accentSoft: "rgba(245, 158, 11, 0.18)",
+        overlay: "radial-gradient(circle at 50% 20%, rgba(36, 14, 18, 0.32) 0%, rgba(12, 8, 10, 0.82) 75%, rgba(9, 9, 11, 0.95) 100%)",
+        caption: "Velvet shadows, warm golden spotlights & main-character luxury after dark."
+      },
+      "9 to 5 energy": {
+        image: "./images/bg-9-to-5-energy.jpg",
+        accent: "#fb7185",
+        accentSoft: "rgba(251, 113, 133, 0.18)",
+        overlay: "radial-gradient(circle at 50% 22%, rgba(28, 22, 32, 0.34) 0%, rgba(11, 11, 15, 0.84) 76%, rgba(9, 9, 11, 0.95) 100%)",
+        caption: "4:00 PM golden hour — walking in vivid color through a monochrome crowd."
+      },
+      "boyfriend seduce": {
+        image: "./images/bg-sexy-nights.jpg",
+        accent: "#f472b6",
+        accentSoft: "rgba(244, 114, 182, 0.16)",
+        overlay: "radial-gradient(circle at 50% 25%, rgba(45, 16, 34, 0.42) 0%, rgba(12, 9, 14, 0.86) 78%, rgba(9, 9, 11, 0.95) 100%)",
+        caption: "Warm vanilla, Turkish rose & close-encounter magnetic warmth."
+      },
+      "24/7 fresh": {
+        image: "./images/bg-feeling-fresh.jpg",
+        accent: "#38bdf8",
+        accentSoft: "rgba(56, 189, 248, 0.16)",
+        overlay: "radial-gradient(circle at 50% 25%, rgba(10, 28, 44, 0.4) 0%, rgba(9, 12, 18, 0.84) 78%, rgba(9, 9, 11, 0.95) 100%)",
+        caption: "Crisp bergamot, cold sea breeze & effortless clean confidence."
+      },
+      "seduce": {
+        image: "./images/bg-sexy-nights.jpg",
+        accent: "#e5b869",
+        accentSoft: "rgba(229, 184, 105, 0.18)",
+        overlay: "radial-gradient(circle at 50% 20%, rgba(38, 18, 12, 0.36) 0%, rgba(10, 9, 11, 0.84) 76%, rgba(9, 9, 11, 0.95) 100%)",
+        caption: "Spiced amber, tonka bean & late-night magnetic pull."
+      },
+      "main character nights": {
+        image: "./images/bg-sexy-nights.jpg",
+        accent: "#fbbf24",
+        accentSoft: "rgba(251, 191, 36, 0.18)",
+        overlay: "radial-gradient(circle at 50% 20%, rgba(28, 20, 12, 0.32) 0%, rgba(9, 9, 11, 0.82) 76%, rgba(9, 9, 11, 0.95) 100%)",
+        caption: "Every spotlight on you — bold sillage built to own the room."
+      },
+      "money vibes": {
+        image: "./images/bg-sexy-nights.jpg",
+        accent: "#34d399",
+        accentSoft: "rgba(52, 211, 153, 0.16)",
+        overlay: "radial-gradient(circle at 50% 22%, rgba(10, 32, 24, 0.44) 0%, rgba(9, 12, 11, 0.86) 76%, rgba(9, 9, 11, 0.95) 100%)",
+        caption: "Old-money woods, iris & quiet luxury."
+      },
+      "finance bro": {
+        image: "./images/bg-9-to-5-energy.jpg",
+        accent: "#60a5fa",
+        accentSoft: "rgba(96, 165, 250, 0.16)",
+        overlay: "radial-gradient(circle at 50% 22%, rgba(14, 24, 42, 0.45) 0%, rgba(9, 11, 16, 0.86) 76%, rgba(9, 9, 11, 0.95) 100%)",
+        caption: "Sharp tailored citrus, cedarwood & 7AM-to-closing-bell stamina."
+      }
+    };
+
+    const DEFAULT_THEME = {
+      image: "",
+      accent: "#e5b869",
+      accentSoft: "rgba(229, 184, 105, 0.15)",
+      overlay: "radial-gradient(circle at 50% 18%, rgba(9, 9, 11, 0.42) 0%, rgba(9, 9, 11, 0.84) 75%, rgba(9, 9, 11, 0.95) 100%)",
+      caption: ""
+    };
+
     let siteData = null;
     let activeCountry = "US";
     let activeGender = "ALL";
     let activeVibe = null;
     let selectedGateGender = null;
     let searchQuery = "";
+
+    function applyVibeTheme(vibe) {
+      const key = (vibe || "").toLowerCase();
+      const theme = VIBE_THEMES[key] || DEFAULT_THEME;
+      const root = document.documentElement;
+      const bgLayer = document.getElementById("vibe-bg-layer");
+      const bgOverlay = document.getElementById("vibe-bg-overlay");
+      const captionEl = document.getElementById("active-vibe-caption");
+
+      root.style.setProperty("--accent", theme.accent);
+      root.style.setProperty("--accent-soft", theme.accentSoft);
+      bgOverlay.style.background = theme.overlay;
+      captionEl.textContent = theme.caption || "";
+
+      if (theme.image) {
+        bgLayer.style.backgroundImage = `url('${theme.image}')`;
+        bgLayer.classList.add("active");
+      } else {
+        bgLayer.classList.remove("active");
+        bgLayer.style.backgroundImage = "none";
+      }
+    }
 
     /* Two-Step Gate Logic */
     const vibeGate = document.getElementById("vibe-gate");
@@ -914,6 +1071,7 @@
         b.classList.toggle("active", b.dataset.gender.toLowerCase() === gender.toLowerCase());
       });
 
+      applyVibeTheme(vibe);
       updateActiveVibeBanner();
       renderCatalog();
     }
@@ -954,6 +1112,7 @@
     });
     document.getElementById("btn-clear-vibe").addEventListener("click", () => {
       activeVibe = null;
+      applyVibeTheme(null);
       updateActiveVibeBanner();
       renderCatalog();
     });
@@ -1241,6 +1400,7 @@
         btn.classList.add("active");
         activeGender = btn.dataset.gender;
         activeVibe = null;
+        applyVibeTheme(null);
         updateActiveVibeBanner();
         renderCatalog();
       });
