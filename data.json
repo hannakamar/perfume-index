@@ -10,10 +10,10 @@
       "currency": "USD",
       "symbol": "$",
       "rate_from_usd": 1.0,
-      "vat_note": "Excludes state sales tax (avg. 6–9% at department stores)",
+      "vat_note": "Prices exclude state sales tax (avg. 6–9% at department stores)",
       "shipping_note": "Free tracked international/US delivery on bundles",
-      "seo_title": "Best Men & Women Perfume Prices USA (2026 Retail vs. Online Index)",
-      "seo_intro": "Compare standard US department store fragrance retail prices against verified online discounters. Find the best deals on men's and women's perfumes.",
+      "seo_title": "Compare Fragrance Prices: US Retail vs. Online Discounter Index (2026)",
+      "seo_intro": "Stop overpaying at department stores. Compare official US retail prices against verified online discounters to find the best deals on luxury and niche fragrances.",
       "priority_score": 100
     },
     "GB": {
@@ -24,8 +24,8 @@
       "rate_from_usd": 0.79,
       "vat_note": "UK retail prices include 20% VAT",
       "shipping_note": "Tracked UK delivery included on selected listings",
-      "seo_title": "Cheapest Men & Women Perfume Prices UK (2026 Price Comparison)",
-      "seo_intro": "Compare UK high-street perfume prices against global online discounters. Save on men's and women's fragrances with our 2026 price index.",
+      "seo_title": "Cheapest Perfume Prices UK: Retail vs. Online Price Comparison 2026",
+      "seo_intro": "Find the lowest prices for men's and women's perfumes in the UK. We track high-street retail costs versus online discounters to help you save on every bottle.",
       "priority_score": 95
     },
     "DE": {
@@ -36,8 +36,8 @@
       "rate_from_usd": 0.92,
       "vat_note": "German retail prices include 19% MwSt (VAT)",
       "shipping_note": "Fast EU tracked shipping available",
-      "seo_title": "Herren & Damen Parfüm Preise Deutschland (2026 Preisvergleich)",
-      "seo_intro": "Vergleichen Sie reguläre Einzelhandelspreise für Herren- und Damenparfüm in Deutschland mit geprüften Online-Angeboten und Duft-Sets.",
+      "seo_title": "Parfüm Preisvergleich Deutschland: Einzelhandel vs. Online (2026)",
+      "seo_intro": "Sparen Sie beim Parfümkauf: Vergleichen Sie deutsche Einzelhandelspreise mit günstigen Online-Angeboten. Ihr transparentes Preis-Index für 2026.",
       "priority_score": 90
     },
     "AE": {
@@ -48,8 +48,8 @@
       "rate_from_usd": 3.67,
       "vat_note": "UAE retail prices include 5% VAT",
       "shipping_note": "Express regional & international tracked dispatch",
-      "seo_title": "Best Men & Women Perfume Prices UAE (2026 Dubai Price Index)",
-      "seo_intro": "Compare Dubai & Abu Dhabi mall retail fragrance prices for men and women against direct online bundle rates.",
+      "seo_title": "Dubai Fragrance Price Index: Mall Retail vs. Online Deals (2026)",
+      "seo_intro": "Compare luxury fragrance prices in Dubai and Abu Dhabi malls against global online discounters. Get the best value on your favorite scents today.",
       "priority_score": 85
     },
     "IL": {
@@ -60,8 +60,8 @@
       "rate_from_usd": 3.65,
       "vat_note": "Local retail prices include 18% VAT; orders under $75 are exempt from import VAT",
       "shipping_note": "Local & international tracked shipping options",
-      "seo_title": "מחירי בשמים לגברים ולנשים בישראל (מדד מחירים 2026)",
-      "seo_intro": "השוואת מחירי בשמים לגברים ולנשים ברשתות הפארם בישראל מול מחירי אונליין ומארזים משתלמים.",
+      "seo_title": "מדד מחירי בשמים בישראל: רתייל מול אונליין (2026)",
+      "seo_intro": "השוואת מחירי בשמים בישראל בין רתייל מקומי לאתרי אונליין בינלאומיים. מצאו את הדילים הטובים ביותר.",
       "priority_score": 75
     }
   },
@@ -77,7 +77,7 @@
       "direct_usd": 255,
       "ebay_url": "https://www.ebay.com/usr/YOUR_EBAY_STORE",
       "direct_url": "#direct-checkout-placeholder",
-      "badge": "High Demand • Fresh Citrus"
+      "badge": "Top Arbitrage Deal • High Demand"
     },
     {
       "id": "jpg-le-beau-lp-125",
@@ -90,7 +90,7 @@
       "direct_usd": 98,
       "ebay_url": "https://www.ebay.com/usr/YOUR_EBAY_STORE",
       "direct_url": "#direct-checkout-placeholder",
-      "badge": "Best Seller • Men"
+      "badge": "Best Seller • Deep Savings"
     },
     {
       "id": "lattafa-khamrah-100",
@@ -103,7 +103,7 @@
       "direct_usd": 34,
       "ebay_url": "https://www.ebay.com/usr/YOUR_EBAY_STORE",
       "direct_url": "#direct-checkout-placeholder",
-      "badge": "Top Value • Unisex"
+      "badge": "Top Value • High Savings"
     },
     {
       "id": "lattafa-ana-abiyedh-60",
@@ -116,7 +116,7 @@
       "direct_usd": 24,
       "ebay_url": "https://www.ebay.com/usr/YOUR_EBAY_STORE",
       "direct_url": "#direct-checkout-placeholder",
-      "badge": "Popular • Women & Unisex"
+      "badge": "Popular • Best Price"
     },
     {
       "id": "yara-lattafa-100",
@@ -129,7 +129,7 @@
       "direct_usd": 28,
       "ebay_url": "https://www.ebay.com/usr/YOUR_EBAY_STORE",
       "direct_url": "#direct-checkout-placeholder",
-      "badge": "Trending • Women"
+      "badge": "Trending • Top Arbitrage"
     },
     {
       "id": "duo-bundle-arabian",
@@ -142,7 +142,7 @@
       "direct_usd": 55,
       "ebay_url": "https://www.ebay.com/usr/YOUR_EBAY_STORE",
       "direct_url": "#direct-checkout-placeholder",
-      "badge": "Save 45% • Bundle Deal"
+      "badge": "Save 45% • Best Bundle Deal"
     }
   ],
   "agent_metadata": {
@@ -154,7 +154,8 @@
     "optimization_log": [
       "Initial baseline dataset created for US, GB, DE, AE, IL.",
       "Optimized SEO titles and intros for US, GB, DE, and AE based on traffic telemetry and high-intent keyword alignment.",
-      "Maintained existing country priority and product data integrity."
+      "Maintained existing country priority and product data integrity.",
+      "Refined product badges to emphasize arbitrage savings and value proposition."
     ]
   }
 }
