@@ -5,14 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title id="page-title">PerfumeIndex — Authentic Designer & Niche Fragrance Price Index</title>
   <meta id="page-desc" name="description" content="Compare official retail perfume prices against verified online discounter and eBay prices in real time. Transparent global fragrance pricing." />
-  <link rel="canonical" href="https://perfume-index.pages.dev/" />
-  <meta property="og:title" content="PerfumeIndex — Authentic Designer & Niche Fragrance Price Index" />
-  <meta property="og:description" content="Verify official retail prices directly on brand websites and save up to 40% on 100% authentic, factory-sealed fragrances." />
-  <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://perfume-index.pages.dev/" />
   <meta name="google-site-verification" content="esZH6uu-ZadtegfLGuvYAmj8m_bU2ymBNALASh5lPIE" />
-  <!-- SSR_SCHEMA_START -->
-  <!-- SSR_SCHEMA_END -->
   <style>
     :root {
       --bg: #09090b;
@@ -62,7 +55,7 @@
       user-select: none;
     }
 
-    /* Gate Rising Particles Overlay Layer (Fire, Money, White Flowers) */
+    /* Gate Fire/Ember Overlay Layer */
     .vibe-gate-canvas {
       position: absolute;
       inset: 0;
@@ -126,7 +119,7 @@
 
     .gate-card {
       width: 100%;
-      max-width: 680px;
+      max-width: 620px;
       background: rgba(18, 18, 22, 0.94);
       border: 1px solid rgba(229, 184, 105, 0.35);
       border-radius: 24px;
@@ -227,70 +220,40 @@
     }
 
     .vibe-choice-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 14px;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 12px;
       margin-bottom: 26px;
       position: relative;
       z-index: 30;
-    }
-
-    @media (max-width: 600px) {
-      .vibe-choice-grid {
-        grid-template-columns: 1fr;
-      }
     }
 
     .vibe-choice-btn {
       background: rgba(255, 255, 255, 0.04);
       border: 1px solid var(--border);
       color: var(--text);
-      padding: 18px 16px;
-      border-radius: 16px;
+      padding: 14px 22px;
+      border-radius: 999px;
+      font-size: 0.98rem;
+      font-weight: 700;
       cursor: pointer;
       transition: transform 0.18s ease, background 0.18s ease, border-color 0.18s ease, box-shadow 0.18s ease;
+      text-transform: lowercase;
       position: relative;
       z-index: 35;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      gap: 6px;
-      text-align: center;
-    }
-
-    .vibe-choice-name {
-      font-size: 1.02rem;
-      font-weight: 800;
-      text-transform: lowercase;
-      letter-spacing: -0.01em;
-    }
-
-    .vibe-choice-desc {
-      font-size: 0.78rem;
-      font-weight: 500;
-      color: var(--muted);
-      line-height: 1.3;
     }
 
     .vibe-choice-btn:hover {
-      background: rgba(255, 255, 255, 0.09);
-      transform: translateY(-3px);
+      background: var(--accent);
+      color: #09090b;
+      border-color: var(--accent);
+      transform: translateY(-2px);
     }
 
-    .vibe-hover-flowers {
-      border-color: #38bdf8 !important;
-      box-shadow: 0 0 22px rgba(56, 189, 248, 0.55);
-    }
-
-    .vibe-hover-money {
-      border-color: #10b981 !important;
-      box-shadow: 0 0 22px rgba(16, 185, 129, 0.55);
-    }
-
-    .vibe-hover-fire {
+    .sexy-fire-hover {
       border-color: #f97316 !important;
-      box-shadow: 0 0 22px rgba(249, 115, 22, 0.55);
+      box-shadow: 0 0 18px rgba(249, 115, 22, 0.55);
     }
 
     .gate-footer-actions {
@@ -331,7 +294,6 @@
       background: rgba(9, 9, 11, 0.82);
       backdrop-filter: blur(12px);
       z-index: 40;
-      transition: border-color 0.4s ease;
     }
 
     .nav {
@@ -352,7 +314,7 @@
       cursor: pointer;
     }
 
-    .brand span { color: var(--accent); transition: color 0.4s ease; }
+    .brand span { color: var(--accent); transition: color 0.3s ease; }
 
     .controls {
       display: flex;
@@ -370,7 +332,7 @@
       font-size: 0.84rem;
       font-weight: 700;
       cursor: pointer;
-      transition: background 0.2s ease, color 0.2s ease, border-color 0.4s ease;
+      transition: background 0.2s ease, color 0.2s ease;
     }
 
     .quiz-reopen-btn:hover {
@@ -386,7 +348,6 @@
       border-radius: 8px;
       font-size: 0.9rem;
       outline: none;
-      transition: border-color 0.3s ease, background-color 0.4s ease;
     }
 
     select:focus, input:focus { border-color: var(--accent); }
@@ -408,7 +369,7 @@
       font-size: 0.8rem;
       font-weight: 600;
       margin-bottom: 14px;
-      transition: all 0.4s ease;
+      transition: all 0.3s ease;
     }
 
     .hero h1 {
@@ -436,31 +397,6 @@
       padding: 6px 14px;
       border-radius: 8px;
       border: 1px solid var(--border);
-      transition: background-color 0.4s ease, border-color 0.4s ease;
-    }
-
-    .vibe-seo-nav {
-      display: flex;
-      justify-content: center;
-      flex-wrap: wrap;
-      gap: 8px;
-      margin-top: 16px;
-    }
-
-    .vibe-seo-link {
-      font-size: 0.78rem;
-      color: var(--muted);
-      background: rgba(18, 18, 22, 0.75);
-      border: 1px solid var(--border);
-      padding: 4px 11px;
-      border-radius: 999px;
-      text-decoration: none;
-      transition: all 0.2s ease;
-    }
-
-    .vibe-seo-link:hover {
-      color: var(--accent);
-      border-color: var(--accent);
     }
 
     .trust-strip {
@@ -476,7 +412,6 @@
       border-radius: 10px;
       padding: 12px 14px;
       font-size: 0.83rem;
-      transition: background-color 0.4s ease, border-color 0.4s ease;
     }
 
     .trust-item strong {
@@ -484,7 +419,7 @@
       color: var(--accent);
       font-size: 0.86rem;
       margin-bottom: 2px;
-      transition: color 0.4s ease;
+      transition: color 0.3s ease;
     }
 
     .trust-item span { color: var(--muted); }
@@ -520,7 +455,7 @@
       cursor: pointer;
       font-size: 0.85rem;
       font-weight: 600;
-      transition: all 0.2s ease;
+      transition: all 0.15s ease;
     }
 
     .filter-btn.active, .filter-btn:hover,
@@ -534,7 +469,7 @@
       display: none;
       align-items: center;
       justify-content: space-between;
-      background: var(--surface);
+      background: rgba(18, 18, 22, 0.9);
       border: 1px solid var(--accent);
       border-radius: 14px;
       padding: 12px 18px;
@@ -542,7 +477,6 @@
       flex-wrap: wrap;
       gap: 10px;
       box-shadow: 0 10px 30px rgba(0,0,0,0.45);
-      transition: background-color 0.4s ease, border-color 0.4s ease;
     }
 
     .active-vibe-bar.visible {
@@ -596,7 +530,7 @@
       border-radius: 18px;
       display: flex;
       flex-direction: column;
-      transition: transform 0.22s ease, border-color 0.3s ease, box-shadow 0.22s ease, background-color 0.4s ease;
+      transition: transform 0.22s ease, border-color 0.22s ease, box-shadow 0.22s ease;
       perspective: 1100px;
       overflow: visible;
       will-change: transform;
@@ -635,7 +569,6 @@
       border-radius: 8px;
       pointer-events: none;
       z-index: 2;
-      transition: border-color 0.4s ease;
     }
 
     .bottle-img {
@@ -696,7 +629,6 @@
       padding: 3px 9px;
       border-radius: 999px;
       transform: translateZ(35px);
-      transition: color 0.4s ease, border-color 0.4s ease;
     }
 
     .card-savings {
@@ -727,7 +659,6 @@
       letter-spacing: 0.08em;
       color: var(--accent);
       font-weight: 700;
-      transition: color 0.4s ease;
     }
 
     .card-title {
@@ -757,7 +688,6 @@
       padding: 2px 8px;
       border-radius: 999px;
       text-transform: lowercase;
-      transition: color 0.4s ease, background-color 0.4s ease;
     }
 
     .price-box {
@@ -859,7 +789,7 @@
       font-weight: 700;
       text-decoration: none;
       cursor: pointer;
-      transition: opacity 0.15s ease, background-color 0.4s ease;
+      transition: opacity 0.15s ease;
       white-space: nowrap;
     }
 
@@ -919,11 +849,11 @@
         <div class="gender-choice-grid">
           <button type="button" class="gender-choice-btn" data-select-gender="Men">
             <span class="gender-choice-title">Men</span>
-            <span class="gender-choice-sub">Fresh daily, bold &amp; night scents</span>
+            <span class="gender-choice-sub">Fresh, seductive &amp; power scents</span>
           </button>
           <button type="button" class="gender-choice-btn" id="women-gate-trigger" data-select-gender="Women">
             <span class="gender-choice-title">Women</span>
-            <span class="gender-choice-sub">Cooling fresh, all-day &amp; night scents</span>
+            <span class="gender-choice-sub">Clean, alluring &amp; boss energy</span>
           </button>
         </div>
         <div class="gate-footer-actions">
@@ -935,7 +865,7 @@
       <div id="gate-step-2" style="display:none;">
         <div class="gate-step-label" id="gate-step-2-badge">Step 2 of 2 • Men</div>
         <h2 class="gate-title">Pick your vibe</h2>
-        <p class="gate-subtitle">Hover a vibe to preview its aura, then click to transform the page theme.</p>
+        <p class="gate-subtitle">We’ll set the scene and curate the highest-value authentic bottles for your mood.</p>
         <div class="vibe-choice-grid" id="vibe-options-container"></div>
         <div class="gate-footer-actions">
           <button type="button" class="gate-link-btn" id="btn-gate-back">← Back to Men / Women</button>
@@ -961,15 +891,7 @@
       <div class="badge-pill" id="last-updated-badge">Live Price Index • Updated Daily</div>
       <h1 id="hero-title">Authentic Designer & Niche Fragrance Price Index</h1>
       <p id="hero-intro">Verify official retail prices directly on brand websites and save up to 40% on 100% authentic, factory-sealed fragrances.</p>
-      <div class="region-note" id="region-note">Prices shown in USD before state sales tax.</div>
-      <nav class="vibe-seo-nav" aria-label="Curated Fragrance Vibes">
-        <a href="/vibe/feeling-fresh.html" class="vibe-seo-link">Feeling Fresh (Women)</a>
-        <a href="/vibe/9-to-5-energy.html" class="vibe-seo-link">9 to 5 Energy (Women)</a>
-        <a href="/vibe/sexy-nights.html" class="vibe-seo-link">Sexy Nights (Women)</a>
-        <a href="/vibe/24-7-fresh.html" class="vibe-seo-link">24/7 Fresh (Men)</a>
-        <a href="/vibe/main-character.html" class="vibe-seo-link">Main Character (Men)</a>
-        <a href="/vibe/alpha-male.html" class="vibe-seo-link">Alpha Male (Men)</a>
-      </nav>
+      <div class="region-note" id="region-note">Loading local currency & tax data...</div>
     </section>
 
     <section class="trust-strip">
@@ -1012,10 +934,7 @@
       </div>
     </div>
 
-    <section id="product-grid" class="product-grid">
-      <!-- SSR_GRID_START -->
-      <!-- SSR_GRID_END -->
-    </section>
+    <section id="product-grid" class="product-grid"></section>
 
     <div class="table-wrap" id="table-wrap">
       <table>
@@ -1029,10 +948,7 @@
             <th>Buy Verified</th>
           </tr>
         </thead>
-        <tbody id="price-table-body">
-          <!-- SSR_TABLE_START -->
-          <!-- SSR_TABLE_END -->
-        </tbody>
+        <tbody id="price-table-body"></tbody>
       </table>
     </div>
   </main>
@@ -1045,99 +961,101 @@
   </footer>
 
   <script>
-    /* Matching 1-2-3 Order Across Women and Men */
     const VIBE_OPTIONS = {
-      Women: [
-        { name: "feeling fresh", desc: "Hot weather — keeps you cool", effect: "flowers" },
-        { name: "9 to 5 energy", desc: "All day use", effect: "money" },
-        { name: "sexy nights", desc: "For the nights", effect: "fire" }
-      ],
       Men: [
-        { name: "24/7 fresh", desc: "Cool weather daily use", effect: "flowers" },
-        { name: "main character", desc: "Bold perfume day or night use", effect: "money" },
-        { name: "alpha male", desc: "Perfumes for nights", effect: "fire" }
+        "24/7 fresh",
+        "main character",
+        "alpha male"
+      ],
+      Women: [
+        "feeling fresh",
+        "9 to 5 energy",
+        "sexy nights"
       ]
-    };
-
-    const VIBE_SLUGS = {
-      "feeling fresh": "feeling-fresh",
-      "9 to 5 energy": "9-to-5-energy",
-      "sexy nights": "sexy-nights",
-      "24/7 fresh": "24-7-fresh",
-      "main character": "main-character",
-      "alpha male": "alpha-male"
-    };
-
-    /* Paired Matching Color Themes */
-    const FRESH_BLUE_THEME = {
-      bg: "#06131d",
-      surface: "rgba(11, 29, 43, 0.88)",
-      surfaceHover: "rgba(16, 42, 62, 0.94)",
-      border: "rgba(56, 189, 248, 0.28)",
-      accent: "#38bdf8",
-      accentSoft: "rgba(56, 189, 248, 0.16)",
-      overlay: "radial-gradient(circle at 50% 25%, rgba(12, 42, 64, 0.36) 0%, rgba(6, 19, 29, 0.84) 78%, rgba(6, 19, 29, 0.96) 100%)"
-    };
-
-    const POWER_MONEY_THEME = {
-      bg: "#071410",
-      surface: "rgba(12, 31, 25, 0.88)",
-      surfaceHover: "rgba(18, 44, 35, 0.94)",
-      border: "rgba(16, 185, 129, 0.28)",
-      accent: "#10b981",
-      accentSoft: "rgba(16, 185, 129, 0.18)",
-      overlay: "radial-gradient(circle at 50% 22%, rgba(14, 42, 32, 0.36) 0%, rgba(7, 20, 16, 0.84) 76%, rgba(7, 20, 16, 0.96) 100%)"
-    };
-
-    const NIGHT_FIRE_THEME = {
-      bg: "#14080c",
-      surface: "rgba(31, 13, 19, 0.88)",
-      surfaceHover: "rgba(44, 18, 27, 0.94)",
-      border: "rgba(249, 115, 22, 0.28)",
-      accent: "#f97316",
-      accentSoft: "rgba(249, 115, 22, 0.18)",
-      overlay: "radial-gradient(circle at 50% 20%, rgba(48, 16, 22, 0.34) 0%, rgba(20, 8, 12, 0.84) 75%, rgba(20, 8, 12, 0.96) 100%)"
     };
 
     const VIBE_THEMES = {
       "feeling fresh": {
-        ...FRESH_BLUE_THEME,
         image: "./images/bg-feeling-fresh.jpg",
-        caption: "Hot weather — keeps you cool with dewy white blossoms & crisp botanicals."
-      },
-      "24/7 fresh": {
-        ...FRESH_BLUE_THEME,
-        image: "./images/bg-24-7-fresh.jpg",
-        caption: "Cool weather daily use — glacial bergamot, white neroli & clean woods."
-      },
-      "9 to 5 energy": {
-        ...POWER_MONEY_THEME,
-        image: "./images/bg-9-to-5-energy.jpg",
-        caption: "All day use — crisp boss energy from morning meetings to evening drinks."
-      },
-      "main character": {
-        ...POWER_MONEY_THEME,
-        image: "./images/bg-main-character-nights.jpg",
-        caption: "Bold perfume day or night use — unmistakable presence wherever you walk in."
+        accent: "#7dd3fc",
+        accentSoft: "rgba(125, 211, 252, 0.16)",
+        overlay: "radial-gradient(circle at 50% 25%, rgba(12, 32, 48, 0.35) 0%, rgba(9, 13, 20, 0.82) 78%, rgba(9, 9, 11, 0.94) 100%)",
+        caption: "Dewy white florals, crisp citrus botanicals & cool mountain mist."
       },
       "sexy nights": {
-        ...NIGHT_FIRE_THEME,
         image: "./images/bg-sexy-nights.jpg",
-        caption: "For the nights — velvet shadows, warm spice & magnetic intensity after dark."
+        accent: "#f59e0b",
+        accentSoft: "rgba(245, 158, 11, 0.18)",
+        overlay: "radial-gradient(circle at 50% 20%, rgba(36, 14, 18, 0.32) 0%, rgba(12, 8, 10, 0.82) 75%, rgba(9, 9, 11, 0.95) 100%)",
+        caption: "Velvet shadows, warm golden spotlights & main-character luxury after dark."
+      },
+      "9 to 5 energy": {
+        image: "./images/bg-9-to-5-energy.jpg",
+        accent: "#fb7185",
+        accentSoft: "rgba(251, 113, 133, 0.18)",
+        overlay: "radial-gradient(circle at 50% 22%, rgba(28, 22, 32, 0.34) 0%, rgba(11, 11, 15, 0.84) 76%, rgba(9, 9, 11, 0.95) 100%)",
+        caption: "4:00 PM golden hour — walking in vivid color through a monochrome crowd."
+      },
+      "boyfriend seduce": {
+        image: "./images/bg-boyfriend-seduce.jpg",
+        accent: "#f472b6",
+        accentSoft: "rgba(244, 114, 182, 0.16)",
+        overlay: "radial-gradient(circle at 50% 25%, rgba(45, 16, 34, 0.38) 0%, rgba(12, 9, 14, 0.84) 78%, rgba(9, 9, 11, 0.95) 100%)",
+        caption: "Warm Madagascar vanilla, Turkish rose & candlelit velvet intimacy."
+      },
+      "24/7 fresh": {
+        image: "./images/bg-24-7-fresh.jpg",
+        accent: "#38bdf8",
+        accentSoft: "rgba(56, 189, 248, 0.16)",
+        overlay: "radial-gradient(circle at 50% 25%, rgba(10, 28, 44, 0.36) 0%, rgba(9, 12, 18, 0.82) 78%, rgba(9, 9, 11, 0.95) 100%)",
+        caption: "Glacial Calabrian bergamot, crushed mint & crisp sea salt."
+      },
+      "main character": {
+        image: "./images/bg-main-character-nights.jpg",
+        accent: "#fbbf24",
+        accentSoft: "rgba(251, 191, 36, 0.18)",
+        overlay: "radial-gradient(circle at 50% 20%, rgba(28, 20, 12, 0.32) 0%, rgba(9, 9, 11, 0.82) 76%, rgba(9, 9, 11, 0.95) 100%)",
+        caption: "Signature presence — effortless charisma from day into midnight."
       },
       "alpha male": {
-        ...NIGHT_FIRE_THEME,
         image: "./images/bg-seduce.jpg",
-        caption: "Perfumes for nights — dark amber, spiced leather & smoky after-hours dominance."
+        accent: "#e5b869",
+        accentSoft: "rgba(229, 184, 105, 0.18)",
+        overlay: "radial-gradient(circle at 50% 20%, rgba(38, 18, 12, 0.34) 0%, rgba(10, 9, 11, 0.83) 76%, rgba(9, 9, 11, 0.95) 100%)",
+        caption: "Warm tonka bean, spiced tobacco, amberwood & commanding projection."
+      },
+      "seduce": {
+        image: "./images/bg-seduce.jpg",
+        accent: "#e5b869",
+        accentSoft: "rgba(229, 184, 105, 0.18)",
+        overlay: "radial-gradient(circle at 50% 20%, rgba(38, 18, 12, 0.34) 0%, rgba(10, 9, 11, 0.83) 76%, rgba(9, 9, 11, 0.95) 100%)",
+        caption: "Roasted tonka bean, spiced cinnamon & smoky dark cacao."
+      },
+      "main character nights": {
+        image: "./images/bg-main-character-nights.jpg",
+        accent: "#fbbf24",
+        accentSoft: "rgba(251, 191, 36, 0.18)",
+        overlay: "radial-gradient(circle at 50% 20%, rgba(28, 20, 12, 0.32) 0%, rgba(9, 9, 11, 0.82) 76%, rgba(9, 9, 11, 0.95) 100%)",
+        caption: "Penthouse skyline after midnight — every spotlight on you."
+      },
+      "money vibes": {
+        image: "./images/bg-money-vibes.jpg",
+        accent: "#34d399",
+        accentSoft: "rgba(52, 211, 153, 0.16)",
+        overlay: "radial-gradient(circle at 50% 22%, rgba(10, 32, 24, 0.38) 0%, rgba(9, 12, 11, 0.84) 76%, rgba(9, 9, 11, 0.95) 100%)",
+        caption: "Aged oud wood, raw amber resin & private-library wealth."
+      },
+      "finance bro": {
+        image: "./images/bg-finance-bro.jpg",
+        accent: "#60a5fa",
+        accentSoft: "rgba(96, 165, 250, 0.16)",
+        overlay: "radial-gradient(circle at 50% 22%, rgba(14, 24, 42, 0.4) 0%, rgba(9, 11, 16, 0.84) 76%, rgba(9, 9, 11, 0.95) 100%)",
+        caption: "Dawn glass towers, sharp cedarwood, grapefruit zest & cold espresso."
       }
     };
 
     const DEFAULT_THEME = {
       image: "",
-      bg: "#09090b",
-      surface: "rgba(18, 18, 22, 0.86)",
-      surfaceHover: "rgba(28, 28, 36, 0.94)",
-      border: "rgba(255, 255, 255, 0.11)",
       accent: "#e5b869",
       accentSoft: "rgba(229, 184, 105, 0.15)",
       overlay: "radial-gradient(circle at 50% 18%, rgba(9, 9, 11, 0.42) 0%, rgba(9, 9, 11, 0.84) 75%, rgba(9, 9, 11, 0.95) 100%)",
@@ -1157,62 +1075,23 @@
       if (el) el.textContent = "Status: " + msg;
     }
 
+    /* --- 1. Hardware-Composited Card Border Sprites (Fires Once on Enter + Repeats While Inside Square) --- */
     const borderFxLayer = document.getElementById("border-fx-layer");
     const BORDER_ITEMS = ["💄", "👠", "💋", "🌸", "🌹", "🌺", "🌷"];
     const SPRITE_URLS = {};
 
-    function bakeEmojiSprite(emoji, size = 80) {
-      const c = document.createElement("canvas");
-      c.width = size;
-      c.height = size;
-      const ctx = c.getContext("2d");
-      ctx.font = `${Math.round(size * 0.6)}px 'Apple Color Emoji', 'Segoe UI Emoji', 'Noto Color Emoji', sans-serif`;
-      ctx.textAlign = "center";
-      ctx.textBaseline = "middle";
-      ctx.fillText(emoji, size / 2, size / 2);
-      return c;
-    }
-
-    /* Crisp White 5-Petal Neroli / Jasmine Blossom Sprite */
-    function bakeWhiteFlowerSprite(size = 56, centerColor = "#bae6fd") {
-      const c = document.createElement("canvas");
-      c.width = size;
-      c.height = size;
-      const ctx = c.getContext("2d");
-      const cx = size / 2;
-      const cy = size / 2;
-
-      ctx.save();
-      ctx.shadowColor = "rgba(186, 230, 253, 0.85)";
-      ctx.shadowBlur = 6;
-
-      for (let i = 0; i < 5; i++) {
-        const angle = (i * Math.PI * 2) / 5 - Math.PI / 2;
-        ctx.save();
-        ctx.translate(cx, cy);
-        ctx.rotate(angle);
-        ctx.beginPath();
-        ctx.ellipse(0, -size * 0.22, size * 0.115, size * 0.2, 0, 0, Math.PI * 2);
-        const grad = ctx.createRadialGradient(0, -size * 0.16, 1, 0, -size * 0.22, size * 0.22);
-        grad.addColorStop(0, "#ffffff");
-        grad.addColorStop(0.75, "#f0f9ff");
-        grad.addColorStop(1, "#bae6fd");
-        ctx.fillStyle = grad;
-        ctx.fill();
-        ctx.restore();
-      }
-
-      ctx.beginPath();
-      ctx.arc(cx, cy, size * 0.085, 0, Math.PI * 2);
-      ctx.fillStyle = centerColor;
-      ctx.fill();
-      ctx.restore();
-      return c;
-    }
-
     function bakeSprites() {
+      const size = 80;
       BORDER_ITEMS.forEach(emoji => {
-        SPRITE_URLS[emoji] = bakeEmojiSprite(emoji, 80).toDataURL();
+        const c = document.createElement("canvas");
+        c.width = size;
+        c.height = size;
+        const ctx = c.getContext("2d");
+        ctx.font = "48px 'Apple Color Emoji', 'Segoe UI Emoji', 'Noto Color Emoji', sans-serif";
+        ctx.textAlign = "center";
+        ctx.textBaseline = "middle";
+        ctx.fillText(emoji, size / 2, size / 2);
+        SPRITE_URLS[emoji] = c.toDataURL();
       });
     }
     bakeSprites();
@@ -1260,9 +1139,19 @@
         borderFxLayer.appendChild(img);
 
         const anim = img.animate([
-          { transform: `translate3d(${startX}px, ${startY}px, 0) rotate(${startRot}deg) scale(0.3)`, opacity: 0 },
-          { transform: `translate3d(${(startX + endX) * 0.5}px, ${Math.min(startY, endY) - 18}px, 0) rotate(${(startRot + endRot) * 0.5}deg) scale(0.95)`, opacity: 1, offset: 0.28 },
-          { transform: `translate3d(${endX}px, ${endY}px, 0) rotate(${endRot}deg) scale(0.8)`, opacity: 0 }
+          {
+            transform: `translate3d(${startX}px, ${startY}px, 0) rotate(${startRot}deg) scale(0.3)`,
+            opacity: 0
+          },
+          {
+            transform: `translate3d(${(startX + endX) * 0.5}px, ${Math.min(startY, endY) - 18}px, 0) rotate(${(startRot + endRot) * 0.5}deg) scale(0.95)`,
+            opacity: 1,
+            offset: 0.28
+          },
+          {
+            transform: `translate3d(${endX}px, ${endY}px, 0) rotate(${endRot}deg) scale(0.8)`,
+            opacity: 0
+          }
         ], {
           duration: 1350,
           delay: idx * 55,
@@ -1286,6 +1175,7 @@
 
         card.addEventListener("mouseenter", () => {
           spawnCardBorderWave(card);
+
           if (activeCardInterval) clearInterval(activeCardInterval);
           activeCardInterval = setInterval(() => {
             if (!document.body.contains(card) || !card.matches(":hover")) {
@@ -1306,13 +1196,12 @@
       });
     }
 
+    /* --- 2. Gate Fire/Ember FX Engine --- */
     const gateCanvas = document.getElementById("vibe-gate-canvas");
     const gCtx = gateCanvas.getContext("2d", { alpha: true });
-    let gateParticles = [];
+    let fireParticles = [];
     let activeEffectNode = null;
     let activeEffectRect = null;
-    let activeEffectType = "fire";
-    let spawnAccumulator = 0;
 
     const FIRE_SPRITE = (() => {
       const s = 32;
@@ -1330,13 +1219,6 @@
       return off;
     })();
 
-    const MONEY_SPRITES = ["💵", "💸", "💲"].map(e => bakeEmojiSprite(e, 48));
-    const WHITE_FLOWER_SPRITES = [
-      bakeWhiteFlowerSprite(56, "#7dd3fc"),
-      bakeWhiteFlowerSprite(52, "#fef08a"),
-      bakeWhiteFlowerSprite(60, "#bae6fd")
-    ];
-
     function sizeGateCanvas() {
       const dpr = Math.min(window.devicePixelRatio || 1, 2);
       const w = window.innerWidth;
@@ -1353,8 +1235,8 @@
     window.addEventListener("resize", sizeGateCanvas);
     sizeGateCanvas();
 
-    function spawnRisingParticle(rect, type) {
-      if (gateParticles.length > 85) return;
+    function spawnFireEmber(rect) {
+      if (fireParticles.length > 75) return;
       const edge = Math.random();
       let x, y;
       if (edge < 0.6) {
@@ -1368,91 +1250,56 @@
         y = rect.top + Math.random() * rect.height;
       }
 
-      let sprite = FIRE_SPRITE;
-      let size = 10 + Math.random() * 14;
-      let decay = 0.022 + Math.random() * 0.018;
-      let rot = 0;
-      let vRot = 0;
-
-      if (type === "money") {
-        sprite = MONEY_SPRITES[Math.floor(Math.random() * MONEY_SPRITES.length)];
-        size = 18 + Math.random() * 12;
-        decay = 0.015 + Math.random() * 0.012;
-        rot = (Math.random() - 0.5) * 0.5;
-        vRot = (Math.random() - 0.5) * 0.06;
-      } else if (type === "flowers") {
-        sprite = WHITE_FLOWER_SPRITES[Math.floor(Math.random() * WHITE_FLOWER_SPRITES.length)];
-        size = 20 + Math.random() * 14;
-        decay = 0.014 + Math.random() * 0.011;
-        rot = Math.random() * Math.PI * 2;
-        vRot = (Math.random() - 0.5) * 0.045;
-      }
-
-      gateParticles.push({
-        type, sprite, x, y,
+      fireParticles.push({
+        x,
+        y,
         vx: (Math.random() - 0.5) * 1.1,
         vy: -(1.2 + Math.random() * 2.2),
         wobble: Math.random() * Math.PI * 2,
-        rot, vRot, size, life: 1.0, decay
+        size: 10 + Math.random() * 14,
+        life: 1.0,
+        decay: 0.022 + Math.random() * 0.018
       });
     }
 
     let lastFrameTime = performance.now();
-    function animateGateFX(now) {
+    function animateFire(now) {
       const dt = Math.min((now - lastFrameTime) / 16.667, 2);
       lastFrameTime = now;
 
-      if (activeEffectRect || gateParticles.length > 0) {
+      if (activeEffectRect || fireParticles.length > 0) {
         gCtx.clearRect(0, 0, window.innerWidth, window.innerHeight);
 
         if (activeEffectRect) {
-          if (activeEffectType === "fire") {
-            spawnRisingParticle(activeEffectRect, "fire");
-            spawnRisingParticle(activeEffectRect, "fire");
-          } else {
-            spawnAccumulator += dt;
-            if (spawnAccumulator >= 2.0) {
-              spawnRisingParticle(activeEffectRect, activeEffectType);
-              spawnAccumulator = 0;
-            }
-          }
+          spawnFireEmber(activeEffectRect);
+          spawnFireEmber(activeEffectRect);
         }
 
-        for (let i = gateParticles.length - 1; i >= 0; i--) {
-          const p = gateParticles[i];
-          p.wobble += 0.14 * dt;
-          p.x += (p.vx + Math.sin(p.wobble) * 0.48) * dt;
+        gCtx.globalCompositeOperation = "lighter";
+        for (let i = fireParticles.length - 1; i >= 0; i--) {
+          const p = fireParticles[i];
+          p.wobble += 0.15 * dt;
+          p.x += (p.vx + Math.sin(p.wobble) * 0.45) * dt;
           p.y += p.vy * dt;
-          p.vy -= 0.028 * dt;
-          p.rot += p.vRot * dt;
+          p.vy -= 0.03 * dt;
           p.life -= p.decay * dt;
 
           if (p.life <= 0) {
-            gateParticles.splice(i, 1);
+            fireParticles.splice(i, 1);
             continue;
           }
 
-          gCtx.globalCompositeOperation = p.type === "fire" ? "lighter" : "source-over";
-          gCtx.globalAlpha = Math.min(1, p.life * 1.15);
-          const s = p.size * (p.type === "fire" ? (0.5 + p.life * 0.5) : (0.7 + p.life * 0.35));
-
-          if (p.type === "fire") {
-            gCtx.drawImage(p.sprite, p.x - s / 2, p.y - s / 2, s, s);
-          } else {
-            gCtx.save();
-            gCtx.translate(p.x, p.y);
-            gCtx.rotate(p.rot);
-            gCtx.drawImage(p.sprite, -s / 2, -s / 2, s, s);
-            gCtx.restore();
-          }
+          gCtx.globalAlpha = p.life;
+          const s = p.size * (0.5 + p.life * 0.5);
+          gCtx.drawImage(FIRE_SPRITE, p.x - s / 2, p.y - s / 2, s, s);
         }
         gCtx.globalAlpha = 1;
         gCtx.globalCompositeOperation = "source-over";
       }
 
-      requestAnimationFrame(animateGateFX);
+      requestAnimationFrame(animateFire);
     }
-    requestAnimationFrame(animateGateFX);
+    requestAnimationFrame(animateFire);
 
     function applyVibeTheme(vibe) {
       const key = (vibe || "").toLowerCase();
@@ -1462,10 +1309,6 @@
       const bgOverlay = document.getElementById("vibe-bg-overlay");
       const captionEl = document.getElementById("active-vibe-caption");
 
-      root.style.setProperty("--bg", theme.bg);
-      root.style.setProperty("--surface", theme.surface);
-      root.style.setProperty("--surface-hover", theme.surfaceHover);
-      root.style.setProperty("--border", theme.border);
       root.style.setProperty("--accent", theme.accent);
       root.style.setProperty("--accent-soft", theme.accentSoft);
       bgOverlay.style.background = theme.overlay;
@@ -1480,6 +1323,7 @@
       }
     }
 
+    /* Two-Step Gate Logic */
     const vibeGate = document.getElementById("vibe-gate");
     const gateStep1 = document.getElementById("gate-step-1");
     const gateStep2 = document.getElementById("gate-step-2");
@@ -1489,7 +1333,6 @@
     womenTrigger.addEventListener("mouseenter", () => {
       activeEffectNode = womenTrigger;
       activeEffectRect = womenTrigger.getBoundingClientRect();
-      activeEffectType = "fire";
     });
     womenTrigger.addEventListener("mouseleave", () => {
       if (activeEffectNode === womenTrigger) {
@@ -1512,7 +1355,7 @@
     function closeVibeGate() {
       activeEffectNode = null;
       activeEffectRect = null;
-      gateParticles = [];
+      fireParticles = [];
       gCtx.clearRect(0, 0, window.innerWidth, window.innerHeight);
       vibeGate.classList.add("hidden");
       vibeGate.style.display = "none";
@@ -1524,40 +1367,34 @@
       document.getElementById("gate-gender-label").textContent = gender;
 
       vibeOptionsContainer.innerHTML = "";
-      (VIBE_OPTIONS[gender] || []).forEach(item => {
+      (VIBE_OPTIONS[gender] || []).forEach(vibe => {
         const btn = document.createElement("button");
         btn.type = "button";
         btn.className = "vibe-choice-btn";
-        btn.innerHTML = `
-          <span class="vibe-choice-name">${item.name}</span>
-          <span class="vibe-choice-desc">${item.desc}</span>
-        `;
+        btn.textContent = vibe;
 
-        const hoverClass = `vibe-hover-${item.effect}`;
-
-        btn.addEventListener("mouseenter", () => {
-          btn.classList.add(hoverClass);
-          activeEffectNode = btn;
-          activeEffectRect = btn.getBoundingClientRect();
-          activeEffectType = item.effect;
-        });
-
-        btn.addEventListener("mouseleave", () => {
-          btn.classList.remove(hoverClass);
-          if (activeEffectNode === btn) {
-            activeEffectNode = null;
-            activeEffectRect = null;
-          }
-        });
+        if (gender === "Women" && (vibe === "sexy nights" || vibe === "boyfriend seduce")) {
+          btn.addEventListener("mouseenter", () => {
+            btn.classList.add("sexy-fire-hover");
+            activeEffectNode = btn;
+            activeEffectRect = btn.getBoundingClientRect();
+          });
+          btn.addEventListener("mouseleave", () => {
+            btn.classList.remove("sexy-fire-hover");
+            if (activeEffectNode === btn) {
+              activeEffectNode = null;
+              activeEffectRect = null;
+            }
+          });
+        }
 
         btn.addEventListener("click", (e) => {
           e.preventDefault();
           e.stopPropagation();
-          setGateStatus(`Selected ${gender} -> ${item.name}`);
+          setGateStatus(`Selected ${gender} -> ${vibe}`);
           closeVibeGate();
-          applyGenderAndVibe(gender, item.name);
+          applyGenderAndVibe(gender, vibe);
         });
-
         vibeOptionsContainer.appendChild(btn);
       });
 
@@ -1725,8 +1562,8 @@
       } catch (err) {
         console.error("Failed to load data.json:", err);
         setGateStatus(`data.json error: ${err.message}`);
-        bind3DTilt();
-        bindCardHoverEffects();
+        document.getElementById("product-grid").innerHTML =
+          `<div style="grid-column:1/-1; text-align:center; color:#ef4444; padding:24px;">Failed to load data.json (${err.message}). Check JSON syntax/commas.</div>`;
       }
     }
 
@@ -1760,6 +1597,28 @@
       document.getElementById("hero-intro").textContent = c.seo_intro;
       document.getElementById("region-note").textContent = `Currency: ${c.currency} (${c.symbol}) • ${c.vat_note}`;
       document.getElementById("last-updated-badge").textContent = `Live Price Index • Last AI Optimization: ${siteData.last_optimized}`;
+    }
+
+    function handleImgFallback(imgEl, itemId, label) {
+      const stage = parseInt(imgEl.dataset.fallbackStage || "0", 10);
+      if (stage === 0) {
+        imgEl.dataset.fallbackStage = "1";
+        imgEl.src = `./images/${itemId}.webp`;
+      } else if (stage === 1) {
+        imgEl.dataset.fallbackStage = "2";
+        imgEl.src = `./images/${itemId}.png`;
+      } else {
+        imgEl.onerror = null;
+        const svg = `<svg xmlns='http://www.w3.org/2000/svg' width='300' height='360' viewBox='0 0 300 360'>
+          <rect width='300' height='360' fill='#faf8f5'/>
+          <rect x='118' y='56' width='64' height='34' rx='6' fill='#1f2937'/>
+          <rect x='132' y='90' width='36' height='18' fill='#d4af37'/>
+          <rect x='84' y='108' width='132' height='188' rx='18' fill='#f3efe6' stroke='#d4af37' stroke-width='3'/>
+          <text x='150' y='194' font-family='sans-serif' font-size='15' font-weight='700' fill='#1f2937' text-anchor='middle'>#${itemId}</text>
+          <text x='150' y='218' font-family='sans-serif' font-size='11' fill='#6b7280' text-anchor='middle'>${(label || '').replace(/[<>&'"]/g, '').slice(0, 24)}</text>
+        </svg>`;
+        imgEl.src = 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(svg);
+      }
     }
 
     function formatLocalPrice(usdAmount) {
@@ -1832,28 +1691,25 @@
           : "";
 
         const vibeBadges = (p.vibes && p.vibes.length)
-          ? `<div class="vibe-tags">${p.vibes.map(v => {
-              const slug = VIBE_SLUGS[v.toLowerCase()] || v.toLowerCase().replace(/[^a-z0-9]+/g, "-");
-              return `<a href="/vibe/${slug}.html" class="vibe-tag" style="text-decoration:none;">${v}</a>`;
-            }).join("")}</div>`
+          ? `<div class="vibe-tags">${p.vibes.map(v => `<span class="vibe-tag">${v}</span>`).join("")}</div>`
           : "";
 
         return `
           <article class="card" data-gender="${p.gender}" data-vibe="${(p.vibes || []).join(',')}">
-            <a href="/perfume/${p.id}.html" class="stage-wrapper" style="text-decoration:none; color:inherit; display:block;" aria-label="View ${p.brand} ${p.name} price breakdown">
+            <div class="stage-wrapper">
               <div class="ivory-frame">
                 <div class="gold-inner-border"></div>
                 ${p.badge ? `<span class="card-badge">${p.badge}</span>` : ""}
                 <span class="card-savings">Save ${discountPct}%</span>
                 <div class="corner-cluster corner-tl">${clusterHTML}</div>
                 <div class="corner-cluster corner-br">${clusterHTML}</div>
-                <img src="${p.image_url}" alt="${p.brand} ${p.name} ${p.size}" class="bottle-img" loading="lazy" />
+                <img src="${p.image_url}" alt="${p.brand} ${p.name} ${p.size}" class="bottle-img" loading="lazy" onerror="handleImgFallback(this, '${p.id}', '${p.brand}')" />
               </div>
-            </a>
+            </div>
             <div class="card-body">
               <div>
                 <div class="card-brand">${p.brand}</div>
-                <h2 class="card-title"><a href="/perfume/${p.id}.html" style="color:inherit; text-decoration:none;">${p.name}</a></h2>
+                <h2 class="card-title">${p.name}</h2>
                 <div class="card-meta">${p.size} • ${p.gender}</div>
                 <div class="card-meta" style="margin-top:4px;">${p.notes}</div>
                 ${vibeBadges}
@@ -1893,9 +1749,9 @@
 
         return `
           <tr>
-            <td><a href="/perfume/${p.id}.html"><img src="${p.image_url}" alt="${p.name}" class="thumb-mini" /></a></td>
+            <td><img src="${p.image_url}" alt="${p.name}" class="thumb-mini" onerror="handleImgFallback(this, '${p.id}', '${p.brand}')" /></td>
             <td>
-              <div style="font-weight:700;"><a href="/perfume/${p.id}.html" style="color:inherit; text-decoration:none;">${p.brand} — ${p.name}</a></div>
+              <div style="font-weight:700;">${p.brand} — ${p.name}</div>
               <div style="font-size:0.8rem; color:var(--muted);">${p.gender} • ${p.notes}</div>
             </td>
             <td>${p.size}</td>
