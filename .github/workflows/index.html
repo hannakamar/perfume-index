@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title id="meta-title">PerfumeIndex — Men & Women Perfume Local Price Comparison</title>
+  <meta name="description" id="meta-desc" content="Compare local retail perfume prices against verified online discounters and multi-bottle bundles across the US, UK, EU, UAE, and worldwide." />
+  <style>
+    :root {
+      --bg: #0f1115;
+      --card: #171a21;
+      --border: #262b36;
+      --text: #f3f4f6;
+      --muted: #9ca3af;
+      --accent: #d4af37;
+      --accent-hover: #e5c158;
+      --green: #10b981;
+      --ebay: #3b82f6;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.5;
+    }
+    header {
+      border-bottom: 1px solid var(--border);
+      background: rgba(15, 17, 21, 0.95);
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      backdrop-filter: blur(8px);
+    }
+    .nav-container {
+      max-width: 1150px;
+      margin: 0 auto;
+      padding: 1rem 1.25rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+    .brand {
+      font-size: 1.35rem;
+      font-weight: 800;
+      letter-spacing: -0.5px;
+      color: var(--text);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .brand span { color: var(--accent); }
+    .country-selector {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: var(--card);
+      border: 1px solid var(--border);
+      padding: 0.45rem 0.75rem;
+      border-radius: 8px;
+    }
+    .country-selector label { font-size: 0.85rem; color: var(--muted); }
+    select {
+      background: transparent;
+      color: var(--text);
+      border: none;
+      font-weight: 600;
+      font-size: 0.95rem;
+      cursor: pointer;
+      outline: none;
+    }
+    select option { background: var(--card); color: var(--text); }
+
+    .hero {
+      max-width: 1150px;
+      margin: 2rem auto 1.5rem;
+      padding: 0 1.25rem;
+    }
+    .hero-box {
+      background: linear-gradient(145deg, #171a21 0%, #12151b 100%);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 1.75rem;
+    }
+    .hero h1 { font-size: 1.85rem; margin-bottom: 0.5rem; }
+    .hero p { color: var(--muted); max-width: 760px; margin-bottom: 1rem; }
+    .local-badges {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      font-size: 0.85rem;
+    }
+    .local-badge {
+      background: rgba(212, 175, 55, 0.1);
+      border: 1px solid rgba(212, 175, 55, 0.3);
+      color: var(--accent);
+      padding: 0.35rem 0.75rem;
+      border-radius: 6px;
+    }
+
+    .controls {
+      max-width: 1150px;
+      margin: 0 auto 1.5rem;
+      padding: 0 1.25rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+    .tabs { display: flex; gap: 0.5rem; flex-wrap: wrap; }
+    .tab {
+      background: var(--card);
+      border: 1px solid var(--border);
+      color: var(--muted);
+      padding: 0.5rem 1rem;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: 600;
+      font-size: 0.9rem;
+      transition: all 0.15s;
+    }
+    .tab.active, .tab:hover {
+      background: var(--accent);
+      color: #0f1115;
+      border-color: var(--accent);
+    }
+    .search-input {
+      background: var(--card);
+      border: 1px solid var(--border);
+      color: var(--text);
+      padding: 0.55rem 1rem;
+      border-radius: 8px;
+      width: 260px;
+      font-size: 0.9rem;
+    }
+
+    .grid {
+      max-width: 1150px;
+      margin: 0 auto 3rem;
+      padding: 0 1.25rem;
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(330px, 1fr));
+      gap: 1.25rem;
+    }
+    .card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.4rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: transform 0.15s, border-color 0.15s;
+    }
+    .card:hover { transform: translateY(-2px); border-color: #3a4152; }
+    .card-top { margin-bottom: 1rem; }
+    .card-badge {
+      display: inline-block;
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.4px;
+      color: var(--accent);
+      background: rgba(212, 175, 55, 0.12);
+      padding: 0.25rem 0.6rem;
+      border-radius: 5px;
+      margin-bottom: 0.65rem;
+    }
+    .card h2 { font-size: 1.15rem; margin-bottom: 0.35rem; }
+    .notes { font-size: 0.85rem; color: var(--muted); }
+
+    .price-table {
+      background: #111318;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 0.85rem;
+      margin: 1rem 0;
+    }
+    .price-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0.3rem 0;
+      font-size: 0.9rem;
+    }
+    .price-row.retail { color: var(--muted); text-decoration: line-through; }
+    .price-row.index { font-weight: 700; font-size: 1.05rem; }
+    .savings-pill {
+      background: rgba(16, 185, 129, 0.15);
+      color: var(--green);
+      font-size: 0.78rem;
+      font-weight: 700;
+      padding: 0.15rem 0.5rem;
+      border-radius: 4px;
+    }
+
+    .actions { display: flex; flex-direction: column; gap: 0.55rem; }
+    .btn {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      text-decoration: none;
+      padding: 0.7rem 1rem;
+      border-radius: 8px;
+      font-weight: 700;
+      font-size: 0.9rem;
+      transition: opacity 0.15s;
+    }
+    .btn:hover { opacity: 0.9; }
+    .btn-ebay { background: var(--ebay); color: #fff; }
+    .btn-direct {
+      background: transparent;
+      border: 1px solid var(--accent);
+      color: var(--accent);
+    }
+
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 2rem 1.25rem;
+      text-align: center;
+      color: var(--muted);
+      font-size: 0.85rem;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="nav-container">
+    <div class="brand">Perfume<span>Index</span></div>
+    <div class="country-selector">
+      <label for="country-select">Region:</label>
+      <select id="country-select"></select>
+    </div>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="hero-box">
+    <h1 id="hero-title">Loading Perfume Price Index...</h1>
+    <p id="hero-intro"></p>
+    <div class="local-badges">
+      <div class="local-badge" id="vat-badge"></div>
+      <div class="local-badge" id="ship-badge"></div>
+      <div class="local-badge" id="updated-badge"></div>
+    </div>
+  </div>
+</section>
+
+<section class="controls">
+  <div class="tabs" id="category-tabs">
+    <button class="tab active" data-cat="all">All Fragrances</button>
+    <button class="tab" data-cat="men">Men Perfume</button>
+    <button class="tab" data-cat="women">Women Perfume</button>
+    <button class="tab" data-cat="unisex">Unisex</button>
+    <button class="tab" data-cat="bundles">Value Bundles</button>
+  </div>
+  <input type="text" id="search-box" class="search-input" placeholder="Search brand, note, or perfume..." />
+</section>
+
+<main class="grid" id="product-grid"></main>
+
+<footer>
+  <p>PerfumeIndex — Independent Fragrance Price Comparison & Bundle Tracker.</p>
+  <p style="margin-top: 0.4rem;">Prices are converted using live regional index rates and verified against authorized retail benchmarks.</p>
+</footer>
+
+<script>
+  let siteData = null;
+  let currentCountry = "US";
+  let currentCategory = "all";
+  let searchQuery = "";
+
+  async function init() {
+    const res = await fetch("data.json?v=" + Date.now());
+    siteData = await res.json();
+
+    // Check URL param (?country=DE) first, otherwise use default
+    const params = new URLSearchParams(window.location.search);
+    const urlCountry = params.get("country")?.toUpperCase();
+    currentCountry = (urlCountry && siteData.countries[urlCountry])
+      ? urlCountry
+      : siteData.default_country;
+
+    populateCountryDropdown();
+    bindEvents();
+    render();
+  }
+
+  function populateCountryDropdown() {
+    const select = document.getElementById("country-select");
+    select.innerHTML = "";
+    Object.entries(siteData.countries).forEach(([code, info]) => {
+      const opt = document.createElement("option");
+      opt.value = code;
+      opt.textContent = `${info.flag} ${info.name} (${info.currency})`;
+      if (code === currentCountry) opt.selected = true;
+      select.appendChild(opt);
+    });
+  }
+
+  function formatMoney(usdAmount, countryInfo) {
+    const converted = Math.round(usdAmount * countryInfo.rate_from_usd);
+    return `${countryInfo.symbol}${converted.toLocaleString()}`;
+  }
+
+  function render() {
+    const cInfo = siteData.countries[currentCountry];
+    document.title = cInfo.seo_title;
+    document.getElementById("hero-title").textContent = cInfo.seo_title;
+    document.getElementById("hero-intro").textContent = cInfo.seo_intro;
+    document.getElementById("vat-badge").textContent = `Tax Info: ${cInfo.vat_note}`;
+    document.getElementById("ship-badge").textContent = `Shipping: ${cInfo.shipping_note}`;
+    document.getElementById("updated-badge").textContent = `Index Updated: ${siteData.last_optimized}`;
+
+    const grid = document.getElementById("product-grid");
+    grid.innerHTML = "";
+
+    const filtered = siteData.products.filter(p => {
+      const matchesCat = currentCategory === "all" || p.category === currentCategory;
+      const matchesSearch = !searchQuery ||
+        p.name.toLowerCase().includes(searchQuery) ||
+        p.notes.toLowerCase().includes(searchQuery) ||
+        p.brand.toLowerCase().includes(searchQuery);
+      return matchesCat && matchesSearch;
+    });
+
+    filtered.forEach(p => {
+      const savingsPct = Math.round(((p.retail_usd - p.index_usd) / p.retail_usd) * 100);
+      const trackTag = `?ref=perfumeindex_${currentCountry.toLowerCase()}_${p.id}`;
+
+      const card = document.createElement("article");
+      card.className = "card";
+      card.innerHTML = `
+        <div class="card-top">
+          <span class="card-badge">${p.badge}</span>
+          <h2>${p.name}</h2>
+          <p class="notes">${p.notes}</p>
+        </div>
+        <div>
+          <div class="price-table">
+            <div class="price-row retail">
+              <span>Local Retail Benchmark</span>
+              <span>${formatMoney(p.retail_usd, cInfo)}</span>
+            </div>
+            <div class="price-row index">
+              <span>PerfumeIndex Price</span>
+              <span>${formatMoney(p.index_usd, cInfo)} <span class="savings-pill">-${savingsPct}%</span></span>
+            </div>
+          </div>
+          <div class="actions">
+            <a class="btn btn-ebay" href="${p.ebay_url}${trackTag}" target="_blank" rel="noopener">
+              <span>Buy via eBay (Buyer Protection)</span>
+              <span>${formatMoney(p.index_usd, cInfo)} →</span>
+            </a>
+            <a class="btn btn-direct" href="${p.direct_url}${trackTag}">
+              <span>Direct Bundle Rate (Coming Soon)</span>
+              <span>${formatMoney(p.direct_usd, cInfo)}</span>
+            </a>
+          </div>
+        </div>
+      `;
+      grid.appendChild(card);
+    });
+  }
+
+  function bindEvents() {
+    document.getElementById("country-select").addEventListener("change", (e) => {
+      currentCountry = e.target.value;
+      const url = new URL(window.location);
+      url.searchParams.set("country", currentCountry);
+      window.history.replaceState({}, "", url);
+      render();
+    });
+
+    document.querySelectorAll(".tab").forEach(btn => {
+      btn.addEventListener("click", () => {
+        document.querySelectorAll(".tab").forEach(b => b.classList.remove("active"));
+        btn.classList.add("active");
+        currentCategory = btn.dataset.cat;
+        render();
+      });
+    });
+
+    document.getElementById("search-box").addEventListener("input", (e) => {
+      searchQuery = e.target.value.trim().toLowerCase();
+      render();
+    });
+  }
+
+  init();
+</script>
+</body>
+</html>

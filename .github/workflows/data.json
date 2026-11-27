@@ -1,0 +1,154 @@
+{
+  "site_name": "PerfumeIndex",
+  "tagline": "Global Fragrance Retail vs. Discounter Price Index",
+  "last_optimized": "2026-11-27",
+  "default_country": "US",
+  "countries": {
+    "US": {
+      "name": "United States",
+      "flag": "🇺🇸",
+      "currency": "USD",
+      "symbol": "$",
+      "rate_from_usd": 1.0,
+      "vat_note": "Excludes state sales tax (avg. 6–9% at department stores)",
+      "shipping_note": "Free tracked international/US delivery on bundles",
+      "seo_title": "Men & Women Perfume Prices in the USA (2026 Retail vs. Online Index)",
+      "seo_intro": "Compare standard US department store fragrance retail prices against verified online discounters and multi-bottle bundles.",
+      "priority_score": 100
+    },
+    "GB": {
+      "name": "United Kingdom",
+      "flag": "🇬🇧",
+      "currency": "GBP",
+      "symbol": "£",
+      "rate_from_usd": 0.79,
+      "vat_note": "UK retail prices include 20% VAT",
+      "shipping_note": "Tracked UK delivery included on selected listings",
+      "seo_title": "Men & Women Perfume Prices in the UK (2026 Retail vs. Online Index)",
+      "seo_intro": "Compare UK high-street perfume prices against global online discounters and curated fragrance sets.",
+      "priority_score": 90
+    },
+    "DE": {
+      "name": "Germany",
+      "flag": "🇩🇪",
+      "currency": "EUR",
+      "symbol": "€",
+      "rate_from_usd": 0.92,
+      "vat_note": "German retail prices include 19% MwSt (VAT)",
+      "shipping_note": "Fast EU tracked shipping available",
+      "seo_title": "Herren & Damen Parfüm Preise in Deutschland (2026 Preisvergleich)",
+      "seo_intro": "Vergleichen Sie reguläre Einzelhandelspreise in Deutschland mit geprüften Online-Angeboten und Duft-Sets.",
+      "priority_score": 85
+    },
+    "AE": {
+      "name": "United Arab Emirates",
+      "flag": "🇦🇪",
+      "currency": "AED",
+      "symbol": "AED ",
+      "rate_from_usd": 3.67,
+      "vat_note": "UAE retail prices include 5% VAT",
+      "shipping_note": "Express regional & international tracked dispatch",
+      "seo_title": "Men & Women Perfume Prices in UAE (2026 Retail vs. Online Index)",
+      "seo_intro": "Compare Dubai & Abu Dhabi mall retail fragrance prices against direct online bundle rates.",
+      "priority_score": 80
+    },
+    "IL": {
+      "name": "Israel",
+      "flag": "🇮🇱",
+      "currency": "ILS",
+      "symbol": "₪",
+      "rate_from_usd": 3.65,
+      "vat_note": "Local retail prices include 18% VAT; orders under $75 are exempt from import VAT",
+      "shipping_note": "Local & international tracked shipping options",
+      "seo_title": "מחירי בשמים לגברים ולנשים בישראל (מדד מחירים 2026)",
+      "seo_intro": "השוואת מחירי בשמים ברשתות הפארם בישראל מול מחירי אונליין ומארזים משתלמים.",
+      "priority_score": 75
+    }
+  },
+  "products": [
+    {
+      "id": "lv-imagination-100",
+      "name": "Louis Vuitton Imagination EDP (100ml)",
+      "brand": "Louis Vuitton",
+      "category": "men",
+      "notes": "Citron, Calabrian Bergamot, Nigerian Ginger, Ceylon Cinnamon, Black Tea",
+      "retail_usd": 330,
+      "index_usd": 275,
+      "direct_usd": 255,
+      "ebay_url": "https://www.ebay.com/usr/YOUR_EBAY_STORE",
+      "direct_url": "#direct-checkout-placeholder",
+      "badge": "High Demand • Fresh Citrus"
+    },
+    {
+      "id": "jpg-le-beau-lp-125",
+      "name": "Jean Paul Gaultier Le Beau Le Parfum (125ml)",
+      "brand": "Jean Paul Gaultier",
+      "category": "men",
+      "notes": "Pineapple, Iris, Ginger, Coconut Wood, Tonka Bean, Sandalwood",
+      "retail_usd": 148,
+      "index_usd": 109,
+      "direct_usd": 98,
+      "ebay_url": "https://www.ebay.com/usr/YOUR_EBAY_STORE",
+      "direct_url": "#direct-checkout-placeholder",
+      "badge": "Best Seller • Men"
+    },
+    {
+      "id": "lattafa-khamrah-100",
+      "name": "Lattafa Khamrah EDP (100ml)",
+      "brand": "Lattafa",
+      "category": "unisex",
+      "notes": "Cinnamon, Nutmeg, Dates, Praline, Vanilla, Tonka Bean, Amberwood",
+      "retail_usd": 65,
+      "index_usd": 39,
+      "direct_usd": 34,
+      "ebay_url": "https://www.ebay.com/usr/YOUR_EBAY_STORE",
+      "direct_url": "#direct-checkout-placeholder",
+      "badge": "Top Value • Unisex"
+    },
+    {
+      "id": "lattafa-ana-abiyedh-60",
+      "name": "Lattafa Ana Abiyedh White EDP (60ml)",
+      "brand": "Lattafa",
+      "category": "women",
+      "notes": "White Musk, Bergamot, Orange, Vanilla, Pear, Cardamom",
+      "retail_usd": 48,
+      "index_usd": 28,
+      "direct_usd": 24,
+      "ebay_url": "https://www.ebay.com/usr/YOUR_EBAY_STORE",
+      "direct_url": "#direct-checkout-placeholder",
+      "badge": "Popular • Women & Unisex"
+    },
+    {
+      "id": "yara-lattafa-100",
+      "name": "Lattafa Yara Pink EDP (100ml)",
+      "brand": "Lattafa",
+      "category": "women",
+      "notes": "Orchid, Heliotrope, Tangerine, Gourmand Accord, Vanilla, Musk",
+      "retail_usd": 52,
+      "index_usd": 32,
+      "direct_usd": 28,
+      "ebay_url": "https://www.ebay.com/usr/YOUR_EBAY_STORE",
+      "direct_url": "#direct-checkout-placeholder",
+      "badge": "Trending • Women"
+    },
+    {
+      "id": "duo-bundle-arabian",
+      "name": "2-Bottle Duo Bundle: Khamrah + Ana Abiyedh",
+      "brand": "Curated Bundle",
+      "category": "bundles",
+      "notes": "Full-size 100ml + 60ml sealed retail boxes • Combined shipping savings",
+      "retail_usd": 113,
+      "index_usd": 62,
+      "direct_usd": 55,
+      "ebay_url": "https://www.ebay.com/usr/YOUR_EBAY_STORE",
+      "direct_url": "#direct-checkout-placeholder",
+      "badge": "Save 45% • Bundle Deal"
+    }
+  ],
+  "agent_metadata": {
+    "top_countries": ["US", "GB", "DE"],
+    "optimization_log": [
+      "Initial baseline dataset created for US, GB, DE, AE, IL."
+    ]
+  }
+}
