@@ -50,6 +50,40 @@
   },
   "products": [
     {
+      "id": "versace-bright-crystal-90ml",
+      "brand": "Versace",
+      "name": "Bright Crystal Eau de Toilette",
+      "size": "90ml / 3.0 oz",
+      "gender": "Women",
+      "notes": "Pomegranate, Yuzu, Peony, Magnolia, Lotus, Amber, Musk",
+      "vibes": ["sexy nights", "feeling fresh"],
+      "badge": "Iconic",
+      "retail_usd": 115,
+      "index_usd": 64,
+      "direct_usd": null,
+      "retail_url": "https://www.versace.com",
+      "ebay_url": "https://www.ebay.com/sch/i.html?_nkw=Versace+Bright+Crystal+90ml+sealed",
+      "direct_url": "#direct-checkout-coming-soon",
+      "image_url": "./images/o.632.webp"
+    },
+    {
+      "id": "ck-obsession-edp-100ml",
+      "brand": "Calvin Klein",
+      "name": "Obsession Eau de Parfum",
+      "size": "100ml / 3.4 oz",
+      "gender": "Women",
+      "notes": "Amber, Vanilla, Incense, Cinnamon, Sandalwood, Mandarin",
+      "vibes": ["sexy nights", "boyfriend seduce"],
+      "badge": "Classic Seductive",
+      "retail_usd": 98,
+      "index_usd": 42,
+      "direct_usd": null,
+      "retail_url": "https://www.calvinklein.us",
+      "ebay_url": "https://www.ebay.com/sch/i.html?_nkw=Calvin+Klein+Obsession+Eau+de+Parfum+100ml+sealed",
+      "direct_url": "#direct-checkout-coming-soon",
+      "image_url": "./images/375x500.248.jpg"
+    }
+    {
       "id": "versace-eros-edp-100ml",
       "brand": "Versace",
       "name": "Eros Eau de Parfum",
