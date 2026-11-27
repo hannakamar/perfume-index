@@ -5,13 +5,13 @@ from google import genai
 from google.genai import types
 from google.oauth2 import service_account
 from googleapiclient.discovery import build
-
-client = genai.Client()
+import build_seo
 
 MODELS_TO_TRY = [
     "gemini-3-flash-preview",
     "gemini-3.1-flash-lite"
 ]
+
 
 def get_gsc_country_data():
     gsc_json_str = os.environ.get("GSC_SERVICE_ACCOUNT_JSON")
@@ -73,11 +73,18 @@ def get_gsc_country_data():
             {"country": "USA", "clicks": 0, "impressions": 0, "ctr": 0.0, "position": 0.0}
         ]
 
+
 def run_optimization():
     with open("data.json", "r", encoding="utf-8") as f:
         current_data = json.load(f)
 
-    # Hard guardrail snapshot: protect all prices, URLs, and vibes
+    if not os.environ.get("GEMINI_API_KEY"):
+        print("GEMINI_API_KEY not set; skipping AI copy step and running static SEO build.")
+        build_seo.build_all()
+        return
+
+    client = genai.Client()
+
     protected_products = {
         p["id"]: {
             "retail_usd": p["retail_usd"],
@@ -86,7 +93,8 @@ def run_optimization():
             "direct_usd": p.get("direct_usd"),
             "ebay_url": p["ebay_url"],
             "direct_url": p.get("direct_url"),
-            "vibes": p.get("vibes", [])
+            "vibes": p.get("vibes", []),
+            "image_url": p.get("image_url")
         }
         for p in current_data.get("products", [])
     }
@@ -106,15 +114,14 @@ Current data.json:
 {json.dumps(current_data, indent=2)}
 
 Your tasks:
-1. Determine the highest-opportunity `default_country` code from the supported keys in `countries` (e.g., "US", "UK", "DE", "AE", "IL") based on clicks and impressions. If all clicks are 0, keep "US".
+1. Determine the highest-opportunity `default_country` code from the supported keys in `countries` (e.g., "US", "UK", "EU", "IL", "CA", "AU") based on clicks and impressions. If all clicks are 0, keep "US".
 2. Refine `seo_title`, `seo_intro`, and `vat_note` inside each entry of `countries` to maximize organic search CTR and buyer trust for local shoppers comparing official retail prices against verified discounter/eBay prices.
 3. Update `badge` labels on products (e.g., "Top Arbitrage Deal", "Best Seller", "High Savings") to highlight strong discounts, and refine `notes` if needed for clarity.
 4. Set `last_optimized` to "{today_str}".
 
 STRICT RULES:
 - Return ONLY valid JSON matching the exact schema of `current_data`.
-- Do NOT alter `id`, `brand`, `name`, `size`, `gender`, `vibes`, `retail_usd`, `retail_url`, `index_usd`, `direct_usd`, `ebay_url`, `direct_url`, `currency`, `symbol`, or `rate_to_usd`.
-- Do NOT wrap the output in markdown fences if avoidable, or ensure it parses cleanly as JSON.
+- Do NOT alter `base_url`, `id`, `brand`, `name`, `size`, `gender`, `vibes`, `image_url`, `retail_usd`, `retail_url`, `index_usd`, `direct_usd`, `ebay_url`, `direct_url`, `currency`, `symbol`, or `rate_to_usd`.
 """
 
     updated_data = None
@@ -136,29 +143,38 @@ STRICT RULES:
             print(f"Skipping {model_name} ({e})")
 
     if not updated_data:
-        raise RuntimeError("All candidate Gemini models failed to return valid JSON.")
+        print("All candidate Gemini models skipped; proceeding with existing data.json.")
+        build_seo.build_all()
+        return
+
+    if current_data.get("base_url"):
+        updated_data["base_url"] = current_data["base_url"]
 
     for product in updated_data.get("products", []):
         pid = product.get("id")
         if pid in protected_products:
-            product["retail_usd"] = protected_products[pid]["retail_usd"]
-            if protected_products[pid]["retail_url"] is not None:
-                product["retail_url"] = protected_products[pid]["retail_url"]
-            product["index_usd"] = protected_products[pid]["index_usd"]
-            if protected_products[pid]["direct_usd"] is not None:
-                product["direct_usd"] = protected_products[pid]["direct_usd"]
-            product["ebay_url"] = protected_products[pid]["ebay_url"]
-            if protected_products[pid]["direct_url"] is not None:
-                product["direct_url"] = protected_products[pid]["direct_url"]
-            if "vibes" in protected_products[pid]:
-                product["vibes"] = protected_products[pid]["vibes"]
+            snap = protected_products[pid]
+            product["retail_usd"] = snap["retail_usd"]
+            if snap["retail_url"] is not None:
+                product["retail_url"] = snap["retail_url"]
+            product["index_usd"] = snap["index_usd"]
+            if snap["direct_usd"] is not None:
+                product["direct_usd"] = snap["direct_usd"]
+            product["ebay_url"] = snap["ebay_url"]
+            if snap["direct_url"] is not None:
+                product["direct_url"] = snap["direct_url"]
+            product["vibes"] = snap["vibes"]
+            if snap["image_url"] is not None:
+                product["image_url"] = snap["image_url"]
 
     updated_data["last_optimized"] = today_str
 
     with open("data.json", "w", encoding="utf-8") as f:
         json.dump(updated_data, f, indent=2, ensure_ascii=False)
 
-    print("PerfumeIndex optimization completed successfully.")
+    build_seo.build_all()
+    print("PerfumeIndex optimization & programmatic SEO build completed successfully.")
+
 
 if __name__ == "__main__":
     run_optimization()
