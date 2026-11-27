@@ -60,7 +60,7 @@
       position: absolute;
       inset: 0;
       pointer-events: none;
-      z-index: 10;
+      z-index: 5;
       will-change: transform;
     }
 
@@ -106,34 +106,47 @@
       align-items: center;
       justify-content: center;
       padding: 24px;
-      transition: opacity 0.3s ease, visibility 0.3s ease;
+      transition: opacity 0.25s ease, visibility 0.25s ease;
       backdrop-filter: blur(14px);
     }
 
     .vibe-gate.hidden {
-      opacity: 0;
-      visibility: hidden;
-      pointer-events: none;
+      display: none !important;
+      opacity: 0 !important;
+      visibility: hidden !important;
+      pointer-events: none !important;
     }
 
     .gate-card {
       width: 100%;
       max-width: 620px;
-      background: rgba(18, 18, 22, 0.92);
+      background: rgba(18, 18, 22, 0.94);
       border: 1px solid rgba(229, 184, 105, 0.35);
       border-radius: 24px;
-      padding: 40px 32px;
+      padding: 36px 32px;
       text-align: center;
       box-shadow: 0 30px 70px rgba(0, 0, 0, 0.85);
       position: relative;
+      z-index: 20;
       overflow: visible;
+    }
+
+    .gate-debug-status {
+      font-size: 0.75rem;
+      color: var(--accent);
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 8px;
+      padding: 5px 10px;
+      margin-bottom: 14px;
+      word-break: break-word;
     }
 
     .gate-logo {
       font-weight: 800;
       font-size: 1.25rem;
       letter-spacing: -0.02em;
-      margin-bottom: 18px;
+      margin-bottom: 14px;
     }
 
     .gate-logo span { color: var(--accent); }
@@ -162,7 +175,7 @@
     .gate-subtitle {
       color: var(--muted);
       font-size: 0.96rem;
-      margin-bottom: 28px;
+      margin-bottom: 26px;
     }
 
     .gender-choice-grid {
@@ -171,7 +184,7 @@
       gap: 16px;
       margin-bottom: 24px;
       position: relative;
-      z-index: 20;
+      z-index: 30;
     }
 
     .gender-choice-btn {
@@ -213,7 +226,7 @@
       gap: 12px;
       margin-bottom: 26px;
       position: relative;
-      z-index: 20;
+      z-index: 30;
     }
 
     .vibe-choice-btn {
@@ -228,7 +241,7 @@
       transition: transform 0.18s ease, background 0.18s ease, border-color 0.18s ease, box-shadow 0.18s ease;
       text-transform: lowercase;
       position: relative;
-      overflow: visible;
+      z-index: 35;
     }
 
     .vibe-choice-btn:hover {
@@ -249,6 +262,8 @@
       align-items: center;
       gap: 18px;
       flex-wrap: wrap;
+      position: relative;
+      z-index: 30;
     }
 
     .gate-link-btn {
@@ -823,6 +838,7 @@
     <canvas class="vibe-gate-canvas" id="vibe-gate-canvas"></canvas>
 
     <div class="gate-card">
+      <div class="gate-debug-status" id="gate-debug-status">Status: Loading catalog...</div>
       <div class="gate-logo">Perfume<span>Index</span></div>
 
       <!-- Step 1: Men or Women -->
@@ -1042,6 +1058,11 @@
     let selectedGateGender = null;
     let searchQuery = "";
     let activeCardInterval = null;
+
+    function setGateStatus(msg) {
+      const el = document.getElementById("gate-debug-status");
+      if (el) el.textContent = "Status: " + msg;
+    }
 
     /* --- 1. Hardware-Composited Card Border Sprites (Fires Once on Enter + Repeats While Inside Square) --- */
     const borderFxLayer = document.getElementById("border-fx-layer");
@@ -1310,13 +1331,14 @@
     });
 
     function openVibeGate(startAtGender = null) {
+      vibeGate.style.display = "flex";
+      vibeGate.classList.remove("hidden");
       if (startAtGender && VIBE_OPTIONS[startAtGender]) {
         selectGateGender(startAtGender);
       } else {
         gateStep1.style.display = "block";
         gateStep2.style.display = "none";
       }
-      vibeGate.classList.remove("hidden");
     }
 
     function closeVibeGate() {
@@ -1325,6 +1347,7 @@
       fireParticles = [];
       gCtx.clearRect(0, 0, window.innerWidth, window.innerHeight);
       vibeGate.classList.add("hidden");
+      vibeGate.style.display = "none";
     }
 
     function selectGateGender(gender) {
@@ -1354,7 +1377,10 @@
           });
         }
 
-        btn.addEventListener("click", () => {
+        btn.addEventListener("click", (e) => {
+          e.preventDefault();
+          e.stopPropagation();
+          setGateStatus(`Selected ${gender} -> ${vibe}`);
           closeVibeGate();
           applyGenderAndVibe(gender, vibe);
         });
@@ -1390,7 +1416,11 @@
     }
 
     document.querySelectorAll("[data-select-gender]").forEach(btn => {
-      btn.addEventListener("click", () => selectGateGender(btn.dataset.selectGender));
+      btn.addEventListener("click", (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        selectGateGender(btn.dataset.selectGender);
+      });
     });
 
     document.getElementById("btn-gate-back").addEventListener("click", () => {
@@ -1507,6 +1537,7 @@
         const res = await fetch("./data.json?v=" + Date.now());
         if (!res.ok) throw new Error("HTTP " + res.status);
         siteData = await res.json();
+        setGateStatus(`Loaded ${siteData.products.length} perfumes`);
 
         const params = new URLSearchParams(window.location.search);
         const urlCountry = params.get("country")?.toUpperCase();
@@ -1519,6 +1550,7 @@
         renderCatalog();
       } catch (err) {
         console.error("Failed to load data.json:", err);
+        setGateStatus(`data.json error: ${err.message}`);
         document.getElementById("product-grid").innerHTML =
           `<div style="grid-column:1/-1; text-align:center; color:#ef4444; padding:24px;">Failed to load data.json (${err.message}). Check JSON syntax/commas.</div>`;
       }
