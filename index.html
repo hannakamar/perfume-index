@@ -62,7 +62,7 @@
       user-select: none;
     }
 
-    /* Gate Rising Particles Overlay Layer (Fire, Money, Flowers) */
+    /* Gate Rising Particles Overlay Layer (Fire, Money, White Flowers) */
     .vibe-gate-canvas {
       position: absolute;
       inset: 0;
@@ -278,19 +278,19 @@
       transform: translateY(-3px);
     }
 
-    .vibe-hover-fire {
-      border-color: #f97316 !important;
-      box-shadow: 0 0 22px rgba(249, 115, 22, 0.55);
+    .vibe-hover-flowers {
+      border-color: #38bdf8 !important;
+      box-shadow: 0 0 22px rgba(56, 189, 248, 0.55);
     }
 
     .vibe-hover-money {
       border-color: #10b981 !important;
-      box-shadow: 0 0 22px rgba(16, 185, 129, 0.5);
+      box-shadow: 0 0 22px rgba(16, 185, 129, 0.55);
     }
 
-    .vibe-hover-flowers {
-      border-color: #f472b6 !important;
-      box-shadow: 0 0 22px rgba(244, 114, 182, 0.5);
+    .vibe-hover-fire {
+      border-color: #f97316 !important;
+      box-shadow: 0 0 22px rgba(249, 115, 22, 0.55);
     }
 
     .gate-footer-actions {
@@ -964,8 +964,8 @@
       <div class="region-note" id="region-note">Prices shown in USD before state sales tax.</div>
       <nav class="vibe-seo-nav" aria-label="Curated Fragrance Vibes">
         <a href="/vibe/feeling-fresh.html" class="vibe-seo-link">Feeling Fresh (Women)</a>
-        <a href="/vibe/sexy-nights.html" class="vibe-seo-link">Sexy Nights (Women)</a>
         <a href="/vibe/9-to-5-energy.html" class="vibe-seo-link">9 to 5 Energy (Women)</a>
+        <a href="/vibe/sexy-nights.html" class="vibe-seo-link">Sexy Nights (Women)</a>
         <a href="/vibe/24-7-fresh.html" class="vibe-seo-link">24/7 Fresh (Men)</a>
         <a href="/vibe/main-character.html" class="vibe-seo-link">Main Character (Men)</a>
         <a href="/vibe/alpha-male.html" class="vibe-seo-link">Alpha Male (Men)</a>
@@ -1045,11 +1045,12 @@
   </footer>
 
   <script>
+    /* Matching 1-2-3 Order Across Women and Men */
     const VIBE_OPTIONS = {
       Women: [
         { name: "feeling fresh", desc: "Hot weather — keeps you cool", effect: "flowers" },
-        { name: "sexy nights", desc: "For the nights", effect: "fire" },
-        { name: "9 to 5 energy", desc: "All day use", effect: "money" }
+        { name: "9 to 5 energy", desc: "All day use", effect: "money" },
+        { name: "sexy nights", desc: "For the nights", effect: "fire" }
       ],
       Men: [
         { name: "24/7 fresh", desc: "Cool weather daily use", effect: "flowers" },
@@ -1060,78 +1061,73 @@
 
     const VIBE_SLUGS = {
       "feeling fresh": "feeling-fresh",
-      "sexy nights": "sexy-nights",
       "9 to 5 energy": "9-to-5-energy",
+      "sexy nights": "sexy-nights",
       "24/7 fresh": "24-7-fresh",
       "main character": "main-character",
       "alpha male": "alpha-male"
     };
 
+    /* Paired Matching Color Themes */
+    const FRESH_BLUE_THEME = {
+      bg: "#06131d",
+      surface: "rgba(11, 29, 43, 0.88)",
+      surfaceHover: "rgba(16, 42, 62, 0.94)",
+      border: "rgba(56, 189, 248, 0.28)",
+      accent: "#38bdf8",
+      accentSoft: "rgba(56, 189, 248, 0.16)",
+      overlay: "radial-gradient(circle at 50% 25%, rgba(12, 42, 64, 0.36) 0%, rgba(6, 19, 29, 0.84) 78%, rgba(6, 19, 29, 0.96) 100%)"
+    };
+
+    const POWER_MONEY_THEME = {
+      bg: "#071410",
+      surface: "rgba(12, 31, 25, 0.88)",
+      surfaceHover: "rgba(18, 44, 35, 0.94)",
+      border: "rgba(16, 185, 129, 0.28)",
+      accent: "#10b981",
+      accentSoft: "rgba(16, 185, 129, 0.18)",
+      overlay: "radial-gradient(circle at 50% 22%, rgba(14, 42, 32, 0.36) 0%, rgba(7, 20, 16, 0.84) 76%, rgba(7, 20, 16, 0.96) 100%)"
+    };
+
+    const NIGHT_FIRE_THEME = {
+      bg: "#14080c",
+      surface: "rgba(31, 13, 19, 0.88)",
+      surfaceHover: "rgba(44, 18, 27, 0.94)",
+      border: "rgba(249, 115, 22, 0.28)",
+      accent: "#f97316",
+      accentSoft: "rgba(249, 115, 22, 0.18)",
+      overlay: "radial-gradient(circle at 50% 20%, rgba(48, 16, 22, 0.34) 0%, rgba(20, 8, 12, 0.84) 75%, rgba(20, 8, 12, 0.96) 100%)"
+    };
+
     const VIBE_THEMES = {
       "feeling fresh": {
+        ...FRESH_BLUE_THEME,
         image: "./images/bg-feeling-fresh.jpg",
-        bg: "#07131a",
-        surface: "rgba(12, 29, 39, 0.88)",
-        surfaceHover: "rgba(18, 42, 56, 0.94)",
-        border: "rgba(125, 211, 252, 0.24)",
-        accent: "#38bdf8",
-        accentSoft: "rgba(56, 189, 248, 0.16)",
-        overlay: "radial-gradient(circle at 50% 25%, rgba(12, 42, 58, 0.36) 0%, rgba(7, 19, 26, 0.84) 78%, rgba(7, 19, 26, 0.96) 100%)",
-        caption: "Hot weather — keeps you cool with dewy florals & crisp botanicals."
-      },
-      "sexy nights": {
-        image: "./images/bg-sexy-nights.jpg",
-        bg: "#14080c",
-        surface: "rgba(31, 13, 19, 0.88)",
-        surfaceHover: "rgba(44, 18, 27, 0.94)",
-        border: "rgba(249, 115, 22, 0.26)",
-        accent: "#f97316",
-        accentSoft: "rgba(249, 115, 22, 0.18)",
-        overlay: "radial-gradient(circle at 50% 20%, rgba(48, 16, 22, 0.34) 0%, rgba(20, 8, 12, 0.84) 75%, rgba(20, 8, 12, 0.96) 100%)",
-        caption: "For the nights — velvet shadows, warm spice & magnetic intensity after dark."
-      },
-      "9 to 5 energy": {
-        image: "./images/bg-9-to-5-energy.jpg",
-        bg: "#071410",
-        surface: "rgba(12, 31, 25, 0.88)",
-        surfaceHover: "rgba(18, 44, 35, 0.94)",
-        border: "rgba(16, 185, 129, 0.26)",
-        accent: "#10b981",
-        accentSoft: "rgba(16, 185, 129, 0.18)",
-        overlay: "radial-gradient(circle at 50% 22%, rgba(14, 42, 32, 0.36) 0%, rgba(7, 20, 16, 0.84) 76%, rgba(7, 20, 16, 0.96) 100%)",
-        caption: "All day use — crisp boss energy from morning meetings to evening drinks."
+        caption: "Hot weather — keeps you cool with dewy white blossoms & crisp botanicals."
       },
       "24/7 fresh": {
+        ...FRESH_BLUE_THEME,
         image: "./images/bg-24-7-fresh.jpg",
-        bg: "#07121c",
-        surface: "rgba(12, 26, 41, 0.88)",
-        surfaceHover: "rgba(18, 38, 59, 0.94)",
-        border: "rgba(56, 189, 248, 0.24)",
-        accent: "#38bdf8",
-        accentSoft: "rgba(56, 189, 248, 0.16)",
-        overlay: "radial-gradient(circle at 50% 25%, rgba(12, 34, 56, 0.36) 0%, rgba(7, 18, 28, 0.84) 78%, rgba(7, 18, 28, 0.96) 100%)",
-        caption: "Cool weather daily use — glacial bergamot, crushed mint & clean woods."
+        caption: "Cool weather daily use — glacial bergamot, white neroli & clean woods."
+      },
+      "9 to 5 energy": {
+        ...POWER_MONEY_THEME,
+        image: "./images/bg-9-to-5-energy.jpg",
+        caption: "All day use — crisp boss energy from morning meetings to evening drinks."
       },
       "main character": {
+        ...POWER_MONEY_THEME,
         image: "./images/bg-main-character-nights.jpg",
-        bg: "#120f08",
-        surface: "rgba(28, 23, 13, 0.88)",
-        surfaceHover: "rgba(41, 33, 18, 0.94)",
-        border: "rgba(234, 179, 8, 0.28)",
-        accent: "#eab308",
-        accentSoft: "rgba(234, 179, 8, 0.18)",
-        overlay: "radial-gradient(circle at 50% 20%, rgba(38, 28, 12, 0.34) 0%, rgba(18, 15, 8, 0.84) 76%, rgba(18, 15, 8, 0.96) 100%)",
         caption: "Bold perfume day or night use — unmistakable presence wherever you walk in."
       },
+      "sexy nights": {
+        ...NIGHT_FIRE_THEME,
+        image: "./images/bg-sexy-nights.jpg",
+        caption: "For the nights — velvet shadows, warm spice & magnetic intensity after dark."
+      },
       "alpha male": {
+        ...NIGHT_FIRE_THEME,
         image: "./images/bg-seduce.jpg",
-        bg: "#140907",
-        surface: "rgba(31, 15, 12, 0.88)",
-        surfaceHover: "rgba(44, 21, 17, 0.94)",
-        border: "rgba(239, 68, 68, 0.28)",
-        accent: "#ef4444",
-        accentSoft: "rgba(239, 68, 68, 0.18)",
-        overlay: "radial-gradient(circle at 50% 20%, rgba(46, 16, 14, 0.34) 0%, rgba(20, 9, 7, 0.84) 76%, rgba(20, 9, 7, 0.96) 100%)",
         caption: "Perfumes for nights — dark amber, spiced leather & smoky after-hours dominance."
       }
     };
@@ -1174,6 +1170,43 @@
       ctx.textAlign = "center";
       ctx.textBaseline = "middle";
       ctx.fillText(emoji, size / 2, size / 2);
+      return c;
+    }
+
+    /* Crisp White 5-Petal Neroli / Jasmine Blossom Sprite */
+    function bakeWhiteFlowerSprite(size = 56, centerColor = "#bae6fd") {
+      const c = document.createElement("canvas");
+      c.width = size;
+      c.height = size;
+      const ctx = c.getContext("2d");
+      const cx = size / 2;
+      const cy = size / 2;
+
+      ctx.save();
+      ctx.shadowColor = "rgba(186, 230, 253, 0.85)";
+      ctx.shadowBlur = 6;
+
+      for (let i = 0; i < 5; i++) {
+        const angle = (i * Math.PI * 2) / 5 - Math.PI / 2;
+        ctx.save();
+        ctx.translate(cx, cy);
+        ctx.rotate(angle);
+        ctx.beginPath();
+        ctx.ellipse(0, -size * 0.22, size * 0.115, size * 0.2, 0, 0, Math.PI * 2);
+        const grad = ctx.createRadialGradient(0, -size * 0.16, 1, 0, -size * 0.22, size * 0.22);
+        grad.addColorStop(0, "#ffffff");
+        grad.addColorStop(0.75, "#f0f9ff");
+        grad.addColorStop(1, "#bae6fd");
+        ctx.fillStyle = grad;
+        ctx.fill();
+        ctx.restore();
+      }
+
+      ctx.beginPath();
+      ctx.arc(cx, cy, size * 0.085, 0, Math.PI * 2);
+      ctx.fillStyle = centerColor;
+      ctx.fill();
+      ctx.restore();
       return c;
     }
 
@@ -1298,7 +1331,11 @@
     })();
 
     const MONEY_SPRITES = ["💵", "💸", "💲"].map(e => bakeEmojiSprite(e, 48));
-    const FLOWER_SPRITES = ["🌸", "🌺", "🌷", "🌼", "🌹"].map(e => bakeEmojiSprite(e, 48));
+    const WHITE_FLOWER_SPRITES = [
+      bakeWhiteFlowerSprite(56, "#7dd3fc"),
+      bakeWhiteFlowerSprite(52, "#fef08a"),
+      bakeWhiteFlowerSprite(60, "#bae6fd")
+    ];
 
     function sizeGateCanvas() {
       const dpr = Math.min(window.devicePixelRatio || 1, 2);
@@ -1344,11 +1381,11 @@
         rot = (Math.random() - 0.5) * 0.5;
         vRot = (Math.random() - 0.5) * 0.06;
       } else if (type === "flowers") {
-        sprite = FLOWER_SPRITES[Math.floor(Math.random() * FLOWER_SPRITES.length)];
-        size = 18 + Math.random() * 12;
-        decay = 0.015 + Math.random() * 0.012;
+        sprite = WHITE_FLOWER_SPRITES[Math.floor(Math.random() * WHITE_FLOWER_SPRITES.length)];
+        size = 20 + Math.random() * 14;
+        decay = 0.014 + Math.random() * 0.011;
         rot = Math.random() * Math.PI * 2;
-        vRot = (Math.random() - 0.5) * 0.05;
+        vRot = (Math.random() - 0.5) * 0.045;
       }
 
       gateParticles.push({
@@ -1374,7 +1411,7 @@
             spawnRisingParticle(activeEffectRect, "fire");
           } else {
             spawnAccumulator += dt;
-            if (spawnAccumulator >= 2.2) {
+            if (spawnAccumulator >= 2.0) {
               spawnRisingParticle(activeEffectRect, activeEffectType);
               spawnAccumulator = 0;
             }
