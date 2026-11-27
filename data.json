@@ -12,8 +12,8 @@
       "rate_from_usd": 1.0,
       "vat_note": "Excludes state sales tax (avg. 6–9% at department stores)",
       "shipping_note": "Free tracked international/US delivery on bundles",
-      "seo_title": "Men & Women Perfume Prices in the USA (2026 Retail vs. Online Index)",
-      "seo_intro": "Compare standard US department store fragrance retail prices against verified online discounters and multi-bottle bundles.",
+      "seo_title": "Best Men & Women Perfume Prices USA (2026 Retail vs. Online Index)",
+      "seo_intro": "Compare standard US department store fragrance retail prices against verified online discounters. Find the best deals on men's and women's perfumes.",
       "priority_score": 100
     },
     "GB": {
@@ -24,9 +24,9 @@
       "rate_from_usd": 0.79,
       "vat_note": "UK retail prices include 20% VAT",
       "shipping_note": "Tracked UK delivery included on selected listings",
-      "seo_title": "Men & Women Perfume Prices in the UK (2026 Retail vs. Online Index)",
-      "seo_intro": "Compare UK high-street perfume prices against global online discounters and curated fragrance sets.",
-      "priority_score": 90
+      "seo_title": "Cheapest Men & Women Perfume Prices UK (2026 Price Comparison)",
+      "seo_intro": "Compare UK high-street perfume prices against global online discounters. Save on men's and women's fragrances with our 2026 price index.",
+      "priority_score": 95
     },
     "DE": {
       "name": "Germany",
@@ -36,9 +36,9 @@
       "rate_from_usd": 0.92,
       "vat_note": "German retail prices include 19% MwSt (VAT)",
       "shipping_note": "Fast EU tracked shipping available",
-      "seo_title": "Herren & Damen Parfüm Preise in Deutschland (2026 Preisvergleich)",
-      "seo_intro": "Vergleichen Sie reguläre Einzelhandelspreise in Deutschland mit geprüften Online-Angeboten und Duft-Sets.",
-      "priority_score": 85
+      "seo_title": "Herren & Damen Parfüm Preise Deutschland (2026 Preisvergleich)",
+      "seo_intro": "Vergleichen Sie reguläre Einzelhandelspreise für Herren- und Damenparfüm in Deutschland mit geprüften Online-Angeboten und Duft-Sets.",
+      "priority_score": 90
     },
     "AE": {
       "name": "United Arab Emirates",
@@ -48,9 +48,9 @@
       "rate_from_usd": 3.67,
       "vat_note": "UAE retail prices include 5% VAT",
       "shipping_note": "Express regional & international tracked dispatch",
-      "seo_title": "Men & Women Perfume Prices in UAE (2026 Retail vs. Online Index)",
-      "seo_intro": "Compare Dubai & Abu Dhabi mall retail fragrance prices against direct online bundle rates.",
-      "priority_score": 80
+      "seo_title": "Best Men & Women Perfume Prices UAE (2026 Dubai Price Index)",
+      "seo_intro": "Compare Dubai & Abu Dhabi mall retail fragrance prices for men and women against direct online bundle rates.",
+      "priority_score": 85
     },
     "IL": {
       "name": "Israel",
@@ -61,7 +61,7 @@
       "vat_note": "Local retail prices include 18% VAT; orders under $75 are exempt from import VAT",
       "shipping_note": "Local & international tracked shipping options",
       "seo_title": "מחירי בשמים לגברים ולנשים בישראל (מדד מחירים 2026)",
-      "seo_intro": "השוואת מחירי בשמים ברשתות הפארם בישראל מול מחירי אונליין ומארזים משתלמים.",
+      "seo_intro": "השוואת מחירי בשמים לגברים ולנשים ברשתות הפארם בישראל מול מחירי אונליין ומארזים משתלמים.",
       "priority_score": 75
     }
   },
@@ -146,9 +146,14 @@
     }
   ],
   "agent_metadata": {
-    "top_countries": ["US", "GB", "DE"],
+    "top_countries": [
+      "US",
+      "GB",
+      "DE"
+    ],
     "optimization_log": [
-      "Initial baseline dataset created for US, GB, DE, AE, IL."
+      "Initial baseline dataset created for US, GB, DE, AE, IL.",
+      "Optimized SEO titles and intros for US, GB, DE, and AE based on traffic telemetry and high-intent keyword alignment."
     ]
   }
 }
