@@ -73,6 +73,17 @@ def run_optimizer():
     traffic_stats = fetch_country_traffic()
     client = genai.Client(api_key=api_key)
 
+    # Automatically pick the newest available Flash model on your API key
+    available_models = [
+        m.name for m in client.models.list()
+        if "flash" in m.name.lower()
+        and "lite" not in m.name.lower()
+        and "image" not in m.name.lower()
+        and "audio" not in m.name.lower()
+    ]
+    target_model = sorted(available_models)[-1] if available_models else "gemini-flash-latest"
+    print(f"Using active model: {target_model}")
+
     prompt = f"""
     You are the autonomous SEO & conversion optimization agent for PerfumeIndex.
     Analyze the latest country-level search traffic and update `data.json` to maximize clicks and conversions from top-performing countries.
@@ -93,7 +104,7 @@ def run_optimizer():
     """
 
     response = client.models.generate_content(
-        model="gemini-3.0-flash",
+        model=target_model,
         contents=prompt,
         config=types.GenerateContentConfig(
             response_mime_type="application/json",
