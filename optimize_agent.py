@@ -6,7 +6,6 @@ from google.genai import types
 from google.oauth2 import service_account
 from googleapiclient.discovery import build
 
-# 1. Initialize Gemini Client (reads GEMINI_API_KEY from environment)
 client = genai.Client()
 
 MODELS_TO_TRY = [
@@ -14,7 +13,6 @@ MODELS_TO_TRY = [
     "gemini-3.1-flash-lite"
 ]
 
-# 2. Fetch Real Country Telemetry from Google Search Console (with safe fallback)
 def get_gsc_country_data():
     gsc_json_str = os.environ.get("GSC_SERVICE_ACCOUNT_JSON")
     site_url = os.environ.get("SITE_URL")
@@ -75,15 +73,15 @@ def get_gsc_country_data():
             {"country": "USA", "clicks": 0, "impressions": 0, "ctr": 0.0, "position": 0.0}
         ]
 
-# 3. Main Autonomous Optimization Routine
 def run_optimization():
     with open("data.json", "r", encoding="utf-8") as f:
         current_data = json.load(f)
 
-    # Snapshot protected fields (prices, URLs, IDs) for hard guardrail enforcement
+    # Hard guardrail snapshot: protect all prices and URLs
     protected_products = {
         p["id"]: {
             "retail_usd": p["retail_usd"],
+            "retail_url": p.get("retail_url"),
             "index_usd": p["index_usd"],
             "direct_usd": p.get("direct_usd"),
             "ebay_url": p["ebay_url"],
@@ -114,7 +112,7 @@ Your tasks:
 
 STRICT RULES:
 - Return ONLY valid JSON matching the exact schema of `current_data`.
-- Do NOT alter `id`, `brand`, `name`, `size`, `gender`, `retail_usd`, `index_usd`, `direct_usd`, `ebay_url`, `direct_url`, `currency`, `symbol`, or `rate_to_usd`.
+- Do NOT alter `id`, `brand`, `name`, `size`, `gender`, `retail_usd`, `retail_url`, `index_usd`, `direct_usd`, `ebay_url`, `direct_url`, `currency`, `symbol`, or `rate_to_usd`.
 - Do NOT wrap the output in markdown fences if avoidable, or ensure it parses cleanly as JSON.
 """
 
@@ -139,11 +137,12 @@ STRICT RULES:
     if not updated_data:
         raise RuntimeError("All candidate Gemini models failed to return valid JSON.")
 
-    # 4. Hard Guardrail Enforcement: Restore exact prices and URLs
     for product in updated_data.get("products", []):
         pid = product.get("id")
         if pid in protected_products:
             product["retail_usd"] = protected_products[pid]["retail_usd"]
+            if protected_products[pid]["retail_url"] is not None:
+                product["retail_url"] = protected_products[pid]["retail_url"]
             product["index_usd"] = protected_products[pid]["index_usd"]
             if protected_products[pid]["direct_usd"] is not None:
                 product["direct_usd"] = protected_products[pid]["direct_usd"]
