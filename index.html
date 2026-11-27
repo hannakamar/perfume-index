@@ -1068,7 +1068,6 @@
       const rect = cardEl.getBoundingClientRect();
       if (rect.width === 0 || rect.height === 0) return;
 
-      // Spawn 5 clean items around the top, left, and right borders of the hovered perfume square
       const positions = [
         { edge: "top", ratio: 0.25 },
         { edge: "top", ratio: 0.75 },
@@ -1143,10 +1142,8 @@
         if (!isWomenCard) return;
 
         card.addEventListener("mouseenter", () => {
-          // 1. Trigger once immediately on entering the perfume square
           spawnCardBorderWave(card);
 
-          // 2. Repeat smoothly every 1.6s as long as the cursor remains inside the perfume square
           if (activeCardInterval) clearInterval(activeCardInterval);
           activeCardInterval = setInterval(() => {
             if (!document.body.contains(card) || !card.matches(":hover")) {
@@ -1325,6 +1322,8 @@
     function closeVibeGate() {
       activeEffectNode = null;
       activeEffectRect = null;
+      fireParticles = [];
+      gCtx.clearRect(0, 0, window.innerWidth, window.innerHeight);
       vibeGate.classList.add("hidden");
     }
 
@@ -1356,8 +1355,8 @@
         }
 
         btn.addEventListener("click", () => {
-          applyGenderAndVibe(gender, vibe);
           closeVibeGate();
+          applyGenderAndVibe(gender, vibe);
         });
         vibeOptionsContainer.appendChild(btn);
       });
@@ -1367,14 +1366,14 @@
     }
 
     function applyGenderAndVibe(gender, vibe) {
-      activeGender = gender;
-      activeVibe = vibe;
+      activeGender = gender || "ALL";
+      activeVibe = vibe || null;
 
       document.querySelectorAll(".filter-btn").forEach(b => {
-        b.classList.toggle("active", b.dataset.gender.toLowerCase() === gender.toLowerCase());
+        b.classList.toggle("active", b.dataset.gender.toLowerCase() === activeGender.toLowerCase());
       });
 
-      applyVibeTheme(vibe);
+      applyVibeTheme(activeVibe);
       updateActiveVibeBanner();
       renderCatalog();
     }
@@ -1402,13 +1401,13 @@
     });
 
     document.getElementById("btn-gate-show-all-gender").addEventListener("click", () => {
-      applyGenderAndVibe(selectedGateGender, null);
       closeVibeGate();
+      applyGenderAndVibe(selectedGateGender, null);
     });
 
     document.getElementById("btn-skip-gate").addEventListener("click", () => {
-      applyGenderAndVibe("ALL", null);
       closeVibeGate();
+      applyGenderAndVibe("ALL", null);
     });
 
     document.getElementById("btn-open-vibe-gate").addEventListener("click", () => openVibeGate());
@@ -1506,6 +1505,7 @@
     async function init() {
       try {
         const res = await fetch("./data.json?v=" + Date.now());
+        if (!res.ok) throw new Error("HTTP " + res.status);
         siteData = await res.json();
 
         const params = new URLSearchParams(window.location.search);
@@ -1518,12 +1518,14 @@
         updateRegionUI();
         renderCatalog();
       } catch (err) {
+        console.error("Failed to load data.json:", err);
         document.getElementById("product-grid").innerHTML =
-          `<div style="grid-column:1/-1; text-align:center; color:#ef4444; padding:24px;">Failed to load data.json.</div>`;
+          `<div style="grid-column:1/-1; text-align:center; color:#ef4444; padding:24px;">Failed to load data.json (${err.message}). Check JSON syntax/commas.</div>`;
       }
     }
 
     function populateCountrySelector() {
+      if (!siteData || !siteData.countries) return;
       const select = document.getElementById("region-select");
       select.innerHTML = "";
       Object.entries(siteData.countries).forEach(([code, info]) => {
@@ -1544,6 +1546,7 @@
     }
 
     function updateRegionUI() {
+      if (!siteData || !siteData.countries) return;
       const c = siteData.countries[activeCountry];
       document.title = c.seo_title;
       document.getElementById("page-desc").setAttribute("content", c.seo_intro);
@@ -1582,6 +1585,8 @@
     }
 
     function renderCatalog() {
+      if (!siteData || !siteData.products) return;
+
       const grid = document.getElementById("product-grid");
       const tbody = document.getElementById("price-table-body");
 
