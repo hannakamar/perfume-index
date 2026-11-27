@@ -1,4 +1,11 @@
 {
+  "checkout": {
+  "mode": "direct_order",
+  "provider": "Direct Order (Credit Card / Bit / PayBox / PayPal)",
+  "whatsapp_number": "9725XXXXXXXX",
+  "payment_link_base": "https://your-payplus-or-tranzila-or-paypal-link",
+  "note": "Pay securely with Visa, Mastercard, Isracard, Apple Pay, Google Pay, Bit, or PayPal."
+}
   "default_country": "US",
   "last_optimized": "2026-11-27",
   "countries": {
