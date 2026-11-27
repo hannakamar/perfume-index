@@ -8,54 +8,54 @@
       "currency": "USD",
       "symbol": "$",
       "rate_to_usd": 1.0,
-      "vat_note": "Prices shown before state sales tax. Free US tracked shipping.",
-      "seo_title": "PerfumeIndex — Authentic Designer & Niche Fragrance Price Index",
-      "seo_intro": "Verify official retail prices directly on brand websites and save up to 40% on 100% authentic, factory-sealed fragrances."
+      "vat_note": "Prices shown before state sales tax. Free US tracked shipping on all orders.",
+      "seo_title": "PerfumeIndex US — Compare Official Retail vs. Discount Fragrance Prices",
+      "seo_intro": "Stop overpaying for luxury scents. Compare official brand retail prices against verified, factory-sealed deals and save up to 40%."
     },
     "UK": {
       "name": "United Kingdom",
       "currency": "GBP",
       "symbol": "£",
       "rate_to_usd": 0.79,
-      "vat_note": "Includes UK VAT estimate. Authentic sealed retail boxes.",
-      "seo_title": "PerfumeIndex UK — Authentic Designer & Niche Perfume Deals",
-      "seo_intro": "Compare official UK retail perfume prices against verified factory-sealed deals in GBP."
+      "vat_note": "Includes UK VAT. Authentic, factory-sealed retail boxes with verified batch codes.",
+      "seo_title": "PerfumeIndex UK — Authentic Designer & Niche Perfume Price Comparison",
+      "seo_intro": "Find the best perfume deals in the UK. Compare official retail prices against verified, sealed market listings in GBP."
     },
     "EU": {
       "name": "European Union",
       "currency": "EUR",
       "symbol": "€",
       "rate_to_usd": 0.92,
-      "vat_note": "Displayed in EUR. Factory-sealed bottles with batch codes.",
-      "seo_title": "PerfumeIndex EU — Authentic Designer & Niche Fragrance Index",
-      "seo_intro": "Compare official European retail fragrance prices against verified sealed deals in EUR."
+      "vat_note": "Displayed in EUR. 100% authentic, factory-sealed bottles with verifiable batch codes.",
+      "seo_title": "PerfumeIndex EU — Official Retail vs. Discount Fragrance Price Index",
+      "seo_intro": "Compare official European retail fragrance prices against verified, factory-sealed deals. Save on your favorite scents in EUR."
     },
     "IL": {
       "name": "Israel",
       "currency": "ILS",
       "symbol": "₪",
       "rate_to_usd": 3.65,
-      "vat_note": "Displayed in ILS (₪). Factory-sealed authentic bottles.",
-      "seo_title": "PerfumeIndex Israel — Authentic Designer & Niche Fragrances",
-      "seo_intro": "Compare official retail perfume prices against verified factory-sealed deals in ILS."
+      "vat_note": "Displayed in ILS (₪). Authentic, factory-sealed bottles with full batch code verification.",
+      "seo_title": "PerfumeIndex Israel — Authentic Designer & Niche Fragrance Deals",
+      "seo_intro": "Compare official retail perfume prices against verified, factory-sealed deals in ILS. Get the best value on luxury fragrances."
     },
     "CA": {
       "name": "Canada",
       "currency": "CAD",
       "symbol": "CA$",
       "rate_to_usd": 1.38,
-      "vat_note": "Displayed in CAD. Authentic sealed retail boxes.",
-      "seo_title": "PerfumeIndex Canada — Authentic Designer & Niche Perfume Index",
-      "seo_intro": "Compare official Canadian retail fragrance prices against verified sealed deals in CAD."
+      "vat_note": "Displayed in CAD. Authentic, sealed retail boxes with verified batch codes.",
+      "seo_title": "PerfumeIndex Canada — Authentic Designer & Niche Perfume Price Index",
+      "seo_intro": "Compare official Canadian retail fragrance prices against verified, sealed deals in CAD. Save big on authentic luxury perfume."
     },
     "AU": {
       "name": "Australia",
       "currency": "AUD",
       "symbol": "A$",
       "rate_to_usd": 1.52,
-      "vat_note": "Displayed in AUD. Factory-sealed bottles with batch codes.",
-      "seo_title": "PerfumeIndex Australia — Authentic Designer & Niche Perfumes",
-      "seo_intro": "Compare official Australian retail perfume prices against verified sealed deals in AUD."
+      "vat_note": "Displayed in AUD. Factory-sealed bottles with batch codes for total authenticity.",
+      "seo_title": "PerfumeIndex Australia — Authentic Designer & Niche Perfume Deals",
+      "seo_intro": "Compare official Australian retail perfume prices against verified, sealed deals in AUD. Find the best price for your signature scent."
     }
   },
   "products": [
@@ -66,8 +66,11 @@
       "size": "90ml / 3.0 oz",
       "gender": "Women",
       "notes": "French Lavender, Moroccan Orange Blossom, Musk, Madagascar Vanilla",
-      "vibes": ["9 to 5 energy", "sexy nights"],
-      "badge": "Best Seller",
+      "vibes": [
+        "9 to 5 energy",
+        "sexy nights"
+      ],
+      "badge": "Top Arbitrage Deal",
       "retail_usd": 165,
       "index_usd": 115,
       "direct_usd": null,
@@ -83,8 +86,11 @@
       "size": "90ml / 3.0 oz",
       "gender": "Women",
       "notes": "Pomegranate, Yuzu, Peony, Magnolia, Lotus, Amber, Musk",
-      "vibes": ["feeling fresh", "9 to 5 energy"],
-      "badge": "Iconic",
+      "vibes": [
+        "feeling fresh",
+        "9 to 5 energy"
+      ],
+      "badge": "High Savings",
       "retail_usd": 115,
       "index_usd": 64,
       "direct_usd": null,
@@ -100,8 +106,10 @@
       "size": "100ml / 3.4 oz",
       "gender": "Women",
       "notes": "Amber, Vanilla, Incense, Cinnamon, Sandalwood, Mandarin",
-      "vibes": ["sexy nights"],
-      "badge": "Classic Seductive",
+      "vibes": [
+        "sexy nights"
+      ],
+      "badge": "Best Value",
       "retail_usd": 98,
       "index_usd": 42,
       "direct_usd": null,
@@ -117,7 +125,10 @@
       "size": "100ml / 3.4 oz",
       "gender": "Women",
       "notes": "Sicilian Orange, Calabrian Bergamot, Turkish Rose, Patchouli, White Musk",
-      "vibes": ["9 to 5 energy", "feeling fresh"],
+      "vibes": [
+        "9 to 5 energy",
+        "feeling fresh"
+      ],
       "badge": "Top Rated",
       "retail_usd": 172,
       "index_usd": 134,
@@ -134,8 +145,10 @@
       "size": "80ml / 2.7 oz",
       "gender": "Women",
       "notes": "Almond, Coffee, Tuberose, Jasmine Sambac, Tonka Bean, Cacao",
-      "vibes": ["sexy nights"],
-      "badge": "Date Night",
+      "vibes": [
+        "sexy nights"
+      ],
+      "badge": "Date Night Favorite",
       "retail_usd": 152,
       "index_usd": 98,
       "direct_usd": null,
@@ -151,7 +164,11 @@
       "size": "100ml / 3.4 oz",
       "gender": "Men",
       "notes": "Calabrian Bergamot, Sichuan Pepper, Star Anise, Ambroxan, Vanilla",
-      "vibes": ["24/7 fresh", "main character", "alpha male"],
+      "vibes": [
+        "24/7 fresh",
+        "main character",
+        "alpha male"
+      ],
       "badge": "Best Seller",
       "retail_usd": 155,
       "index_usd": 114,
@@ -168,7 +185,10 @@
       "size": "100ml / 3.4 oz",
       "gender": "Men",
       "notes": "Grapefruit, Lemon, Mint, Pink Pepper, Ginger, Cedar, Sandalwood",
-      "vibes": ["24/7 fresh", "main character"],
+      "vibes": [
+        "24/7 fresh",
+        "main character"
+      ],
       "badge": "Office & Night",
       "retail_usd": 165,
       "index_usd": 129,
@@ -185,7 +205,10 @@
       "size": "100ml / 3.4 oz",
       "gender": "Men",
       "notes": "Pink Pepper, Cinnamon, Toffee, Lavender, Vanilla, Chestnut, Amber",
-      "vibes": ["alpha male", "main character"],
+      "vibes": [
+        "alpha male",
+        "main character"
+      ],
       "badge": "High Demand",
       "retail_usd": 135,
       "index_usd": 92,
@@ -202,8 +225,11 @@
       "size": "100ml / 3.3 oz",
       "gender": "Men",
       "notes": "Pineapple, Bergamot, Black Currant, Birch, Patchouli, Oakmoss, Ambergris",
-      "vibes": ["main character", "alpha male"],
-      "badge": "Niche Icon",
+      "vibes": [
+        "main character",
+        "alpha male"
+      ],
+      "badge": "Luxury Arbitrage",
       "retail_usd": 495,
       "index_usd": 289,
       "direct_usd": null,
@@ -219,7 +245,11 @@
       "size": "70ml / 2.4 oz",
       "gender": "Unisex",
       "notes": "Saffron, Jasmine, Amberwood, Ambergris, Fir Resin, Cedar",
-      "vibes": ["main character", "alpha male", "sexy nights"],
+      "vibes": [
+        "main character",
+        "alpha male",
+        "sexy nights"
+      ],
       "badge": "Luxury Icon",
       "retail_usd": 365,
       "index_usd": 269,
