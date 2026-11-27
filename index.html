@@ -5,7 +5,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title id="page-title">PerfumeIndex — Authentic Designer & Niche Fragrance Price Index</title>
   <meta id="page-desc" name="description" content="Compare official retail perfume prices against verified online discounter and eBay prices in real time. Transparent global fragrance pricing." />
+  <link rel="canonical" href="https://perfume-index.pages.dev/" />
+  <meta property="og:title" content="PerfumeIndex — Authentic Designer & Niche Fragrance Price Index" />
+  <meta property="og:description" content="Verify official retail prices directly on brand websites and save up to 40% on 100% authentic, factory-sealed fragrances." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://perfume-index.pages.dev/" />
   <meta name="google-site-verification" content="esZH6uu-ZadtegfLGuvYAmj8m_bU2ymBNALASh5lPIE" />
+  <!-- SSR_SCHEMA_START -->
+  <!-- SSR_SCHEMA_END -->
   <style>
     :root {
       --bg: #09090b;
@@ -430,6 +437,30 @@
       border-radius: 8px;
       border: 1px solid var(--border);
       transition: background-color 0.4s ease, border-color 0.4s ease;
+    }
+
+    .vibe-seo-nav {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 16px;
+    }
+
+    .vibe-seo-link {
+      font-size: 0.78rem;
+      color: var(--muted);
+      background: rgba(18, 18, 22, 0.75);
+      border: 1px solid var(--border);
+      padding: 4px 11px;
+      border-radius: 999px;
+      text-decoration: none;
+      transition: all 0.2s ease;
+    }
+
+    .vibe-seo-link:hover {
+      color: var(--accent);
+      border-color: var(--accent);
     }
 
     .trust-strip {
@@ -930,7 +961,15 @@
       <div class="badge-pill" id="last-updated-badge">Live Price Index • Updated Daily</div>
       <h1 id="hero-title">Authentic Designer & Niche Fragrance Price Index</h1>
       <p id="hero-intro">Verify official retail prices directly on brand websites and save up to 40% on 100% authentic, factory-sealed fragrances.</p>
-      <div class="region-note" id="region-note">Loading local currency & tax data...</div>
+      <div class="region-note" id="region-note">Prices shown in USD before state sales tax.</div>
+      <nav class="vibe-seo-nav" aria-label="Curated Fragrance Vibes">
+        <a href="/vibe/feeling-fresh.html" class="vibe-seo-link">Feeling Fresh (Women)</a>
+        <a href="/vibe/sexy-nights.html" class="vibe-seo-link">Sexy Nights (Women)</a>
+        <a href="/vibe/9-to-5-energy.html" class="vibe-seo-link">9 to 5 Energy (Women)</a>
+        <a href="/vibe/24-7-fresh.html" class="vibe-seo-link">24/7 Fresh (Men)</a>
+        <a href="/vibe/main-character.html" class="vibe-seo-link">Main Character (Men)</a>
+        <a href="/vibe/alpha-male.html" class="vibe-seo-link">Alpha Male (Men)</a>
+      </nav>
     </section>
 
     <section class="trust-strip">
@@ -973,7 +1012,10 @@
       </div>
     </div>
 
-    <section id="product-grid" class="product-grid"></section>
+    <section id="product-grid" class="product-grid">
+      <!-- SSR_GRID_START -->
+      <!-- SSR_GRID_END -->
+    </section>
 
     <div class="table-wrap" id="table-wrap">
       <table>
@@ -987,7 +1029,10 @@
             <th>Buy Verified</th>
           </tr>
         </thead>
-        <tbody id="price-table-body"></tbody>
+        <tbody id="price-table-body">
+          <!-- SSR_TABLE_START -->
+          <!-- SSR_TABLE_END -->
+        </tbody>
       </table>
     </div>
   </main>
@@ -1011,6 +1056,15 @@
         { name: "main character", desc: "Bold perfume day or night use", effect: "money" },
         { name: "alpha male", desc: "Perfumes for nights", effect: "fire" }
       ]
+    };
+
+    const VIBE_SLUGS = {
+      "feeling fresh": "feeling-fresh",
+      "sexy nights": "sexy-nights",
+      "9 to 5 energy": "9-to-5-energy",
+      "24/7 fresh": "24-7-fresh",
+      "main character": "main-character",
+      "alpha male": "alpha-male"
     };
 
     const VIBE_THEMES = {
@@ -1107,7 +1161,6 @@
       if (el) el.textContent = "Status: " + msg;
     }
 
-    /* --- 1. Hardware-Composited Card Border Sprites --- */
     const borderFxLayer = document.getElementById("border-fx-layer");
     const BORDER_ITEMS = ["💄", "👠", "💋", "🌸", "🌹", "🌺", "🌷"];
     const SPRITE_URLS = {};
@@ -1174,19 +1227,9 @@
         borderFxLayer.appendChild(img);
 
         const anim = img.animate([
-          {
-            transform: `translate3d(${startX}px, ${startY}px, 0) rotate(${startRot}deg) scale(0.3)`,
-            opacity: 0
-          },
-          {
-            transform: `translate3d(${(startX + endX) * 0.5}px, ${Math.min(startY, endY) - 18}px, 0) rotate(${(startRot + endRot) * 0.5}deg) scale(0.95)`,
-            opacity: 1,
-            offset: 0.28
-          },
-          {
-            transform: `translate3d(${endX}px, ${endY}px, 0) rotate(${endRot}deg) scale(0.8)`,
-            opacity: 0
-          }
+          { transform: `translate3d(${startX}px, ${startY}px, 0) rotate(${startRot}deg) scale(0.3)`, opacity: 0 },
+          { transform: `translate3d(${(startX + endX) * 0.5}px, ${Math.min(startY, endY) - 18}px, 0) rotate(${(startRot + endRot) * 0.5}deg) scale(0.95)`, opacity: 1, offset: 0.28 },
+          { transform: `translate3d(${endX}px, ${endY}px, 0) rotate(${endRot}deg) scale(0.8)`, opacity: 0 }
         ], {
           duration: 1350,
           delay: idx * 55,
@@ -1210,7 +1253,6 @@
 
         card.addEventListener("mouseenter", () => {
           spawnCardBorderWave(card);
-
           if (activeCardInterval) clearInterval(activeCardInterval);
           activeCardInterval = setInterval(() => {
             if (!document.body.contains(card) || !card.matches(":hover")) {
@@ -1231,13 +1273,12 @@
       });
     }
 
-    /* --- 2. Gate Rising Particle FX Engine (Fire, Money, Flowers) --- */
     const gateCanvas = document.getElementById("vibe-gate-canvas");
     const gCtx = gateCanvas.getContext("2d", { alpha: true });
     let gateParticles = [];
     let activeEffectNode = null;
     let activeEffectRect = null;
-    let activeEffectType = "fire"; // "fire" | "money" | "flowers"
+    let activeEffectType = "fire";
     let spawnAccumulator = 0;
 
     const FIRE_SPRITE = (() => {
@@ -1311,18 +1352,11 @@
       }
 
       gateParticles.push({
-        type,
-        sprite,
-        x,
-        y,
+        type, sprite, x, y,
         vx: (Math.random() - 0.5) * 1.1,
         vy: -(1.2 + Math.random() * 2.2),
         wobble: Math.random() * Math.PI * 2,
-        rot,
-        vRot,
-        size,
-        life: 1.0,
-        decay
+        rot, vRot, size, life: 1.0, decay
       });
     }
 
@@ -1409,7 +1443,6 @@
       }
     }
 
-    /* Two-Step Gate Logic */
     const vibeGate = document.getElementById("vibe-gate");
     const gateStep1 = document.getElementById("gate-step-1");
     const gateStep2 = document.getElementById("gate-step-2");
@@ -1655,8 +1688,8 @@
       } catch (err) {
         console.error("Failed to load data.json:", err);
         setGateStatus(`data.json error: ${err.message}`);
-        document.getElementById("product-grid").innerHTML =
-          `<div style="grid-column:1/-1; text-align:center; color:#ef4444; padding:24px;">Failed to load data.json (${err.message}). Check JSON syntax/commas.</div>`;
+        bind3DTilt();
+        bindCardHoverEffects();
       }
     }
 
@@ -1762,12 +1795,15 @@
           : "";
 
         const vibeBadges = (p.vibes && p.vibes.length)
-          ? `<div class="vibe-tags">${p.vibes.map(v => `<span class="vibe-tag">${v}</span>`).join("")}</div>`
+          ? `<div class="vibe-tags">${p.vibes.map(v => {
+              const slug = VIBE_SLUGS[v.toLowerCase()] || v.toLowerCase().replace(/[^a-z0-9]+/g, "-");
+              return `<a href="/vibe/${slug}.html" class="vibe-tag" style="text-decoration:none;">${v}</a>`;
+            }).join("")}</div>`
           : "";
 
         return `
           <article class="card" data-gender="${p.gender}" data-vibe="${(p.vibes || []).join(',')}">
-            <div class="stage-wrapper">
+            <a href="/perfume/${p.id}.html" class="stage-wrapper" style="text-decoration:none; color:inherit; display:block;" aria-label="View ${p.brand} ${p.name} price breakdown">
               <div class="ivory-frame">
                 <div class="gold-inner-border"></div>
                 ${p.badge ? `<span class="card-badge">${p.badge}</span>` : ""}
@@ -1776,11 +1812,11 @@
                 <div class="corner-cluster corner-br">${clusterHTML}</div>
                 <img src="${p.image_url}" alt="${p.brand} ${p.name} ${p.size}" class="bottle-img" loading="lazy" />
               </div>
-            </div>
+            </a>
             <div class="card-body">
               <div>
                 <div class="card-brand">${p.brand}</div>
-                <h2 class="card-title">${p.name}</h2>
+                <h2 class="card-title"><a href="/perfume/${p.id}.html" style="color:inherit; text-decoration:none;">${p.name}</a></h2>
                 <div class="card-meta">${p.size} • ${p.gender}</div>
                 <div class="card-meta" style="margin-top:4px;">${p.notes}</div>
                 ${vibeBadges}
@@ -1820,9 +1856,9 @@
 
         return `
           <tr>
-            <td><img src="${p.image_url}" alt="${p.name}" class="thumb-mini" /></td>
+            <td><a href="/perfume/${p.id}.html"><img src="${p.image_url}" alt="${p.name}" class="thumb-mini" /></a></td>
             <td>
-              <div style="font-weight:700;">${p.brand} — ${p.name}</div>
+              <div style="font-weight:700;"><a href="/perfume/${p.id}.html" style="color:inherit; text-decoration:none;">${p.brand} — ${p.name}</a></div>
               <div style="font-size:0.8rem; color:var(--muted);">${p.gender} • ${p.notes}</div>
             </td>
             <td>${p.size}</td>
