@@ -31,6 +31,161 @@
       -webkit-font-smoothing: antialiased;
     }
 
+    /* Two-Step Onboarding Gate */
+    .vibe-gate {
+      position: fixed;
+      inset: 0;
+      z-index: 100;
+      background: radial-gradient(circle at 50% 25%, #181820 0%, #09090b 75%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      transition: opacity 0.3s ease, visibility 0.3s ease;
+    }
+
+    .vibe-gate.hidden {
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+    }
+
+    .gate-card {
+      width: 100%;
+      max-width: 620px;
+      background: rgba(18, 18, 22, 0.92);
+      border: 1px solid rgba(229, 184, 105, 0.35);
+      border-radius: 24px;
+      padding: 40px 32px;
+      text-align: center;
+      box-shadow: 0 30px 70px rgba(0, 0, 0, 0.8);
+      backdrop-filter: blur(16px);
+    }
+
+    .gate-logo {
+      font-weight: 800;
+      font-size: 1.25rem;
+      letter-spacing: -0.02em;
+      margin-bottom: 18px;
+    }
+
+    .gate-logo span { color: var(--accent); }
+
+    .gate-step-label {
+      display: inline-block;
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--accent);
+      background: var(--accent-soft);
+      border: 1px solid rgba(229, 184, 105, 0.3);
+      padding: 4px 12px;
+      border-radius: 999px;
+      margin-bottom: 14px;
+      font-weight: 700;
+    }
+
+    .gate-title {
+      font-size: clamp(1.55rem, 3.5vw, 2.15rem);
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      margin-bottom: 8px;
+    }
+
+    .gate-subtitle {
+      color: var(--muted);
+      font-size: 0.96rem;
+      margin-bottom: 28px;
+    }
+
+    .gender-choice-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+      margin-bottom: 24px;
+    }
+
+    .gender-choice-btn {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      color: var(--text);
+      border-radius: 16px;
+      padding: 28px 18px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .gender-choice-btn:hover {
+      border-color: var(--accent);
+      background: var(--accent-soft);
+      transform: translateY(-3px);
+    }
+
+    .gender-choice-title {
+      font-size: 1.25rem;
+      font-weight: 800;
+      color: var(--text);
+    }
+
+    .gender-choice-sub {
+      font-size: 0.82rem;
+      color: var(--muted);
+    }
+
+    .vibe-choice-grid {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 12px;
+      margin-bottom: 26px;
+    }
+
+    .vibe-choice-btn {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      color: var(--text);
+      padding: 14px 22px;
+      border-radius: 999px;
+      font-size: 0.98rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.18s ease;
+      text-transform: lowercase;
+    }
+
+    .vibe-choice-btn:hover {
+      background: var(--accent);
+      color: #09090b;
+      border-color: var(--accent);
+      transform: translateY(-2px);
+    }
+
+    .gate-footer-actions {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 18px;
+      flex-wrap: wrap;
+    }
+
+    .gate-link-btn {
+      background: none;
+      border: none;
+      color: var(--muted);
+      font-size: 0.85rem;
+      cursor: pointer;
+      text-decoration: underline;
+      text-underline-offset: 3px;
+    }
+
+    .gate-link-btn:hover {
+      color: var(--accent);
+    }
+
     .container {
       max-width: 1200px;
       margin: 0 auto;
@@ -62,6 +217,7 @@
       font-weight: 800;
       font-size: 1.32rem;
       letter-spacing: -0.02em;
+      cursor: pointer;
     }
 
     .brand span { color: var(--accent); }
@@ -71,6 +227,23 @@
       align-items: center;
       gap: 12px;
       flex-wrap: wrap;
+    }
+
+    .quiz-reopen-btn {
+      background: var(--accent-soft);
+      color: var(--accent);
+      border: 1px solid rgba(229, 184, 105, 0.45);
+      padding: 7px 13px;
+      border-radius: 8px;
+      font-size: 0.84rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+
+    .quiz-reopen-btn:hover {
+      background: var(--accent);
+      color: #09090b;
     }
 
     select, input {
@@ -158,7 +331,7 @@
       justify-content: space-between;
       align-items: center;
       gap: 12px;
-      margin: 22px 0 26px;
+      margin: 22px 0 16px;
       flex-wrap: wrap;
     }
 
@@ -194,6 +367,49 @@
       border-color: var(--accent);
     }
 
+    .active-vibe-bar {
+      display: none;
+      align-items: center;
+      justify-content: space-between;
+      background: var(--accent-soft);
+      border: 1px solid rgba(229, 184, 105, 0.4);
+      border-radius: 12px;
+      padding: 10px 16px;
+      margin-bottom: 22px;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .active-vibe-bar.visible {
+      display: flex;
+    }
+
+    .active-vibe-text {
+      font-size: 0.9rem;
+      color: var(--text);
+    }
+
+    .active-vibe-text strong {
+      color: var(--accent);
+      text-transform: lowercase;
+    }
+
+    .clear-vibe-btn {
+      background: var(--bg);
+      color: var(--text);
+      border: 1px solid var(--border);
+      padding: 5px 12px;
+      border-radius: 6px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    .clear-vibe-btn:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+
     /* 3D Parallax Botanical Frame Grid */
     .product-grid {
       display: grid;
@@ -224,7 +440,6 @@
       transform-style: preserve-3d;
     }
 
-    /* Layer 1 (Z = 0px): Warm Ivory Frame with Champagne Gold Border */
     .ivory-frame {
       position: relative;
       height: 270px;
@@ -247,7 +462,6 @@
       z-index: 2;
     }
 
-    /* Layer 2 (Z = 28px): Real Bottle Cutout (White BG removed via multiply) */
     .bottle-img {
       max-height: 210px;
       max-width: 72%;
@@ -263,7 +477,6 @@
       transform: translateZ(42px) scale(1.05);
     }
 
-    /* Layer 3 (Z = 60px): 50/50 Diagonal Corner Botanical Clusters */
     .corner-cluster {
       position: absolute;
       width: 118px;
@@ -351,6 +564,23 @@
       color: var(--muted);
     }
 
+    .vibe-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 6px;
+    }
+
+    .vibe-tag {
+      font-size: 0.72rem;
+      color: var(--accent);
+      background: var(--accent-soft);
+      border: 1px solid rgba(229, 184, 105, 0.25);
+      padding: 2px 8px;
+      border-radius: 999px;
+      text-transform: lowercase;
+    }
+
     .price-box {
       background: rgba(9, 9, 11, 0.65);
       border: 1px solid var(--border);
@@ -397,7 +627,6 @@
       margin-top: 4px;
     }
 
-    /* Compact Table View */
     .table-wrap {
       background: var(--surface);
       border: 1px solid var(--border);
@@ -488,10 +717,50 @@
 </head>
 <body>
 
+  <!-- Two-Step Entry Gate -->
+  <div class="vibe-gate" id="vibe-gate" role="dialog" aria-modal="true" aria-labelledby="gate-title">
+    <div class="gate-card">
+      <div class="gate-logo">Perfume<span>Index</span></div>
+
+      <!-- Step 1: Men or Women -->
+      <div id="gate-step-1">
+        <div class="gate-step-label">Step 1 of 2</div>
+        <h2 class="gate-title" id="gate-title">Who is the perfume for?</h2>
+        <p class="gate-subtitle">Select below to match your exact scent vibe and verified retail discounts.</p>
+        <div class="gender-choice-grid">
+          <button type="button" class="gender-choice-btn" data-select-gender="Men">
+            <span class="gender-choice-title">Men</span>
+            <span class="gender-choice-sub">Fresh, seductive &amp; power scents</span>
+          </button>
+          <button type="button" class="gender-choice-btn" data-select-gender="Women">
+            <span class="gender-choice-title">Women</span>
+            <span class="gender-choice-sub">Clean, alluring &amp; boss energy</span>
+          </button>
+        </div>
+        <div class="gate-footer-actions">
+          <button type="button" class="gate-link-btn" id="btn-skip-gate">Skip &amp; browse full price index</button>
+        </div>
+      </div>
+
+      <!-- Step 2: Vibe Selection -->
+      <div id="gate-step-2" style="display:none;">
+        <div class="gate-step-label" id="gate-step-2-badge">Step 2 of 2 • Men</div>
+        <h2 class="gate-title">Pick your vibe</h2>
+        <p class="gate-subtitle">We’ll curate the highest-value authentic bottles for your mood.</p>
+        <div class="vibe-choice-grid" id="vibe-options-container"></div>
+        <div class="gate-footer-actions">
+          <button type="button" class="gate-link-btn" id="btn-gate-back">← Back to Men / Women</button>
+          <button type="button" class="gate-link-btn" id="btn-gate-show-all-gender">Show all for <span id="gate-gender-label">Men</span></button>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <header>
     <div class="container nav">
-      <div class="brand">Perfume<span>Index</span></div>
+      <div class="brand" id="brand-reset">Perfume<span>Index</span></div>
       <div class="controls">
+        <button type="button" class="quiz-reopen-btn" id="btn-open-vibe-gate">Find Your Vibe</button>
         <label for="region-select" style="font-size: 0.85rem; color: var(--muted);">Region:</label>
         <select id="region-select" aria-label="Select Region"></select>
       </div>
@@ -534,6 +803,17 @@
       </div>
     </div>
 
+    <!-- Active Vibe Banner -->
+    <div class="active-vibe-bar" id="active-vibe-bar">
+      <div class="active-vibe-text">
+        Showing <span id="active-vibe-gender">Men</span> fragrances matching vibe: <strong id="active-vibe-name">24/7 fresh</strong>
+      </div>
+      <div style="display:flex; gap:8px;">
+        <button type="button" class="clear-vibe-btn" id="btn-switch-vibe">Change Vibe</button>
+        <button type="button" class="clear-vibe-btn" id="btn-clear-vibe">Clear Filter ✕</button>
+      </div>
+    </div>
+
     <section id="product-grid" class="product-grid"></section>
 
     <div class="table-wrap" id="table-wrap">
@@ -561,10 +841,122 @@
   </footer>
 
   <script>
+    const VIBE_OPTIONS = {
+      Men: [
+        "24/7 fresh",
+        "seduce",
+        "main character nights",
+        "money vibes",
+        "finance bro"
+      ],
+      Women: [
+        "feeling fresh",
+        "sexy nights",
+        "9 to 5 energy",
+        "boyfriend seduce"
+      ]
+    };
+
     let siteData = null;
     let activeCountry = "US";
     let activeGender = "ALL";
+    let activeVibe = null;
+    let selectedGateGender = null;
     let searchQuery = "";
+
+    /* Two-Step Gate Logic */
+    const vibeGate = document.getElementById("vibe-gate");
+    const gateStep1 = document.getElementById("gate-step-1");
+    const gateStep2 = document.getElementById("gate-step-2");
+    const vibeOptionsContainer = document.getElementById("vibe-options-container");
+
+    function openVibeGate(startAtGender = null) {
+      if (startAtGender && VIBE_OPTIONS[startAtGender]) {
+        selectGateGender(startAtGender);
+      } else {
+        gateStep1.style.display = "block";
+        gateStep2.style.display = "none";
+      }
+      vibeGate.classList.remove("hidden");
+    }
+
+    function closeVibeGate() {
+      vibeGate.classList.add("hidden");
+    }
+
+    function selectGateGender(gender) {
+      selectedGateGender = gender;
+      document.getElementById("gate-step-2-badge").textContent = `Step 2 of 2 • ${gender}`;
+      document.getElementById("gate-gender-label").textContent = gender;
+
+      vibeOptionsContainer.innerHTML = "";
+      (VIBE_OPTIONS[gender] || []).forEach(vibe => {
+        const btn = document.createElement("button");
+        btn.type = "button";
+        btn.className = "vibe-choice-btn";
+        btn.textContent = vibe;
+        btn.addEventListener("click", () => {
+          applyGenderAndVibe(gender, vibe);
+          closeVibeGate();
+        });
+        vibeOptionsContainer.appendChild(btn);
+      });
+
+      gateStep1.style.display = "none";
+      gateStep2.style.display = "block";
+    }
+
+    function applyGenderAndVibe(gender, vibe) {
+      activeGender = gender;
+      activeVibe = vibe;
+
+      document.querySelectorAll(".filter-btn").forEach(b => {
+        b.classList.toggle("active", b.dataset.gender.toLowerCase() === gender.toLowerCase());
+      });
+
+      updateActiveVibeBanner();
+      renderCatalog();
+    }
+
+    function updateActiveVibeBanner() {
+      const bar = document.getElementById("active-vibe-bar");
+      if (activeVibe) {
+        document.getElementById("active-vibe-gender").textContent = activeGender === "ALL" ? "All" : activeGender;
+        document.getElementById("active-vibe-name").textContent = activeVibe;
+        bar.classList.add("visible");
+      } else {
+        bar.classList.remove("visible");
+      }
+    }
+
+    document.querySelectorAll("[data-select-gender]").forEach(btn => {
+      btn.addEventListener("click", () => selectGateGender(btn.dataset.selectGender));
+    });
+
+    document.getElementById("btn-gate-back").addEventListener("click", () => {
+      gateStep2.style.display = "none";
+      gateStep1.style.display = "block";
+    });
+
+    document.getElementById("btn-gate-show-all-gender").addEventListener("click", () => {
+      applyGenderAndVibe(selectedGateGender, null);
+      closeVibeGate();
+    });
+
+    document.getElementById("btn-skip-gate").addEventListener("click", () => {
+      applyGenderAndVibe("ALL", null);
+      closeVibeGate();
+    });
+
+    document.getElementById("btn-open-vibe-gate").addEventListener("click", () => openVibeGate());
+    document.getElementById("btn-switch-vibe").addEventListener("click", () => {
+      openVibeGate(activeGender !== "ALL" ? activeGender : null);
+    });
+    document.getElementById("btn-clear-vibe").addEventListener("click", () => {
+      activeVibe = null;
+      updateActiveVibeBanner();
+      renderCatalog();
+    });
 
     function getBotanicalClusterSVG(notesStr) {
       const n = (notesStr || "").toLowerCase();
@@ -725,16 +1117,19 @@
 
       const filtered = siteData.products.filter(p => {
         const matchesGender = activeGender === "ALL" || p.gender.toLowerCase() === activeGender.toLowerCase();
+        const productVibes = (p.vibes || []).map(v => v.toLowerCase());
+        const matchesVibe = !activeVibe || productVibes.includes(activeVibe.toLowerCase());
         const q = searchQuery.toLowerCase();
         const matchesSearch = !q ||
           p.brand.toLowerCase().includes(q) ||
           p.name.toLowerCase().includes(q) ||
-          p.notes.toLowerCase().includes(q);
-        return matchesGender && matchesSearch;
+          p.notes.toLowerCase().includes(q) ||
+          productVibes.some(v => v.includes(q));
+        return matchesGender && matchesVibe && matchesSearch;
       });
 
       if (!filtered.length) {
-        grid.innerHTML = `<div style="grid-column:1/-1; text-align:center; color:var(--muted); padding:24px;">No fragrances match your current filter.</div>`;
+        grid.innerHTML = `<div style="grid-column:1/-1; text-align:center; color:var(--muted); padding:24px;">No fragrances match your current vibe or filter yet.</div>`;
         tbody.innerHTML = `<tr><td colspan="6" style="text-align:center; color:var(--muted);">No fragrances match your current filter.</td></tr>`;
         return;
       }
@@ -755,6 +1150,10 @@
           ? `<a href="${p.direct_url}" target="_blank" rel="noopener" class="btn btn-direct">Direct ${formatLocalPrice(p.direct_usd)}</a>`
           : "";
 
+        const vibeBadges = (p.vibes && p.vibes.length)
+          ? `<div class="vibe-tags">${p.vibes.map(v => `<span class="vibe-tag">${v}</span>`).join("")}</div>`
+          : "";
+
         return `
           <article class="card">
             <div class="stage-wrapper">
@@ -773,6 +1172,7 @@
                 <h2 class="card-title">${p.name}</h2>
                 <div class="card-meta">${p.size} • ${p.gender}</div>
                 <div class="card-meta" style="margin-top:4px;">${p.notes}</div>
+                ${vibeBadges}
               </div>
               <div class="price-box">
                 <div class="price-row">
@@ -840,6 +1240,8 @@
         document.querySelectorAll(".filter-btn").forEach(b => b.classList.remove("active"));
         btn.classList.add("active");
         activeGender = btn.dataset.gender;
+        activeVibe = null;
+        updateActiveVibeBanner();
         renderCatalog();
       });
     });
