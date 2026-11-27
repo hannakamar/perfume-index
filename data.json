@@ -2,7 +2,7 @@
   "checkout": {
   "mode": "direct_order",
   "provider": "Direct Order (Credit Card / Bit / PayBox / PayPal)",
-  "whatsapp_number": "9725XXXXXXXX",
+  "whatsapp_number": "972527893343",
   "payment_link_base": "https://your-payplus-or-tranzila-or-paypal-link",
   "note": "Pay securely with Visa, Mastercard, Isracard, Apple Pay, Google Pay, Bit, or PayPal."
 }
