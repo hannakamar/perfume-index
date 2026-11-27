@@ -77,7 +77,7 @@ def run_optimization():
     with open("data.json", "r", encoding="utf-8") as f:
         current_data = json.load(f)
 
-    # Hard guardrail snapshot: protect all prices and URLs
+    # Hard guardrail snapshot: protect all prices, URLs, and vibes
     protected_products = {
         p["id"]: {
             "retail_usd": p["retail_usd"],
@@ -85,7 +85,8 @@ def run_optimization():
             "index_usd": p["index_usd"],
             "direct_usd": p.get("direct_usd"),
             "ebay_url": p["ebay_url"],
-            "direct_url": p.get("direct_url")
+            "direct_url": p.get("direct_url"),
+            "vibes": p.get("vibes", [])
         }
         for p in current_data.get("products", [])
     }
@@ -112,7 +113,7 @@ Your tasks:
 
 STRICT RULES:
 - Return ONLY valid JSON matching the exact schema of `current_data`.
-- Do NOT alter `id`, `brand`, `name`, `size`, `gender`, `retail_usd`, `retail_url`, `index_usd`, `direct_usd`, `ebay_url`, `direct_url`, `currency`, `symbol`, or `rate_to_usd`.
+- Do NOT alter `id`, `brand`, `name`, `size`, `gender`, `vibes`, `retail_usd`, `retail_url`, `index_usd`, `direct_usd`, `ebay_url`, `direct_url`, `currency`, `symbol`, or `rate_to_usd`.
 - Do NOT wrap the output in markdown fences if avoidable, or ensure it parses cleanly as JSON.
 """
 
@@ -149,6 +150,8 @@ STRICT RULES:
             product["ebay_url"] = protected_products[pid]["ebay_url"]
             if protected_products[pid]["direct_url"] is not None:
                 product["direct_url"] = protected_products[pid]["direct_url"]
+            if "vibes" in protected_products[pid]:
+                product["vibes"] = protected_products[pid]["vibes"]
 
     updated_data["last_optimized"] = today_str
 
