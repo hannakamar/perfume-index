@@ -35,7 +35,7 @@
       overflow-x: hidden;
     }
 
-    /* Hardware-Accelerated Border FX Container */
+    /* Hardware-Accelerated Border FX Layer */
     .border-fx-layer {
       position: fixed;
       inset: 0;
@@ -48,8 +48,8 @@
       position: fixed;
       top: 0;
       left: 0;
-      width: 44px;
-      height: 44px;
+      width: 40px;
+      height: 40px;
       pointer-events: none;
       will-change: transform, opacity;
       user-select: none;
@@ -502,11 +502,6 @@
       color: var(--accent);
     }
 
-    /* Whole Perfume List Wrapper (Target Border Zone) */
-    .catalog-zone {
-      position: relative;
-    }
-
     /* 3D Parallax Botanical Frame Grid */
     .product-grid {
       display: grid;
@@ -923,25 +918,22 @@
       </div>
     </div>
 
-    <!-- Whole Perfume List Area (Red-Marked Border Zone) -->
-    <div class="catalog-zone" id="catalog-zone">
-      <section id="product-grid" class="product-grid"></section>
+    <section id="product-grid" class="product-grid"></section>
 
-      <div class="table-wrap" id="table-wrap">
-        <table>
-          <thead>
-            <tr>
-              <th>Bottle</th>
-              <th>Fragrance</th>
-              <th>Size</th>
-              <th>Official Retail</th>
-              <th>PerfumeIndex</th>
-              <th>Buy Verified</th>
-            </tr>
-          </thead>
-          <tbody id="price-table-body"></tbody>
-        </table>
-      </div>
+    <div class="table-wrap" id="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Bottle</th>
+            <th>Fragrance</th>
+            <th>Size</th>
+            <th>Official Retail</th>
+            <th>PerfumeIndex</th>
+            <th>Buy Verified</th>
+          </tr>
+        </thead>
+        <tbody id="price-table-body"></tbody>
+      </table>
     </div>
   </main>
 
@@ -1049,24 +1041,21 @@
     let activeVibe = null;
     let selectedGateGender = null;
     let searchQuery = "";
+    let activeCardInterval = null;
 
-    /* --- 1. Hardware-Composited Border Sprites (Web Animations API = 120 FPS) --- */
+    /* --- 1. Hardware-Composited Card Border Sprites (Fires Once on Enter + Repeats While Inside Square) --- */
     const borderFxLayer = document.getElementById("border-fx-layer");
-    const catalogZone = document.getElementById("catalog-zone");
     const BORDER_ITEMS = ["💄", "👠", "💋", "🌸", "🌹", "🌺", "🌷"];
     const SPRITE_URLS = {};
-    let activeBorderSprites = 0;
-    let lastBorderSpawn = 0;
 
-    // Pre-bake sharp PNG data URLs once so GPU composits pure <img> layers with zero text rasterization
     function bakeSprites() {
-      const size = 88;
+      const size = 80;
       BORDER_ITEMS.forEach(emoji => {
         const c = document.createElement("canvas");
         c.width = size;
         c.height = size;
         const ctx = c.getContext("2d");
-        ctx.font = "52px 'Apple Color Emoji', 'Segoe UI Emoji', 'Noto Color Emoji', sans-serif";
+        ctx.font = "48px 'Apple Color Emoji', 'Segoe UI Emoji', 'Noto Color Emoji', sans-serif";
         ctx.textAlign = "center";
         ctx.textBaseline = "middle";
         ctx.fillText(emoji, size / 2, size / 2);
@@ -1075,105 +1064,108 @@
     }
     bakeSprites();
 
-    function spawnCatalogBorderItems(count = 3) {
-      if (activeBorderSprites >= 16) return; // Keep it clean & minimal (max 16 on screen)
-      const rect = catalogZone.getBoundingClientRect();
+    function spawnCardBorderWave(cardEl) {
+      const rect = cardEl.getBoundingClientRect();
       if (rect.width === 0 || rect.height === 0) return;
 
-      const vh = window.innerHeight;
-      const visibleTop = Math.max(rect.top, 80);
-      const visibleBottom = Math.min(rect.bottom, vh - 40);
-      if (visibleBottom <= visibleTop) return;
+      // Spawn 5 clean items around the top, left, and right borders of the hovered perfume square
+      const positions = [
+        { edge: "top", ratio: 0.25 },
+        { edge: "top", ratio: 0.75 },
+        { edge: "left", ratio: 0.35 },
+        { edge: "right", ratio: 0.35 },
+        { edge: "left", ratio: 0.72 }
+      ];
 
-      for (let i = 0; i < count; i++) {
-        if (activeBorderSprites >= 16) break;
-
-        const emoji = BORDER_ITEMS[Math.floor(Math.random() * BORDER_ITEMS.length)];
+      positions.forEach((pos, idx) => {
+        const emoji = BORDER_ITEMS[(idx + Math.floor(Math.random() * BORDER_ITEMS.length)) % BORDER_ITEMS.length];
         const img = document.createElement("img");
         img.src = SPRITE_URLS[emoji];
         img.alt = "";
         img.className = "fx-sprite-node";
 
-        // Pick one of the 3 outer borders of the whole perfume list (Top, Left, Right)
-        const edgeRoll = Math.random();
         let startX, startY, endX, endY;
-
-        if (edgeRoll < 0.34) {
-          // Top border of the whole perfume list: floats gently upward & outward
-          startX = rect.left + 24 + Math.random() * (rect.width - 48);
-          startY = visibleTop;
-          endX = startX + (Math.random() - 0.5) * 140;
-          endY = startY - (75 + Math.random() * 65);
-        } else if (edgeRoll < 0.67) {
-          // Left outer border of the whole perfume list: drifts outward to the left & arcs down
-          startX = rect.left;
-          startY = visibleTop + Math.random() * (visibleBottom - visibleTop);
-          endX = startX - (55 + Math.random() * 75);
-          endY = startY + (40 + Math.random() * 80);
+        if (pos.edge === "top") {
+          startX = rect.left + rect.width * pos.ratio - 20;
+          startY = rect.top - 10;
+          endX = startX + (pos.ratio < 0.5 ? -35 : 35);
+          endY = startY - 75;
+        } else if (pos.edge === "left") {
+          startX = rect.left - 18;
+          startY = rect.top + rect.height * pos.ratio;
+          endX = startX - 65;
+          endY = startY + 35;
         } else {
-          // Right outer border of the whole perfume list: drifts outward to the right & arcs down
-          startX = rect.right - 44;
-          startY = visibleTop + Math.random() * (visibleBottom - visibleTop);
-          endX = startX + (55 + Math.random() * 75);
-          endY = startY + (40 + Math.random() * 80);
+          startX = rect.right - 22;
+          startY = rect.top + rect.height * pos.ratio;
+          endX = startX + 65;
+          endY = startY + 35;
         }
 
-        const startRot = (Math.random() - 0.5) * 40;
-        const endRot = startRot + (Math.random() > 0.5 ? 1 : -1) * (110 + Math.random() * 120);
-        const scale = 0.72 + Math.random() * 0.36;
-        const duration = 1400 + Math.random() * 500;
+        const startRot = (Math.random() - 0.5) * 30;
+        const endRot = startRot + (pos.edge === "left" ? -110 : 110);
 
         borderFxLayer.appendChild(img);
-        activeBorderSprites++;
 
-        // Pure GPU-composited Web Animation (runs off main JS thread)
         const anim = img.animate([
           {
-            transform: `translate3d(${startX}px, ${startY}px, 0) rotate(${startRot}deg) scale(0.35)`,
+            transform: `translate3d(${startX}px, ${startY}px, 0) rotate(${startRot}deg) scale(0.3)`,
             opacity: 0
           },
           {
-            transform: `translate3d(${(startX + endX) * 0.5}px, ${Math.min(startY, endY) - 24}px, 0) rotate(${(startRot + endRot) * 0.5}deg) scale(${scale})`,
+            transform: `translate3d(${(startX + endX) * 0.5}px, ${Math.min(startY, endY) - 18}px, 0) rotate(${(startRot + endRot) * 0.5}deg) scale(0.95)`,
             opacity: 1,
-            offset: 0.25
+            offset: 0.28
           },
           {
-            transform: `translate3d(${endX}px, ${endY}px, 0) rotate(${endRot}deg) scale(${scale * 0.85})`,
+            transform: `translate3d(${endX}px, ${endY}px, 0) rotate(${endRot}deg) scale(0.8)`,
             opacity: 0
           }
         ], {
-          duration,
+          duration: 1350,
+          delay: idx * 55,
           easing: "cubic-bezier(0.22, 1, 0.36, 1)",
           fill: "forwards"
         });
 
-        anim.onfinish = () => {
-          img.remove();
-          activeBorderSprites = Math.max(0, activeBorderSprites - 1);
-        };
-      }
+        anim.onfinish = () => img.remove();
+      });
     }
 
-    function isWomenExperienceActive() {
-      return activeGender.toLowerCase() === "women" ||
-        ["feeling fresh", "sexy nights", "9 to 5 energy", "boyfriend seduce"].includes((activeVibe || "").toLowerCase());
-    }
-
-    // Trigger around the whole perfume list borders when hovering over the catalog zone
-    catalogZone.addEventListener("mouseenter", () => {
-      if (!isWomenExperienceActive()) return;
-      spawnCatalogBorderItems(4);
-      lastBorderSpawn = performance.now();
-    });
-
-    catalogZone.addEventListener("mousemove", () => {
-      if (!isWomenExperienceActive()) return;
-      const now = performance.now();
-      if (now - lastBorderSpawn > 320) {
-        spawnCatalogBorderItems(2);
-        lastBorderSpawn = now;
+    function bindCardHoverEffects() {
+      if (activeCardInterval) {
+        clearInterval(activeCardInterval);
+        activeCardInterval = null;
       }
-    });
+
+      document.querySelectorAll(".card").forEach(card => {
+        const isWomenCard = (card.dataset.gender || "").toLowerCase() === "women";
+        if (!isWomenCard) return;
+
+        card.addEventListener("mouseenter", () => {
+          // 1. Trigger once immediately on entering the perfume square
+          spawnCardBorderWave(card);
+
+          // 2. Repeat smoothly every 1.6s as long as the cursor remains inside the perfume square
+          if (activeCardInterval) clearInterval(activeCardInterval);
+          activeCardInterval = setInterval(() => {
+            if (!document.body.contains(card) || !card.matches(":hover")) {
+              clearInterval(activeCardInterval);
+              activeCardInterval = null;
+              return;
+            }
+            spawnCardBorderWave(card);
+          }, 1600);
+        });
+
+        card.addEventListener("mouseleave", () => {
+          if (activeCardInterval) {
+            clearInterval(activeCardInterval);
+            activeCardInterval = null;
+          }
+        });
+      });
+    }
 
     /* --- 2. Gate Fire/Ember FX Engine --- */
     const gateCanvas = document.getElementById("vibe-gate-canvas");
@@ -1706,6 +1698,7 @@
       }).join("");
 
       bind3DTilt();
+      bindCardHoverEffects();
     }
 
     document.getElementById("search-input").addEventListener("input", (e) => {
