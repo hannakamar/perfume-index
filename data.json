@@ -1,161 +1,68 @@
 {
-  "site_name": "PerfumeIndex",
-  "tagline": "Global Fragrance Retail vs. Discounter Price Index",
-  "last_optimized": "2026-11-27",
   "default_country": "US",
+  "last_optimized": "2026-11-27",
   "countries": {
     "US": {
       "name": "United States",
-      "flag": "🇺🇸",
       "currency": "USD",
       "symbol": "$",
-      "rate_from_usd": 1.0,
-      "vat_note": "Prices exclude state sales tax (avg. 6–9% at department stores)",
-      "shipping_note": "Free tracked international/US delivery on bundles",
-      "seo_title": "Compare Fragrance Prices: US Retail vs. Online Discounter Index (2026)",
-      "seo_intro": "Stop overpaying at department stores. Compare official US retail prices against verified online discounters to find the best deals on luxury and niche fragrances.",
-      "priority_score": 100
+      "rate_to_usd": 1.0,
+      "seo_title": "Authentic Designer & Niche Fragrance Price Index — Compare Official Retail vs. Verified Deals",
+      "seo_intro": "Verify official department store retail prices directly on brand websites and save up to 35% on 100% authentic, factory-sealed fragrances.",
+      "vat_note": "Prices shown in USD before applicable state sales tax."
     },
-    "GB": {
+    "UK": {
       "name": "United Kingdom",
-      "flag": "🇬🇧",
       "currency": "GBP",
       "symbol": "£",
-      "rate_from_usd": 0.79,
-      "vat_note": "UK retail prices include 20% VAT",
-      "shipping_note": "Tracked UK delivery included on selected listings",
-      "seo_title": "Cheapest Perfume Prices UK: Retail vs. Online Price Comparison 2026",
-      "seo_intro": "Find the lowest prices for men's and women's perfumes in the UK. We track high-street retail costs versus online discounters to help you save on every bottle.",
-      "priority_score": 95
+      "rate_to_usd": 0.79,
+      "seo_title": "UK Designer & Niche Fragrance Price Index — Compare RRP vs. Verified Deals",
+      "seo_intro": "Compare official UK retail prices against verified authentic fragrance inventory with tracked international delivery.",
+      "vat_note": "Estimated GBP conversion; import VAT may apply at checkout."
     },
     "DE": {
-      "name": "Germany",
-      "flag": "🇩🇪",
+      "name": "Germany / EU",
       "currency": "EUR",
       "symbol": "€",
-      "rate_from_usd": 0.92,
-      "vat_note": "German retail prices include 19% MwSt (VAT)",
-      "shipping_note": "Fast EU tracked shipping available",
-      "seo_title": "Parfüm Preisvergleich Deutschland: Einzelhandel vs. Online (2026)",
-      "seo_intro": "Sparen Sie beim Parfümkauf: Vergleichen Sie deutsche Einzelhandelspreise mit günstigen Online-Angeboten. Ihr transparentes Preis-Index für 2026.",
-      "priority_score": 90
+      "rate_to_usd": 0.92,
+      "seo_title": "EU Authentic Perfume Price Index — Compare Official Retail vs. Verified Deals",
+      "seo_intro": "Compare official European retail prices against factory-sealed designer and niche fragrances.",
+      "vat_note": "Estimated EUR conversion; local customs/VAT rules apply."
     },
     "AE": {
       "name": "United Arab Emirates",
-      "flag": "🇦🇪",
       "currency": "AED",
       "symbol": "AED ",
-      "rate_from_usd": 3.67,
-      "vat_note": "UAE retail prices include 5% VAT",
-      "shipping_note": "Express regional & international tracked dispatch",
-      "seo_title": "Dubai Fragrance Price Index: Mall Retail vs. Online Deals (2026)",
-      "seo_intro": "Compare luxury fragrance prices in Dubai and Abu Dhabi malls against global online discounters. Get the best value on your favorite scents today.",
-      "priority_score": 85
+      "rate_to_usd": 3.67,
+      "seo_title": "UAE Authentic Fragrance Price Index — Official Retail vs. Verified Deals",
+      "seo_intro": "Compare official mall retail prices against verified factory-sealed fragrances shipped worldwide.",
+      "vat_note": "Estimated AED conversion."
     },
     "IL": {
       "name": "Israel",
-      "flag": "🇮🇱",
       "currency": "ILS",
       "symbol": "₪",
-      "rate_from_usd": 3.65,
-      "vat_note": "Local retail prices include 18% VAT; orders under $75 are exempt from import VAT",
-      "shipping_note": "Local & international tracked shipping options",
-      "seo_title": "מדד מחירי בשמים בישראל: רתייל מול אונליין (2026)",
-      "seo_intro": "השוואת מחירי בשמים בישראל בין רתייל מקומי לאתרי אונליין בינלאומיים. מצאו את הדילים הטובים ביותר.",
-      "priority_score": 75
+      "rate_to_usd": 3.65,
+      "seo_title": "מדד מחירי הבשמים — השוואת מחיר רשמי מול מחירים מאומתים",
+      "seo_intro": "השוו מחירים רשמיים מול בשמים מקוריים ואטומים במחירים מוזלים.",
+      "vat_note": "המחירים מוצגים בשקלים להמחשה; ייתכן מע״מ ביבוא אישי מעל $75."
     }
   },
   "products": [
     {
-      "id": "lv-imagination-100",
-      "name": "Louis Vuitton Imagination EDP (100ml)",
-      "brand": "Louis Vuitton",
-      "category": "men",
-      "notes": "Citron, Calabrian Bergamot, Nigerian Ginger, Ceylon Cinnamon, Black Tea",
-      "retail_usd": 330,
-      "index_usd": 275,
-      "direct_usd": 255,
-      "ebay_url": "https://www.ebay.com/usr/YOUR_EBAY_STORE",
-      "direct_url": "#direct-checkout-placeholder",
-      "badge": "Top Arbitrage Deal • High Demand"
-    },
-    {
-      "id": "jpg-le-beau-lp-125",
-      "name": "Jean Paul Gaultier Le Beau Le Parfum (125ml)",
-      "brand": "Jean Paul Gaultier",
-      "category": "men",
-      "notes": "Pineapple, Iris, Ginger, Coconut Wood, Tonka Bean, Sandalwood",
-      "retail_usd": 148,
-      "index_usd": 109,
-      "direct_usd": 98,
-      "ebay_url": "https://www.ebay.com/usr/YOUR_EBAY_STORE",
-      "direct_url": "#direct-checkout-placeholder",
-      "badge": "Best Seller • Deep Savings"
-    },
-    {
-      "id": "lattafa-khamrah-100",
-      "name": "Lattafa Khamrah EDP (100ml)",
-      "brand": "Lattafa",
-      "category": "unisex",
-      "notes": "Cinnamon, Nutmeg, Dates, Praline, Vanilla, Tonka Bean, Amberwood",
-      "retail_usd": 65,
-      "index_usd": 39,
-      "direct_usd": 34,
-      "ebay_url": "https://www.ebay.com/usr/YOUR_EBAY_STORE",
-      "direct_url": "#direct-checkout-placeholder",
-      "badge": "Top Value • High Savings"
-    },
-    {
-      "id": "lattafa-ana-abiyedh-60",
-      "name": "Lattafa Ana Abiyedh White EDP (60ml)",
-      "brand": "Lattafa",
-      "category": "women",
-      "notes": "White Musk, Bergamot, Orange, Vanilla, Pear, Cardamom",
-      "retail_usd": 48,
-      "index_usd": 28,
-      "direct_usd": 24,
-      "ebay_url": "https://www.ebay.com/usr/YOUR_EBAY_STORE",
-      "direct_url": "#direct-checkout-placeholder",
-      "badge": "Popular • Best Price"
-    },
-    {
-      "id": "yara-lattafa-100",
-      "name": "Lattafa Yara Pink EDP (100ml)",
-      "brand": "Lattafa",
-      "category": "women",
-      "notes": "Orchid, Heliotrope, Tangerine, Gourmand Accord, Vanilla, Musk",
-      "retail_usd": 52,
-      "index_usd": 32,
-      "direct_usd": 28,
-      "ebay_url": "https://www.ebay.com/usr/YOUR_EBAY_STORE",
-      "direct_url": "#direct-checkout-placeholder",
-      "badge": "Trending • Top Arbitrage"
-    },
-    {
-      "id": "duo-bundle-arabian",
-      "name": "2-Bottle Duo Bundle: Khamrah + Ana Abiyedh",
-      "brand": "Curated Bundle",
-      "category": "bundles",
-      "notes": "Full-size 100ml + 60ml sealed retail boxes • Combined shipping savings",
-      "retail_usd": 113,
-      "index_usd": 62,
-      "direct_usd": 55,
-      "ebay_url": "https://www.ebay.com/usr/YOUR_EBAY_STORE",
-      "direct_url": "#direct-checkout-placeholder",
-      "badge": "Save 45% • Best Bundle Deal"
+      "id": "versace-eros-edp-100ml",
+      "brand": "Versace",
+      "name": "Eros Eau de Parfum",
+      "size": "100ml / 3.4 oz",
+      "gender": "Men",
+      "notes": "Mint, Green Apple, Tonka Bean, Ambroxan, Vanilla",
+      "badge": "Top Arbitrage Deal",
+      "retail_usd": 149,
+      "retail_url": "https://www.versace.com/us/en/men/accessories/fragrances-body-care/eros/eros-edp-100-ml-blue/R740110-R100MLS_RNUL.html",
+      "index_usd": 114,
+      "direct_usd": 104,
+      "ebay_url": "https://www.ebay.com/sch/i.html?_nkw=Versace+Eros+Eau+de+Parfum+100ml+New+Sealed",
+      "direct_url": "#direct-checkout-coming-soon"
     }
-  ],
-  "agent_metadata": {
-    "top_countries": [
-      "US",
-      "GB",
-      "DE"
-    ],
-    "optimization_log": [
-      "Initial baseline dataset created for US, GB, DE, AE, IL.",
-      "Optimized SEO titles and intros for US, GB, DE, and AE based on traffic telemetry and high-intent keyword alignment.",
-      "Maintained existing country priority and product data integrity.",
-      "Refined product badges to emphasize arbitrage savings and value proposition."
-    ]
-  }
+  ]
 }
