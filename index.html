@@ -9,8 +9,8 @@
   <style>
     :root {
       --bg: #09090b;
-      --surface: rgba(18, 18, 22, 0.92);
-      --surface-hover: rgba(28, 28, 36, 0.96);
+      --surface: rgba(18, 18, 22, 0.86);
+      --surface-hover: rgba(28, 28, 36, 0.94);
       --border: rgba(255, 255, 255, 0.11);
       --text: #faf8f5;
       --ivory: #faf8f5;
@@ -31,26 +31,37 @@
       -webkit-font-smoothing: antialiased;
       min-height: 100vh;
       position: relative;
+      transition: background-color 0.5s ease;
       overflow-x: hidden;
     }
 
-    /* GPU-Promoted Overlay Canvases */
-    .physics-canvas {
+    /* Hardware-Accelerated Border FX Container */
+    .border-fx-layer {
       position: fixed;
       inset: 0;
       pointer-events: none;
       z-index: 150;
-      transform: translate3d(0, 0, 0);
-      will-change: contents;
+      overflow: hidden;
     }
 
-    .vibe-gate-canvas {
+    .fx-sprite-node {
       position: fixed;
+      top: 0;
+      left: 0;
+      width: 44px;
+      height: 44px;
+      pointer-events: none;
+      will-change: transform, opacity;
+      user-select: none;
+    }
+
+    /* Gate Fire/Ember Overlay Layer */
+    .vibe-gate-canvas {
+      position: absolute;
       inset: 0;
       pointer-events: none;
-      z-index: 105;
-      transform: translate3d(0, 0, 0);
-      will-change: contents;
+      z-index: 10;
+      will-change: transform;
     }
 
     /* Dynamic Vibe Background Wallpaper */
@@ -62,15 +73,15 @@
       background-position: center center;
       background-repeat: no-repeat;
       opacity: 0;
-      transform: translate3d(0, 0, 0) scale(1.02);
-      transition: opacity 0.6s ease, transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+      transform: scale(1.03);
+      transition: opacity 0.65s ease, transform 0.8s ease;
       pointer-events: none;
       will-change: opacity, transform;
     }
 
     .vibe-bg-layer.active {
       opacity: 1;
-      transform: translate3d(0, 0, 0) scale(1);
+      transform: scale(1);
     }
 
     /* Readability Vignette & Atmospheric Tint */
@@ -90,12 +101,13 @@
       position: fixed;
       inset: 0;
       z-index: 100;
-      background: radial-gradient(circle at 50% 25%, rgba(24, 24, 32, 0.95) 0%, rgba(9, 9, 11, 0.99) 75%);
+      background: radial-gradient(circle at 50% 25%, rgba(24, 24, 32, 0.94) 0%, rgba(9, 9, 11, 0.98) 75%);
       display: flex;
       align-items: center;
       justify-content: center;
       padding: 24px;
-      transition: opacity 0.28s ease, visibility 0.28s ease;
+      transition: opacity 0.3s ease, visibility 0.3s ease;
+      backdrop-filter: blur(14px);
     }
 
     .vibe-gate.hidden {
@@ -107,14 +119,14 @@
     .gate-card {
       width: 100%;
       max-width: 620px;
-      background: rgba(18, 18, 22, 0.96);
+      background: rgba(18, 18, 22, 0.92);
       border: 1px solid rgba(229, 184, 105, 0.35);
       border-radius: 24px;
       padding: 40px 32px;
       text-align: center;
       box-shadow: 0 30px 70px rgba(0, 0, 0, 0.85);
       position: relative;
-      z-index: 110;
+      overflow: visible;
     }
 
     .gate-logo {
@@ -158,6 +170,8 @@
       grid-template-columns: repeat(2, 1fr);
       gap: 16px;
       margin-bottom: 24px;
+      position: relative;
+      z-index: 20;
     }
 
     .gender-choice-btn {
@@ -167,17 +181,18 @@
       border-radius: 16px;
       padding: 28px 18px;
       cursor: pointer;
-      transition: transform 0.2s cubic-bezier(0.22, 1, 0.36, 1), border-color 0.2s ease, background 0.2s ease;
+      transition: transform 0.2s ease, border-color 0.2s ease, background 0.2s ease;
       display: flex;
       flex-direction: column;
       align-items: center;
       gap: 8px;
+      position: relative;
     }
 
     .gender-choice-btn:hover {
       border-color: var(--accent);
       background: var(--accent-soft);
-      transform: translate3d(0, -3px, 0);
+      transform: translateY(-3px);
     }
 
     .gender-choice-title {
@@ -197,6 +212,8 @@
       justify-content: center;
       gap: 12px;
       margin-bottom: 26px;
+      position: relative;
+      z-index: 20;
     }
 
     .vibe-choice-btn {
@@ -208,15 +225,17 @@
       font-size: 0.98rem;
       font-weight: 700;
       cursor: pointer;
-      transition: transform 0.18s cubic-bezier(0.22, 1, 0.36, 1), background 0.18s ease, border-color 0.18s ease, box-shadow 0.18s ease;
+      transition: transform 0.18s ease, background 0.18s ease, border-color 0.18s ease, box-shadow 0.18s ease;
       text-transform: lowercase;
+      position: relative;
+      overflow: visible;
     }
 
     .vibe-choice-btn:hover {
       background: var(--accent);
       color: #09090b;
       border-color: var(--accent);
-      transform: translate3d(0, -2px, 0);
+      transform: translateY(-2px);
     }
 
     .sexy-fire-hover {
@@ -257,7 +276,8 @@
       padding: 16px 0;
       position: sticky;
       top: 0;
-      background: rgba(9, 9, 11, 0.94);
+      background: rgba(9, 9, 11, 0.82);
+      backdrop-filter: blur(12px);
       z-index: 40;
     }
 
@@ -434,7 +454,7 @@
       display: none;
       align-items: center;
       justify-content: space-between;
-      background: rgba(18, 18, 22, 0.94);
+      background: rgba(18, 18, 22, 0.9);
       border: 1px solid var(--accent);
       border-radius: 14px;
       padding: 12px 18px;
@@ -466,7 +486,7 @@
     }
 
     .clear-vibe-btn {
-      background: rgba(9, 9, 11, 0.9);
+      background: rgba(9, 9, 11, 0.85);
       color: var(--text);
       border: 1px solid var(--border);
       padding: 6px 12px;
@@ -482,12 +502,16 @@
       color: var(--accent);
     }
 
+    /* Whole Perfume List Wrapper (Target Border Zone) */
+    .catalog-zone {
+      position: relative;
+    }
+
     /* 3D Parallax Botanical Frame Grid */
     .product-grid {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(310px, 1fr));
       gap: 28px;
-      position: relative;
     }
 
     .card {
@@ -496,14 +520,14 @@
       border-radius: 18px;
       display: flex;
       flex-direction: column;
-      transition: transform 0.25s cubic-bezier(0.22, 1, 0.36, 1), border-color 0.22s ease, box-shadow 0.22s ease;
+      transition: transform 0.22s ease, border-color 0.22s ease, box-shadow 0.22s ease;
       perspective: 1100px;
       overflow: visible;
-      transform: translate3d(0, 0, 0);
+      will-change: transform;
     }
 
     .card:hover {
-      transform: translate3d(0, -4px, 0);
+      transform: translateY(-4px);
       border-color: var(--accent);
       box-shadow: 0 22px 42px rgba(0, 0, 0, 0.7);
     }
@@ -523,8 +547,9 @@
       align-items: center;
       justify-content: center;
       transform-style: preserve-3d;
-      transition: transform 0.22s cubic-bezier(0.22, 1, 0.36, 1);
+      transition: transform 0.18s ease-out;
       box-shadow: inset 0 0 0 1px rgba(0,0,0,0.06), 0 10px 24px rgba(0,0,0,0.45);
+      will-change: transform;
     }
 
     .gold-inner-border {
@@ -541,17 +566,14 @@
       max-width: 72%;
       object-fit: contain;
       mix-blend-mode: multiply;
-      transform: translate3d(0, 0, 28px);
+      transform: translateZ(28px);
       transition: transform 0.25s cubic-bezier(0.22, 1, 0.36, 1);
       z-index: 3;
       pointer-events: none;
-      color: #52525b;
-      font-size: 0.8rem;
-      text-align: center;
     }
 
     .card:hover .bottle-img {
-      transform: translate3d(0, 0, 42px) scale(1.05);
+      transform: translateZ(42px) scale(1.05);
     }
 
     .corner-cluster {
@@ -560,9 +582,9 @@
       height: 118px;
       pointer-events: none;
       z-index: 6;
-      transform: translate3d(0, 0, 60px);
+      transform: translateZ(60px);
       transition: transform 0.25s cubic-bezier(0.22, 1, 0.36, 1);
-      filter: drop-shadow(0 8px 12px rgba(0, 0, 0, 0.35));
+      filter: drop-shadow(0 10px 14px rgba(0, 0, 0, 0.42));
     }
 
     .corner-tl {
@@ -573,15 +595,15 @@
     .corner-br {
       bottom: -16px;
       right: -14px;
-      transform: translate3d(0, 0, 60px) rotate(180deg);
+      transform: translateZ(60px) rotate(180deg);
     }
 
     .card:hover .corner-tl {
-      transform: translate3d(-4px, -4px, 78px) scale(1.06);
+      transform: translateZ(78px) translate(-4px, -4px) scale(1.06);
     }
 
     .card:hover .corner-br {
-      transform: translate3d(4px, 4px, 78px) rotate(180deg) scale(1.06);
+      transform: translateZ(78px) rotate(180deg) translate(-4px, -4px) scale(1.06);
     }
 
     .card-badge {
@@ -659,7 +681,7 @@
     }
 
     .price-box {
-      background: rgba(9, 9, 11, 0.85);
+      background: rgba(9, 9, 11, 0.78);
       border: 1px solid var(--border);
       border-radius: 10px;
       padding: 12px;
@@ -794,8 +816,8 @@
 </head>
 <body>
 
-  <!-- Border-Bursting 3D Emoji & Flower Physics Layer -->
-  <canvas class="physics-canvas" id="physics-canvas"></canvas>
+  <!-- GPU Compositor Border FX Layer -->
+  <div class="border-fx-layer" id="border-fx-layer"></div>
 
   <!-- Dynamic Vibe Background Wallpaper & Readability Overlay -->
   <div class="vibe-bg-layer" id="vibe-bg-layer"></div>
@@ -901,22 +923,25 @@
       </div>
     </div>
 
-    <section id="product-grid" class="product-grid"></section>
+    <!-- Whole Perfume List Area (Red-Marked Border Zone) -->
+    <div class="catalog-zone" id="catalog-zone">
+      <section id="product-grid" class="product-grid"></section>
 
-    <div class="table-wrap" id="table-wrap">
-      <table>
-        <thead>
-          <tr>
-            <th>Bottle</th>
-            <th>Fragrance</th>
-            <th>Size</th>
-            <th>Official Retail</th>
-            <th>PerfumeIndex</th>
-            <th>Buy Verified</th>
-          </tr>
-        </thead>
-        <tbody id="price-table-body"></tbody>
-      </table>
+      <div class="table-wrap" id="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Bottle</th>
+              <th>Fragrance</th>
+              <th>Size</th>
+              <th>Official Retail</th>
+              <th>PerfumeIndex</th>
+              <th>Buy Verified</th>
+            </tr>
+          </thead>
+          <tbody id="price-table-body"></tbody>
+        </table>
+      </div>
     </div>
   </main>
 
@@ -1025,44 +1050,138 @@
     let selectedGateGender = null;
     let searchQuery = "";
 
-    /* --- Ultra-Smooth Sprite-Cached Border FX Engine --- */
-    const physicsCanvas = document.getElementById("physics-canvas");
-    const pCtx = physicsCanvas.getContext("2d", { alpha: true, desynchronized: true });
-    const gateCanvas = document.getElementById("vibe-gate-canvas");
-    const gCtx = gateCanvas.getContext("2d", { alpha: true, desynchronized: true });
+    /* --- 1. Hardware-Composited Border Sprites (Web Animations API = 120 FPS) --- */
+    const borderFxLayer = document.getElementById("border-fx-layer");
+    const catalogZone = document.getElementById("catalog-zone");
+    const BORDER_ITEMS = ["💄", "👠", "💋", "🌸", "🌹", "🌺", "🌷"];
+    const SPRITE_URLS = {};
+    let activeBorderSprites = 0;
+    let lastBorderSpawn = 0;
 
-    let particles = [];
+    // Pre-bake sharp PNG data URLs once so GPU composits pure <img> layers with zero text rasterization
+    function bakeSprites() {
+      const size = 88;
+      BORDER_ITEMS.forEach(emoji => {
+        const c = document.createElement("canvas");
+        c.width = size;
+        c.height = size;
+        const ctx = c.getContext("2d");
+        ctx.font = "52px 'Apple Color Emoji', 'Segoe UI Emoji', 'Noto Color Emoji', sans-serif";
+        ctx.textAlign = "center";
+        ctx.textBaseline = "middle";
+        ctx.fillText(emoji, size / 2, size / 2);
+        SPRITE_URLS[emoji] = c.toDataURL();
+      });
+    }
+    bakeSprites();
+
+    function spawnCatalogBorderItems(count = 3) {
+      if (activeBorderSprites >= 16) return; // Keep it clean & minimal (max 16 on screen)
+      const rect = catalogZone.getBoundingClientRect();
+      if (rect.width === 0 || rect.height === 0) return;
+
+      const vh = window.innerHeight;
+      const visibleTop = Math.max(rect.top, 80);
+      const visibleBottom = Math.min(rect.bottom, vh - 40);
+      if (visibleBottom <= visibleTop) return;
+
+      for (let i = 0; i < count; i++) {
+        if (activeBorderSprites >= 16) break;
+
+        const emoji = BORDER_ITEMS[Math.floor(Math.random() * BORDER_ITEMS.length)];
+        const img = document.createElement("img");
+        img.src = SPRITE_URLS[emoji];
+        img.alt = "";
+        img.className = "fx-sprite-node";
+
+        // Pick one of the 3 outer borders of the whole perfume list (Top, Left, Right)
+        const edgeRoll = Math.random();
+        let startX, startY, endX, endY;
+
+        if (edgeRoll < 0.34) {
+          // Top border of the whole perfume list: floats gently upward & outward
+          startX = rect.left + 24 + Math.random() * (rect.width - 48);
+          startY = visibleTop;
+          endX = startX + (Math.random() - 0.5) * 140;
+          endY = startY - (75 + Math.random() * 65);
+        } else if (edgeRoll < 0.67) {
+          // Left outer border of the whole perfume list: drifts outward to the left & arcs down
+          startX = rect.left;
+          startY = visibleTop + Math.random() * (visibleBottom - visibleTop);
+          endX = startX - (55 + Math.random() * 75);
+          endY = startY + (40 + Math.random() * 80);
+        } else {
+          // Right outer border of the whole perfume list: drifts outward to the right & arcs down
+          startX = rect.right - 44;
+          startY = visibleTop + Math.random() * (visibleBottom - visibleTop);
+          endX = startX + (55 + Math.random() * 75);
+          endY = startY + (40 + Math.random() * 80);
+        }
+
+        const startRot = (Math.random() - 0.5) * 40;
+        const endRot = startRot + (Math.random() > 0.5 ? 1 : -1) * (110 + Math.random() * 120);
+        const scale = 0.72 + Math.random() * 0.36;
+        const duration = 1400 + Math.random() * 500;
+
+        borderFxLayer.appendChild(img);
+        activeBorderSprites++;
+
+        // Pure GPU-composited Web Animation (runs off main JS thread)
+        const anim = img.animate([
+          {
+            transform: `translate3d(${startX}px, ${startY}px, 0) rotate(${startRot}deg) scale(0.35)`,
+            opacity: 0
+          },
+          {
+            transform: `translate3d(${(startX + endX) * 0.5}px, ${Math.min(startY, endY) - 24}px, 0) rotate(${(startRot + endRot) * 0.5}deg) scale(${scale})`,
+            opacity: 1,
+            offset: 0.25
+          },
+          {
+            transform: `translate3d(${endX}px, ${endY}px, 0) rotate(${endRot}deg) scale(${scale * 0.85})`,
+            opacity: 0
+          }
+        ], {
+          duration,
+          easing: "cubic-bezier(0.22, 1, 0.36, 1)",
+          fill: "forwards"
+        });
+
+        anim.onfinish = () => {
+          img.remove();
+          activeBorderSprites = Math.max(0, activeBorderSprites - 1);
+        };
+      }
+    }
+
+    function isWomenExperienceActive() {
+      return activeGender.toLowerCase() === "women" ||
+        ["feeling fresh", "sexy nights", "9 to 5 energy", "boyfriend seduce"].includes((activeVibe || "").toLowerCase());
+    }
+
+    // Trigger around the whole perfume list borders when hovering over the catalog zone
+    catalogZone.addEventListener("mouseenter", () => {
+      if (!isWomenExperienceActive()) return;
+      spawnCatalogBorderItems(4);
+      lastBorderSpawn = performance.now();
+    });
+
+    catalogZone.addEventListener("mousemove", () => {
+      if (!isWomenExperienceActive()) return;
+      const now = performance.now();
+      if (now - lastBorderSpawn > 320) {
+        spawnCatalogBorderItems(2);
+        lastBorderSpawn = now;
+      }
+    });
+
+    /* --- 2. Gate Fire/Ember FX Engine --- */
+    const gateCanvas = document.getElementById("vibe-gate-canvas");
+    const gCtx = gateCanvas.getContext("2d", { alpha: true });
     let fireParticles = [];
     let activeEffectNode = null;
     let activeEffectRect = null;
-    let lastTrailTime = 0;
-    let physicsCanvasDirty = false;
-    let gateCanvasDirty = false;
 
-    // Pre-render flowers + beauty icons into crisp offscreen bitmaps ONCE
-    const EMOJI_LIST = [
-      "🌹", "🌸", "🌺", "🌷", "💐", // Flowers
-      "💄", "💋", "👠", "💅"        // Beauty & glamour
-    ];
-    const EMOJI_SPRITES = {};
-
-    function buildEmojiSprites() {
-      const size = 84;
-      EMOJI_LIST.forEach(emoji => {
-        const off = document.createElement("canvas");
-        off.width = size;
-        off.height = size;
-        const octx = off.getContext("2d");
-        octx.font = "48px 'Apple Color Emoji', 'Segoe UI Emoji', 'Noto Color Emoji', sans-serif";
-        octx.textAlign = "center";
-        octx.textBaseline = "middle";
-        octx.fillText(emoji, size / 2, size / 2);
-        EMOJI_SPRITES[emoji] = off;
-      });
-    }
-    buildEmojiSprites();
-
-    // Pre-render fire ember sprite ONCE
     const FIRE_SPRITE = (() => {
       const s = 32;
       const off = document.createElement("canvas");
@@ -1079,32 +1198,24 @@
       return off;
     })();
 
-    function sizeCanvases() {
+    function sizeGateCanvas() {
       const dpr = Math.min(window.devicePixelRatio || 1, 2);
       const w = window.innerWidth;
       const h = window.innerHeight;
-
-      physicsCanvas.width = w * dpr;
-      physicsCanvas.height = h * dpr;
-      physicsCanvas.style.width = w + "px";
-      physicsCanvas.style.height = h + "px";
-      pCtx.setTransform(dpr, 0, 0, dpr, 0, 0);
-
       gateCanvas.width = w * dpr;
       gateCanvas.height = h * dpr;
       gateCanvas.style.width = w + "px";
       gateCanvas.style.height = h + "px";
       gCtx.setTransform(dpr, 0, 0, dpr, 0, 0);
-
       if (activeEffectNode) {
         activeEffectRect = activeEffectNode.getBoundingClientRect();
       }
     }
-    window.addEventListener("resize", sizeCanvases, { passive: true });
-    sizeCanvases();
+    window.addEventListener("resize", sizeGateCanvas);
+    sizeGateCanvas();
 
     function spawnFireEmber(rect) {
-      if (fireParticles.length > 65) return;
+      if (fireParticles.length > 75) return;
       const edge = Math.random();
       let x, y;
       if (edge < 0.6) {
@@ -1121,91 +1232,35 @@
       fireParticles.push({
         x,
         y,
-        vx: (Math.random() - 0.5) * 0.9,
-        vy: -(1.1 + Math.random() * 1.9),
+        vx: (Math.random() - 0.5) * 1.1,
+        vy: -(1.2 + Math.random() * 2.2),
         wobble: Math.random() * Math.PI * 2,
-        size: 10 + Math.random() * 12,
+        size: 10 + Math.random() * 14,
         life: 1.0,
-        decay: 0.022 + Math.random() * 0.016
+        decay: 0.022 + Math.random() * 0.018
       });
     }
 
-    // Spawn fewer items smoothly from the outer borders (top, left, right) of the whole perfume grid
-    function spawnFromCatalogBorders(count = 4) {
-      if (particles.length >= 16) return; // Hard cap at 16 active items so it stays clean & silky
-
-      const gridEl = document.getElementById("product-grid");
-      if (!gridEl) return;
-      const rect = gridEl.getBoundingClientRect();
-      const vw = window.innerWidth;
-      const vh = window.innerHeight;
-
-      const visibleTop = Math.max(75, rect.top);
-      const visibleBottom = Math.min(vh - 60, rect.bottom);
-      if (visibleBottom <= visibleTop) return;
-
-      const allowed = Math.min(count, 16 - particles.length);
-      for (let i = 0; i < allowed; i++) {
-        const emoji = EMOJI_LIST[Math.floor(Math.random() * EMOJI_LIST.length)];
-        const side = Math.random();
-        let x, y, vx, vy;
-
-        if (side < 0.34) {
-          // Left border of the perfume grid — arcs outward to the left
-          x = Math.max(16, rect.left);
-          y = visibleTop + Math.random() * (visibleBottom - visibleTop);
-          vx = -(2.2 + Math.random() * 2.6);
-          vy = -(3.4 + Math.random() * 2.6);
-        } else if (side < 0.68) {
-          // Right border of the perfume grid — arcs outward to the right
-          x = Math.min(vw - 16, rect.right);
-          y = visibleTop + Math.random() * (visibleBottom - visibleTop);
-          vx = 2.2 + Math.random() * 2.6;
-          vy = -(3.4 + Math.random() * 2.6);
-        } else {
-          // Top border of the perfume grid — fountains gently upward
-          x = rect.left + Math.random() * rect.width;
-          y = visibleTop;
-          vx = (Math.random() - 0.5) * 4.2;
-          vy = -(3.8 + Math.random() * 2.6);
-        }
-
-        particles.push({
-          sprite: EMOJI_SPRITES[emoji],
-          x,
-          y,
-          vx,
-          vy,
-          rotation: (Math.random() - 0.5) * 0.5,
-          vRot: (Math.random() - 0.5) * 0.06,
-          scale: 0.52 + Math.random() * 0.24,
-          life: 1.0,
-          decay: 0.0085 + Math.random() * 0.0035
-        });
-      }
-    }
-
     let lastFrameTime = performance.now();
-    function animate(now) {
+    function animateFire(now) {
       const dt = Math.min((now - lastFrameTime) / 16.667, 2);
       lastFrameTime = now;
 
-      // 1. Gate Fire Canvas Pass
       if (activeEffectRect || fireParticles.length > 0) {
         gCtx.clearRect(0, 0, window.innerWidth, window.innerHeight);
-        gateCanvasDirty = true;
 
         if (activeEffectRect) {
+          spawnFireEmber(activeEffectRect);
           spawnFireEmber(activeEffectRect);
         }
 
         gCtx.globalCompositeOperation = "lighter";
         for (let i = fireParticles.length - 1; i >= 0; i--) {
           const p = fireParticles[i];
-          p.wobble += 0.14 * dt;
-          p.x += (p.vx + Math.sin(p.wobble) * 0.4) * dt;
+          p.wobble += 0.15 * dt;
+          p.x += (p.vx + Math.sin(p.wobble) * 0.45) * dt;
           p.y += p.vy * dt;
-          p.vy -= 0.025 * dt;
+          p.vy -= 0.03 * dt;
           p.life -= p.decay * dt;
 
           if (p.life <= 0) {
@@ -1219,48 +1274,11 @@
         }
         gCtx.globalAlpha = 1;
         gCtx.globalCompositeOperation = "source-over";
-      } else if (gateCanvasDirty) {
-        gCtx.clearRect(0, 0, window.innerWidth, window.innerHeight);
-        gateCanvasDirty = false;
       }
 
-      // 2. Border Flowers & Makeup Physics Pass
-      if (particles.length > 0) {
-        pCtx.clearRect(0, 0, window.innerWidth, window.innerHeight);
-        physicsCanvasDirty = true;
-        const maxH = window.innerHeight + 60;
-
-        for (let i = particles.length - 1; i >= 0; i--) {
-          const p = particles[i];
-          p.vy += 0.16 * dt; // Gentle floaty gravity
-          p.vx *= Math.pow(0.992, dt);
-          p.x += p.vx * dt;
-          p.y += p.vy * dt;
-          p.rotation += p.vRot * dt;
-          p.life -= p.decay * dt;
-
-          if (p.life <= 0 || p.y > maxH) {
-            particles.splice(i, 1);
-            continue;
-          }
-
-          pCtx.save();
-          pCtx.globalAlpha = Math.min(1, p.life * 2.8);
-          pCtx.translate(p.x, p.y);
-          pCtx.rotate(p.rotation);
-          const drawSize = 84 * p.scale;
-          pCtx.drawImage(p.sprite, -drawSize / 2, -drawSize / 2, drawSize, drawSize);
-          pCtx.restore();
-        }
-        pCtx.globalAlpha = 1;
-      } else if (physicsCanvasDirty) {
-        pCtx.clearRect(0, 0, window.innerWidth, window.innerHeight);
-        physicsCanvasDirty = false;
-      }
-
-      requestAnimationFrame(animate);
+      requestAnimationFrame(animateFire);
     }
-    requestAnimationFrame(animate);
+    requestAnimationFrame(animateFire);
 
     function applyVibeTheme(vibe) {
       const key = (vibe || "").toLowerCase();
@@ -1553,52 +1571,21 @@
       document.querySelectorAll(".card").forEach(card => {
         const frame = card.querySelector(".ivory-frame");
         if (!frame) return;
-        let cardRect = null;
         let ticking = false;
-
-        card.addEventListener("mouseenter", () => {
-          cardRect = card.getBoundingClientRect();
-        });
-
         card.addEventListener("mousemove", (e) => {
-          if (ticking || !cardRect) return;
+          if (ticking) return;
           ticking = true;
-          const clientX = e.clientX;
-          const clientY = e.clientY;
           requestAnimationFrame(() => {
-            const x = ((clientX - cardRect.left) / cardRect.width - 0.5) * 14;
-            const y = ((clientY - cardRect.top) / cardRect.height - 0.5) * -14;
-            frame.style.transform = `rotateX(${y.toFixed(2)}deg) rotateY(${x.toFixed(2)}deg)`;
+            const rect = card.getBoundingClientRect();
+            const x = ((e.clientX - rect.left) / rect.width - 0.5) * 14;
+            const y = ((e.clientY - rect.top) / rect.height - 0.5) * -14;
+            frame.style.transform = `rotateX(${y}deg) rotateY(${x}deg)`;
             ticking = false;
           });
-        }, { passive: true });
-
+        });
         card.addEventListener("mouseleave", () => {
-          cardRect = null;
           frame.style.transform = "rotateX(0deg) rotateY(0deg)";
         });
-      });
-    }
-
-    /* Fewer, Smoother Flowers & Makeup Launching from the Perfume Grid Borders */
-    function bindVisualEffects() {
-      document.querySelectorAll(".card").forEach(card => {
-        const isWomenVibe = card.dataset.gender && card.dataset.gender.toLowerCase() === "women";
-
-        if (isWomenVibe) {
-          card.addEventListener("mouseenter", () => {
-            spawnFromCatalogBorders(4);
-            lastTrailTime = performance.now();
-          });
-
-          card.addEventListener("mousemove", () => {
-            const now = performance.now();
-            if (now - lastTrailTime > 420) {
-              spawnFromCatalogBorders(1);
-              lastTrailTime = now;
-            }
-          }, { passive: true });
-        }
       });
     }
 
@@ -1654,7 +1641,7 @@
                 <span class="card-savings">Save ${discountPct}%</span>
                 <div class="corner-cluster corner-tl">${clusterHTML}</div>
                 <div class="corner-cluster corner-br">${clusterHTML}</div>
-                <img src="${p.image_url}" alt="${p.brand} ${p.name} ${p.size}" class="bottle-img" loading="lazy" onerror="this.style.opacity='0.65'; this.alt='${p.brand} ${p.name}';" />
+                <img src="${p.image_url}" alt="${p.brand} ${p.name} ${p.size}" class="bottle-img" loading="lazy" />
               </div>
             </div>
             <div class="card-body">
@@ -1719,7 +1706,6 @@
       }).join("");
 
       bind3DTilt();
-      bindVisualEffects();
     }
 
     document.getElementById("search-input").addEventListener("input", (e) => {
