@@ -73,17 +73,6 @@ def run_optimizer():
     traffic_stats = fetch_country_traffic()
     client = genai.Client(api_key=api_key)
 
-    # Automatically pick the newest available Flash model on your API key
-    available_models = [
-        m.name for m in client.models.list()
-        if "flash" in m.name.lower()
-        and "lite" not in m.name.lower()
-        and "image" not in m.name.lower()
-        and "audio" not in m.name.lower()
-    ]
-    target_model = sorted(available_models)[-1] if available_models else "gemini-flash-latest"
-    print(f"Using active model: {target_model}")
-
     prompt = f"""
     You are the autonomous SEO & conversion optimization agent for PerfumeIndex.
     Analyze the latest country-level search traffic and update `data.json` to maximize clicks and conversions from top-performing countries.
@@ -103,14 +92,46 @@ def run_optimizer():
     6. Return ONLY valid JSON matching the exact structure of `data.json`.
     """
 
-    response = client.models.generate_content(
-        model=target_model,
-        contents=prompt,
-        config=types.GenerateContentConfig(
-            response_mime_type="application/json",
-            temperature=0.3
-        )
-    )
+    # Build a prioritized list of standard text models (excluding zero-quota omni/image/audio models)
+    excluded_keywords = ("omni", "image", "audio", "tts", "embedding", "aqa", "robotics", "computer-use")
+    discovered = [
+        m.name.replace("models/", "") for m in client.models.list()
+        if "gemini" in m.name.lower()
+        and not any(bad in m.name.lower() for bad in excluded_keywords)
+    ]
+
+    preferred_order = [
+        "gemini-flash-latest",
+        "gemini-2.5-pro",
+        "gemini-pro-latest",
+        "gemini-2.0-flash",
+        "gemini-2.0-flash-lite"
+    ]
+    candidates = [m for m in preferred_order if m in discovered] + [
+        m for m in discovered if m not in preferred_order
+    ]
+
+    response = None
+    last_error = None
+    for model_name in candidates:
+        try:
+            print(f"Trying model: {model_name}")
+            response = client.models.generate_content(
+                model=model_name,
+                contents=prompt,
+                config=types.GenerateContentConfig(
+                    response_mime_type="application/json",
+                    temperature=0.3
+                )
+            )
+            print(f"Success with model: {model_name}")
+            break
+        except Exception as e:
+            print(f"Skipping {model_name} ({e})")
+            last_error = e
+
+    if response is None:
+        raise RuntimeError(f"All candidate models failed. Last error: {last_error}")
 
     updated_data = json.loads(response.text)
 
