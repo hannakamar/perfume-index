@@ -1,0 +1,52 @@
+name: PerfumeIndex SEO & Price Build
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'data.json'
+      - 'index.html'
+      - 'build_seo.py'
+  schedule:
+    - cron: '0 6 */2 * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build-and-optimize:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Build static SEO pages & pre-render index
+        env:
+          SITE_BASE_URL: ${{ vars.SITE_BASE_URL }}
+        run: python build_seo.py
+
+      - name: Run AI SEO optimization (scheduled / manual)
+        if: github.event_name != 'push'
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          GSC_SERVICE_ACCOUNT_JSON: ${{ secrets.GSC_SERVICE_ACCOUNT_JSON }}
+          SITE_URL: ${{ secrets.SITE_URL }}
+          SITE_BASE_URL: ${{ vars.SITE_BASE_URL }}
+        run: |
+          pip install google-genai google-api-python-client google-auth
+          python optimize_agent.py
+
+      - name: Commit generated SEO pages & sitemap
+        run: |
+          git config user.name "PerfumeIndex Bot"
+          git config user.email "actions@github.com"
+          git add index.html data.json perfume/ vibe/ sitemap.xml robots.txt
+          git diff --staged --quiet || git commit -m "chore(seo): rebuild static product/vibe pages & sitemap"
+          git push
