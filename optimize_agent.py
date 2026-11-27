@@ -1,119 +1,125 @@
 import os
 import json
-from datetime import datetime, timezone
+import datetime
 from google import genai
 from google.genai import types
+from google.oauth2 import service_account
+from googleapiclient.discovery import build
 
-# Optional: Google Search Console API integration
-# Requires GSC_SERVICE_ACCOUNT_JSON and SITE_URL secrets in GitHub Actions
-def fetch_country_traffic():
-    gsc_creds = os.getenv("GSC_SERVICE_ACCOUNT_JSON")
-    site_url = os.getenv("SITE_URL")
+# 1. Initialize Gemini Client (reads GEMINI_API_KEY from environment)
+client = genai.Client()
 
-    if gsc_creds and site_url:
-        try:
-            from google.oauth2 import service_account
-            from googleapiclient.discovery import build
+MODELS_TO_TRY = [
+    "gemini-3-flash-preview",
+    "gemini-3.1-flash-lite"
+]
 
-            creds_dict = json.loads(gsc_creds)
-            creds = service_account.Credentials.from_service_account_info(
-                creds_dict, scopes=["https://www.googleapis.com/auth/webmasters.readonly"]
-            )
-            service = build("searchconsole", "v1", credentials=creds)
+# 2. Fetch Real Country Telemetry from Google Search Console (with safe fallback)
+def get_gsc_country_data():
+    gsc_json_str = os.environ.get("GSC_SERVICE_ACCOUNT_JSON")
+    site_url = os.environ.get("SITE_URL")
 
-            request = {
-                "startDate": "2026-11-01",
-                "endDate": datetime.now(timezone.utc).strftime("%Y-%m-%d"),
-                "dimensions": ["country"],
-                "rowLimit": 15
-            }
-            response = service.searchanalytics().query(siteUrl=site_url, body=request).execute()
-            rows = response.get("rows", [])
+    if not gsc_json_str or not site_url:
+        print("GSC secrets not found; using fallback sample telemetry.")
+        return [
+            {"country": "USA", "clicks": 42, "impressions": 1150, "ctr": 0.036, "position": 14.2},
+            {"country": "GBR", "clicks": 19, "impressions": 610, "ctr": 0.031, "position": 16.8},
+            {"country": "DEU", "clicks": 11, "impressions": 420, "ctr": 0.026, "position": 18.5},
+            {"country": "ARE", "clicks": 8, "impressions": 290, "ctr": 0.027, "position": 15.1}
+        ]
+
+    try:
+        creds_info = json.loads(gsc_json_str)
+        credentials = service_account.Credentials.from_service_account_info(
+            creds_info,
+            scopes=["https://www.googleapis.com/auth/webmasters.readonly"]
+        )
+        service = build("searchconsole", "v1", credentials=credentials)
+
+        end_date = datetime.date.today()
+        start_date = end_date - datetime.timedelta(days=28)
+
+        request = {
+            "startDate": start_date.isoformat(),
+            "endDate": end_date.isoformat(),
+            "dimensions": ["country"],
+            "rowLimit": 10
+        }
+        response = service.searchanalytics().query(siteUrl=site_url, body=request).execute()
+        rows = response.get("rows", [])
+
+        if not rows:
+            print(f"Connected to GSC for {site_url}, but 0 rows returned yet (awaiting indexing). Using baseline telemetry.")
             return [
-                {
-                    "country_iso3": r["keys"][0],
-                    "clicks": r["clicks"],
-                    "impressions": r["impressions"],
-                    "ctr": round(r["ctr"] * 100, 2)
-                }
-                for r in rows
+                {"country": "USA", "clicks": 0, "impressions": 0, "ctr": 0.0, "position": 0.0},
+                {"country": "GBR", "clicks": 0, "impressions": 0, "ctr": 0.0, "position": 0.0},
+                {"country": "DEU", "clicks": 0, "impressions": 0, "ctr": 0.0, "position": 0.0},
+                {"country": "ARE", "clicks": 0, "impressions": 0, "ctr": 0.0, "position": 0.0}
             ]
-        except Exception as e:
-            print(f"GSC fetch warning: {e}")
 
-    # Fallback sample telemetry until GSC collects its first 7 days of data
-    return [
-        {"country_iso3": "USA", "clicks": 42, "impressions": 1200, "ctr": 3.5},
-        {"country_iso3": "GBR", "clicks": 28, "impressions": 640, "ctr": 4.38},
-        {"country_iso3": "DEU", "clicks": 19, "impressions": 510, "ctr": 3.72},
-        {"country_iso3": "ARE", "clicks": 14, "impressions": 300, "ctr": 4.67}
-    ]
+        telemetry = []
+        for row in rows:
+            telemetry.append({
+                "country": row["keys"][0].upper(),
+                "clicks": row.get("clicks", 0),
+                "impressions": row.get("impressions", 0),
+                "ctr": round(row.get("ctr", 0.0), 4),
+                "position": round(row.get("position", 0.0), 1)
+            })
+        print(f"Successfully fetched {len(telemetry)} country rows from GSC for {site_url}.")
+        return telemetry
 
-def run_optimizer():
-    api_key = os.getenv("GEMINI_API_KEY")
-    if not api_key:
-        raise ValueError("Missing GEMINI_API_KEY environment variable.")
+    except Exception as e:
+        print(f"GSC API Error ({e}); falling back to baseline telemetry.")
+        return [
+            {"country": "USA", "clicks": 0, "impressions": 0, "ctr": 0.0, "position": 0.0}
+        ]
 
+# 3. Main Autonomous Optimization Routine
+def run_optimization():
     with open("data.json", "r", encoding="utf-8") as f:
         current_data = json.load(f)
 
-    # Snapshot locked fields so the AI cannot alter prices or payment URLs
-    locked_products = [
-        {
-            "id": p["id"],
+    # Snapshot protected fields (prices, URLs, IDs) for hard guardrail enforcement
+    protected_products = {
+        p["id"]: {
             "retail_usd": p["retail_usd"],
             "index_usd": p["index_usd"],
-            "direct_usd": p["direct_usd"],
+            "direct_usd": p.get("direct_usd"),
             "ebay_url": p["ebay_url"],
-            "direct_url": p["direct_url"],
+            "direct_url": p.get("direct_url")
         }
-        for p in current_data["products"]
-    ]
+        for p in current_data.get("products", [])
+    }
 
-    traffic_stats = fetch_country_traffic()
-    client = genai.Client(api_key=api_key)
+    telemetry = get_gsc_country_data()
+    today_str = datetime.date.today().isoformat()
 
     prompt = f"""
-    You are the autonomous SEO & conversion optimization agent for PerfumeIndex.
-    Analyze the latest country-level search traffic and update `data.json` to maximize clicks and conversions from top-performing countries.
+You are an autonomous SEO and geo-arbitrage optimization agent for PerfumeIndex, an online fragrance price comparison index.
 
-    TRAFFIC TELEMETRY BY COUNTRY:
-    {json.dumps(traffic_stats, indent=2)}
+Analyze the 28-day Google Search Console country performance telemetry and the current site configuration (`data.json`):
 
-    CURRENT SITE DATA:
-    {json.dumps(current_data, indent=2)}
+GSC Country Telemetry:
+{json.dumps(telemetry, indent=2)}
 
-    STRICT RULES:
-    1. Identify the top 3 countries by clicks and CTR. Set `default_country` to the #1 highest-performing country code (2-letter ISO code like US, GB, DE, AE, IL).
-    2. For countries with rising clicks/impressions, refine their `seo_title` and `seo_intro` to include high-intent local search terms for "men perfume", "women perfume", and local price comparisons in that country's primary language.
-    3. If a country in the traffic telemetry has strong impressions/clicks and is missing from `countries`, add it with accurate currency symbol, approximate USD exchange rate, local VAT note, and localized SEO copy.
-    4. NEVER modify `retail_usd`, `index_usd`, `direct_usd`, `ebay_url`, or `direct_url` on any product. You may only refine `badge` or `notes` text for clarity.
-    5. Update `last_optimized` to "{datetime.now(timezone.utc).strftime('%Y-%m-%d')}" and append a concise summary of what you changed to `agent_metadata.optimization_log`.
-    6. Return ONLY valid JSON matching the exact structure of `data.json`.
-    """
+Current data.json:
+{json.dumps(current_data, indent=2)}
 
-    # Build a prioritized list of standard text models (excluding zero-quota omni/image/audio models)
-    excluded_keywords = ("omni", "image", "audio", "tts", "embedding", "aqa", "robotics", "computer-use")
-    discovered = [
-        m.name.replace("models/", "") for m in client.models.list()
-        if "gemini" in m.name.lower()
-        and not any(bad in m.name.lower() for bad in excluded_keywords)
-    ]
+Your tasks:
+1. Determine the highest-opportunity `default_country` code from the supported keys in `countries` (e.g., "US", "UK", "DE", "AE", "IL") based on clicks and impressions. If all clicks are 0, keep "US".
+2. Refine `seo_title`, `seo_intro`, and `vat_note` inside each entry of `countries` to maximize organic search CTR and buyer trust for local shoppers comparing official retail prices against verified discounter/eBay prices.
+3. Update `badge` labels on products (e.g., "Top Arbitrage Deal", "Best Seller", "High Savings") to highlight strong discounts, and refine `notes` if needed for clarity.
+4. Set `last_optimized` to "{today_str}".
 
-    preferred_order = [
-        "gemini-flash-latest",
-        "gemini-2.5-pro",
-        "gemini-pro-latest",
-        "gemini-2.0-flash",
-        "gemini-2.0-flash-lite"
-    ]
-    candidates = [m for m in preferred_order if m in discovered] + [
-        m for m in discovered if m not in preferred_order
-    ]
+STRICT RULES:
+- Return ONLY valid JSON matching the exact schema of `current_data`.
+- Do NOT alter `id`, `brand`, `name`, `size`, `gender`, `retail_usd`, `index_usd`, `direct_usd`, `ebay_url`, `direct_url`, `currency`, `symbol`, or `rate_to_usd`.
+- Do NOT wrap the output in markdown fences if avoidable, or ensure it parses cleanly as JSON.
+"""
 
-    response = None
-    last_error = None
-    for model_name in candidates:
+    updated_data = None
+    for model_name in MODELS_TO_TRY:
         try:
             print(f"Trying model: {model_name}")
             response = client.models.generate_content(
@@ -124,22 +130,28 @@ def run_optimizer():
                     temperature=0.3
                 )
             )
+            updated_data = json.loads(response.text)
             print(f"Success with model: {model_name}")
             break
         except Exception as e:
             print(f"Skipping {model_name} ({e})")
-            last_error = e
 
-    if response is None:
-        raise RuntimeError(f"All candidate models failed. Last error: {last_error}")
+    if not updated_data:
+        raise RuntimeError("All candidate Gemini models failed to return valid JSON.")
 
-    updated_data = json.loads(response.text)
+    # 4. Hard Guardrail Enforcement: Restore exact prices and URLs
+    for product in updated_data.get("products", []):
+        pid = product.get("id")
+        if pid in protected_products:
+            product["retail_usd"] = protected_products[pid]["retail_usd"]
+            product["index_usd"] = protected_products[pid]["index_usd"]
+            if protected_products[pid]["direct_usd"] is not None:
+                product["direct_usd"] = protected_products[pid]["direct_usd"]
+            product["ebay_url"] = protected_products[pid]["ebay_url"]
+            if protected_products[pid]["direct_url"] is not None:
+                product["direct_url"] = protected_products[pid]["direct_url"]
 
-    # Enforce hard guardrail on prices & payment URLs
-    locked_map = {item["id"]: item for item in locked_products}
-    for prod in updated_data.get("products", []):
-        if prod["id"] in locked_map:
-            prod.update(locked_map[prod["id"]])
+    updated_data["last_optimized"] = today_str
 
     with open("data.json", "w", encoding="utf-8") as f:
         json.dump(updated_data, f, indent=2, ensure_ascii=False)
@@ -147,4 +159,4 @@ def run_optimizer():
     print("PerfumeIndex optimization completed successfully.")
 
 if __name__ == "__main__":
-    run_optimizer()
+    run_optimization()
