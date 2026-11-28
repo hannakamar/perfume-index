@@ -1127,6 +1127,189 @@
       flex-wrap: wrap;
       gap: 12px;
     }
+
+    /* Policy & Support Modals + Footer Compliance */
+    .legal-modal-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.78);
+      backdrop-filter: blur(6px);
+      z-index: 160;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    .legal-modal-backdrop.open {
+      display: flex;
+    }
+
+    .legal-modal {
+      width: 100%;
+      max-width: 680px;
+      max-height: 85vh;
+      background: #121216;
+      border: 1px solid rgba(229, 184, 105, 0.35);
+      border-radius: 18px;
+      display: flex;
+      flex-direction: column;
+      box-shadow: 0 25px 65px rgba(0, 0, 0, 0.85);
+      overflow: hidden;
+    }
+
+    .legal-modal-header {
+      padding: 18px 22px;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: #0d0d11;
+    }
+
+    .legal-modal-header h2 {
+      font-size: 1.12rem;
+      font-weight: 800;
+      color: var(--accent);
+    }
+
+    .legal-modal-body {
+      padding: 22px;
+      overflow-y: auto;
+      font-size: 0.9rem;
+      color: #e4e4e7;
+      line-height: 1.65;
+    }
+
+    .legal-modal-body h3 {
+      font-size: 0.98rem;
+      color: var(--text);
+      margin: 16px 0 6px;
+      font-weight: 700;
+    }
+
+    .legal-modal-body h3:first-child {
+      margin-top: 0;
+    }
+
+    .legal-modal-body p {
+      margin-bottom: 10px;
+      color: var(--muted);
+    }
+
+    .legal-modal-body ul {
+      margin: 0 0 12px 18px;
+      color: var(--muted);
+    }
+
+    .legal-modal-body li {
+      margin-bottom: 5px;
+    }
+
+    .support-form-group {
+      margin-bottom: 12px;
+    }
+
+    .support-form-group label {
+      display: block;
+      font-size: 0.8rem;
+      color: var(--muted);
+      margin-bottom: 4px;
+      font-weight: 600;
+    }
+
+    .support-form-group input,
+    .support-form-group select,
+    .support-form-group textarea {
+      width: 100%;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid var(--border);
+      color: var(--text);
+      border-radius: 8px;
+      padding: 9px 12px;
+      font-family: inherit;
+      font-size: 0.88rem;
+    }
+
+    .support-form-group textarea {
+      min-height: 92px;
+      resize: vertical;
+    }
+
+    .checkout-legal-consent {
+      font-size: 0.74rem;
+      color: var(--muted);
+      text-align: center;
+      margin-bottom: 10px;
+      line-height: 1.4;
+    }
+
+    .checkout-legal-consent button {
+      background: none;
+      border: none;
+      color: var(--accent);
+      text-decoration: underline;
+      cursor: pointer;
+      font-size: 0.74rem;
+      padding: 0;
+    }
+
+    .header-support-btn {
+      background: rgba(255, 255, 255, 0.05);
+      color: var(--text);
+      border: 1px solid var(--border);
+      padding: 7px 12px;
+      border-radius: 8px;
+      font-size: 0.84rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: border-color 0.2s ease, color 0.2s ease;
+    }
+
+    .header-support-btn:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+
+    .footer-grid {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .footer-links-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 18px;
+      align-items: center;
+    }
+
+    .footer-policy-btn {
+      background: none;
+      border: none;
+      color: var(--text);
+      font-size: 0.84rem;
+      font-weight: 600;
+      cursor: pointer;
+      padding: 0;
+      text-decoration: underline;
+      text-underline-offset: 3px;
+      text-decoration-color: rgba(255, 255, 255, 0.25);
+    }
+
+    .footer-policy-btn:hover {
+      color: var(--accent);
+      text-decoration-color: var(--accent);
+    }
+
+    .footer-disclaimer {
+      font-size: 0.76rem;
+      color: var(--muted);
+      line-height: 1.5;
+      border-top: 1px solid rgba(255, 255, 255, 0.07);
+      padding-top: 12px;
+    }
   </style>
 </head>
 <body>
@@ -1160,6 +1343,12 @@
       <div class="cart-total-row">
         <span>Total:</span>
         <span id="cart-grand-total">$0</span>
+      </div>
+      <div class="checkout-legal-consent">
+        Covered by <strong>PayPal Buyer Protection</strong> &amp; tracked carrier delivery. By checking out, you agree to our
+        <button type="button" data-open-policy="terms">Terms of Service</button>,
+        <button type="button" data-open-policy="shipping">Shipping &amp; Sealed-Item Return Policy</button>, and
+        <button type="button" data-open-policy="privacy">Privacy Policy</button>.
       </div>
       <div id="paypal-button-container"></div>
       <div class="checkout-status-msg" id="checkout-status-msg"></div>
@@ -1213,6 +1402,7 @@
       <div class="brand" id="brand-reset">Perfume<span>Index</span></div>
       <div class="controls">
         <button type="button" class="quiz-reopen-btn" id="btn-open-vibe-gate">Find Your Vibe</button>
+        <button type="button" class="header-support-btn" data-open-policy="support">Support</button>
         <label for="region-select" style="font-size: 0.85rem; color: var(--muted);">Region:</label>
         <select id="region-select" aria-label="Select Region"></select>
         <button type="button" class="cart-toggle-btn" id="btn-open-cart" aria-label="Open Basket">
@@ -1241,7 +1431,11 @@
       </div>
       <div class="trust-item">
         <strong>PayPal Buyer-Protected Checkout</strong>
-        <span>Fast, encrypted PayPal checkout with full buyer protection and tracked carrier delivery.</span>
+        <span>Fast, encrypted PayPal checkout with full buyer protection, carrier tracking upload, and dispute coverage.</span>
+      </div>
+      <div class="trust-item">
+        <strong>24h Customer Support &amp; Easy Returns</strong>
+        <span>Questions on batch codes or tracking? Reach support anytime. 14-day returns on unopened, factory-sealed boxes.</span>
       </div>
     </section>
 
@@ -1290,11 +1484,44 @@
   </main>
 
   <footer>
-    <div class="container" style="display:flex; justify-content:space-between; width:100%; flex-wrap:wrap; gap:12px;">
-      <div>© 2026 PerfumeIndex. 100% Authentic Factory-Sealed Fragrances.</div>
-      <div id="agent-status">PayPal Buyer Protection Enabled</div>
+    <div class="container">
+      <div class="footer-grid">
+        <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:14px;">
+          <div>
+            <strong style="color:var(--text);">PerfumeIndex</strong> — 100% Authentic Factory-Sealed Fragrances
+          </div>
+          <nav class="footer-links-row" aria-label="Legal and Customer Support">
+            <button type="button" class="footer-policy-btn" data-open-policy="shipping">Shipping &amp; Return Policy</button>
+            <button type="button" class="footer-policy-btn" data-open-policy="buyer-protection">Buyer Protection &amp; Authenticity</button>
+            <button type="button" class="footer-policy-btn" data-open-policy="privacy">Privacy Policy</button>
+            <button type="button" class="footer-policy-btn" data-open-policy="terms">Terms &amp; Conditions</button>
+            <button type="button" class="footer-policy-btn" data-open-policy="support">Contact Support</button>
+          </nav>
+        </div>
+        <div class="footer-disclaimer">
+          <strong>Disclosures &amp; Buyer Protection:</strong> All orders are protected by PayPal Buyer Protection and shipped with tracked carrier confirmation (adult signature required on orders of $750 USD or more).
+          "Official Retail" prices reflect verifiable manufacturer suggested retail prices (MSRP) linked directly to each brand's official storefront for transparency.
+          PerfumeIndex is an independent online retailer of genuine, factory-sealed fragrances; all brand names, bottle designs, and trademarks belong to their respective owners.
+          Support inquiries: <a href="mailto:support@perfume-index.pages.dev" style="color:var(--accent);">support@perfume-index.pages.dev</a> (24-hour response SLA).
+        </div>
+        <div style="display:flex; justify-content:space-between; flex-wrap:wrap; gap:10px; font-size:0.78rem;">
+          <div>© 2026 PerfumeIndex. All Rights Reserved.</div>
+          <div id="agent-status">PayPal Buyer Protection Enabled • FTC Mail-Order Compliant</div>
+        </div>
+      </div>
     </div>
   </footer>
+
+  <!-- Compliance, Policy & Customer Support Modal -->
+  <div class="legal-modal-backdrop" id="legal-modal-backdrop" role="dialog" aria-modal="true" aria-labelledby="legal-modal-title">
+    <div class="legal-modal">
+      <div class="legal-modal-header">
+        <h2 id="legal-modal-title">Store Policy</h2>
+        <button type="button" class="cart-close-btn" id="btn-close-legal-modal" aria-label="Close Dialog">✕</button>
+      </div>
+      <div class="legal-modal-body" id="legal-modal-body"></div>
+    </div>
+  </div>
 
   <script>
     const PAYPAL_CLIENT_ID = "BAAjSqry-OUYm4qquDe1Wf-zGttJDOKStPFlp2ykjHAhgAsThu4Y0Q8xh2elQDHqiC2LneUxQg6tzewDKs";
@@ -2283,6 +2510,162 @@
       gridViewBtn.classList.remove("active");
       gridEl.style.display = "none";
       tableEl.style.display = "block";
+    });
+
+
+    /* --- US E-Commerce Compliance, Buyer Protection & Support Modals --- */
+    const POLICY_DOCS = {
+      "shipping": {
+        title: "Shipping, Fulfillment & Return Policy",
+        html: `
+          <h3>1. Order Processing &amp; Shipping Times (FTC Mail Order Compliance)</h3>
+          <p>All orders are processed and dispatched within <strong>1–2 business days</strong> (excluding weekends and US federal holidays). Standard tracked domestic transit takes <strong>3–6 business days</strong>.</p>
+          <ul>
+            <li><strong>Carrier Tracking:</strong> A valid tracking number is emailed to you and uploaded directly to your PayPal transaction record upon shipment.</li>
+            <li><strong>High-Value Signature Requirement:</strong> In accordance with PayPal Seller &amp; Buyer Protection guidelines, orders totaling <strong>$750 USD or more</strong> require adult signature confirmation at delivery.</li>
+            <li><strong>Address Accuracy:</strong> Orders ship exclusively to the verified shipping address provided at PayPal checkout.</li>
+            <li><strong>Delay Notification:</strong> If an unforeseen fulfillment delay occurs, we will notify you immediately with the option to cancel for a full, prompt refund.</li>
+          </ul>
+          <h3>2. Return &amp; Refund Policy (Sealed Fragrance Hygiene Standard)</h3>
+          <p>We accept returns within <strong>14 calendar days</strong> of confirmed carrier delivery, subject to the following fragrance safety and hygiene conditions:</p>
+          <ul>
+            <li><strong>Unopened &amp; Factory-Sealed Only:</strong> Returned bottles must be 100% unused, unsprayed, and in their original, intact factory cellophane wrap and retail box.</li>
+            <li><strong>Opened Bottles:</strong> For hygiene, tampering prevention, and US hazardous-materials (flammable fragrance) shipping rules, opened or unsealed fragrances cannot be returned unless damaged in transit or defective.</li>
+            <li><strong>Damaged or Incorrect Items:</strong> Contact support within 48 hours of delivery with photos of the outer shipping box and batch code for a free replacement or full refund.</li>
+            <li><strong>Refund Processing:</strong> Approved returns are inspected within 2 business days of receipt and refunded directly to your original PayPal payment method.</li>
+          </ul>
+        `
+      },
+      "buyer-protection": {
+        title: "Buyer Protection & 100% Authenticity Guarantee",
+        html: `
+          <h3>1. PayPal Buyer Protection Coverage</h3>
+          <p>Every purchase on PerfumeIndex is processed through encrypted <strong>PayPal Checkout</strong>. If your order does not arrive or arrives materially different from its description, you are covered by PayPal's Buyer Protection program.</p>
+          <h3>2. 100% Factory-Sealed Authenticity</h3>
+          <ul>
+            <li><strong>Original Retail Packaging:</strong> Every item is brand-new, cellophane-sealed, and bears matching manufacturer batch codes on both the outer carton and glass bottle.</li>
+            <li><strong>No Testers, Decants, or Counterfeits:</strong> We never sell unboxed testers, refills, diluted decants, or replica fragrances.</li>
+            <li><strong>Verifiable MSRP Pricing:</strong> Every product card links directly to the official brand website so you can independently verify retail pricing and bottle specifications before purchasing.</li>
+          </ul>
+        `
+      },
+      "privacy": {
+        title: "Privacy Policy (US & California CCPA/CalOPPA Notice)",
+        html: `
+          <p><strong>Effective Date:</strong> January 1, 2026</p>
+          <h3>1. Information We Collect</h3>
+          <p>When you browse PerfumeIndex or place an order, we collect only the information necessary to fulfill your purchase and operate our storefront:</p>
+          <ul>
+            <li><strong>Order &amp; Contact Details:</strong> Name, shipping address, email address, and PayPal transaction ID provided during checkout.</li>
+            <li><strong>Technical &amp; Analytics Data:</strong> Aggregated, privacy-first page performance metrics via Cloudflare Web Analytics and local browser storage (<code>localStorage</code>) used solely to preserve your shopping basket.</li>
+          </ul>
+          <h3>2. How We Use &amp; Share Your Data</h3>
+          <p>We <strong>never sell or rent</strong> your personal information to third parties. Data is shared strictly with essential service providers:</p>
+          <ul>
+            <li><strong>PayPal:</strong> To securely process payments and prevent fraud (PerfumeIndex never sees or stores your credit card or bank credentials).</li>
+            <li><strong>Shipping Carriers (USPS, UPS, FedEx):</strong> To deliver your package and provide tracking updates.</li>
+          </ul>
+          <h3>3. Your Privacy Rights</h3>
+          <p>US and California residents may request access to, correction of, or deletion of their order contact records at any time by emailing <strong>support@perfume-index.pages.dev</strong>.</p>
+        `
+      },
+      "terms": {
+        title: "Terms & Conditions of Sale",
+        html: `
+          <h3>1. Independent Retailer Notice</h3>
+          <p>PerfumeIndex operates as an independent online retailer sourcing authentic designer and niche fragrances. Brand names, logos, and trademarks displayed on this site are the property of their respective trademark owners and are used solely to identify the genuine products offered for sale.</p>
+          <h3>2. Pricing, Availability &amp; Order Acceptance</h3>
+          <ul>
+            <li><strong>Pricing Accuracy:</strong> All prices are displayed in your selected currency (USD default) and include transparent savings compared to official retail MSRP. In the rare event of a typographical pricing error, we reserve the right to cancel the order and issue an immediate 100% refund.</li>
+            <li><strong>Order Limits:</strong> We reserve the right to limit quantities per household or cancel orders flagged for suspected fraud.</li>
+          </ul>
+          <h3>3. Fragrance Safety &amp; Usage</h3>
+          <p>Fragrances contain denatured alcohol and aromatic compounds intended for external cosmetic use only. Keep away from open flames, heat sources, and eyes. No medical or therapeutic claims are made regarding any fragrance.</p>
+        `
+      },
+      "support": {
+        title: "Customer Support & Order Assistance",
+        html: `
+          <p>Need help with an order, batch code verification, tracking number, or return authorization? Our support team responds to all inquiries within <strong>24 hours</strong>.</p>
+          <ul>
+            <li><strong>Direct Support Email:</strong> <a href="mailto:support@perfume-index.pages.dev" style="color:var(--accent);">support@perfume-index.pages.dev</a></li>
+            <li><strong>Support Hours:</strong> Monday – Friday, 9:00 AM – 6:00 PM EST</li>
+          </ul>
+          <form id="support-ticket-form" style="margin-top:14px;">
+            <div class="support-form-group">
+              <label for="sup-topic">Topic</label>
+              <select id="sup-topic" required>
+                <option value="Order & Tracking">Order Status &amp; Tracking</option>
+                <option value="Batch Code & Authenticity">Batch Code &amp; Authenticity Verification</option>
+                <option value="Return / Damaged Item">Sealed Return or Damaged Delivery</option>
+                <option value="Product Question">Fragrance Question</option>
+              </select>
+            </div>
+            <div class="support-form-group">
+              <label for="sup-email">Your Email Address</label>
+              <input type="email" id="sup-email" placeholder="you@example.com" required />
+            </div>
+            <div class="support-form-group">
+              <label for="sup-order">PayPal Transaction ID (Optional)</label>
+              <input type="text" id="sup-order" placeholder="e.g., 5TY8923410..." />
+            </div>
+            <div class="support-form-group">
+              <label for="sup-msg">Message</label>
+              <textarea id="sup-msg" placeholder="How can we help?" required></textarea>
+            </div>
+            <button type="submit" class="btn btn-add-basket" style="width:100%;">Send Support Request</button>
+            <div id="support-form-feedback" style="margin-top:10px; font-size:0.83rem; color:var(--green); text-align:center;"></div>
+          </form>
+        `
+      }
+    };
+
+    const legalBackdrop = document.getElementById("legal-modal-backdrop");
+    const legalTitle = document.getElementById("legal-modal-title");
+    const legalBody = document.getElementById("legal-modal-body");
+
+    function openPolicyModal(docKey) {
+      const doc = POLICY_DOCS[docKey];
+      if (!doc) return;
+      legalTitle.textContent = doc.title;
+      legalBody.innerHTML = doc.html;
+      legalBackdrop.classList.add("open");
+
+      const supForm = document.getElementById("support-ticket-form");
+      if (supForm) {
+        supForm.addEventListener("submit", (e) => {
+          e.preventDefault();
+          const topic = document.getElementById("sup-topic").value;
+          const email = document.getElementById("sup-email").value.trim();
+          const orderId = document.getElementById("sup-order").value.trim();
+          const msg = document.getElementById("sup-msg").value.trim();
+          const subject = encodeURIComponent(`[PerfumeIndex Support] ${topic}${orderId ? " - Order " + orderId : ""}`);
+          const body = encodeURIComponent(`From: ${email}\nPayPal Transaction ID: ${orderId || "N/A"}\n\n${msg}`);
+          document.getElementById("support-form-feedback").textContent = "Opening your email client to send your message to support@perfume-index.pages.dev...";
+          window.location.href = `mailto:support@perfume-index.pages.dev?subject=${subject}&body=${body}`;
+        });
+      }
+    }
+
+    function closePolicyModal() {
+      legalBackdrop.classList.remove("open");
+    }
+
+    document.querySelectorAll("[data-open-policy]").forEach(btn => {
+      btn.addEventListener("click", (e) => {
+        e.preventDefault();
+        openPolicyModal(btn.dataset.openPolicy);
+      });
+    });
+
+    document.getElementById("btn-close-legal-modal").addEventListener("click", closePolicyModal);
+    legalBackdrop.addEventListener("click", (e) => {
+      if (e.target === legalBackdrop) closePolicyModal();
+    });
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape" && legalBackdrop.classList.contains("open")) {
+        closePolicyModal();
+      }
     });
 
     init();
