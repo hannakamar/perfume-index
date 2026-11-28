@@ -1,6 +1,6 @@
 {
   "default_country": "US",
-  "last_optimized": "2026-11-27",
+  "last_optimized": "2026-11-28",
   "countries": {
     "US": {
       "name": "United States",
@@ -8,7 +8,7 @@
       "symbol": "$",
       "rate_to_usd": 1.0,
       "vat_note": "Prices shown before state sales tax. Free US tracked shipping.",
-      "seo_title": "PerfumeIndex — Authentic Designer & Niche Fragrance Price Index",
+      "seo_title": "PerfumeIndex — Authentic Designer & Niche Fragrance Store",
       "seo_intro": "Verify official retail prices directly on brand websites and save up to 40% on 100% authentic, factory-sealed fragrances."
     },
     "UK": {
@@ -17,8 +17,8 @@
       "symbol": "£",
       "rate_to_usd": 0.79,
       "vat_note": "Includes UK VAT estimate. Authentic sealed retail boxes.",
-      "seo_title": "PerfumeIndex UK — Authentic Designer & Niche Perfume Deals",
-      "seo_intro": "Compare official UK retail perfume prices against verified factory-sealed deals in GBP."
+      "seo_title": "PerfumeIndex UK — Authentic Designer & Niche Perfume Store",
+      "seo_intro": "Compare official UK retail perfume prices against direct factory-sealed deals in GBP."
     },
     "EU": {
       "name": "European Union",
@@ -26,8 +26,8 @@
       "symbol": "€",
       "rate_to_usd": 0.92,
       "vat_note": "Displayed in EUR. Factory-sealed bottles with batch codes.",
-      "seo_title": "PerfumeIndex EU — Authentic Designer & Niche Fragrance Index",
-      "seo_intro": "Compare official European retail fragrance prices against verified sealed deals in EUR."
+      "seo_title": "PerfumeIndex EU — Authentic Designer & Niche Fragrance Store",
+      "seo_intro": "Compare official European retail fragrance prices against direct sealed deals in EUR."
     },
     "IL": {
       "name": "Israel",
@@ -36,7 +36,7 @@
       "rate_to_usd": 3.65,
       "vat_note": "Displayed in ILS (₪). Factory-sealed authentic bottles.",
       "seo_title": "PerfumeIndex Israel — Authentic Designer & Niche Fragrances",
-      "seo_intro": "Compare official retail perfume prices against verified factory-sealed deals in ILS."
+      "seo_intro": "Compare official retail perfume prices against direct factory-sealed deals in ILS."
     },
     "CA": {
       "name": "Canada",
@@ -44,8 +44,8 @@
       "symbol": "CA$",
       "rate_to_usd": 1.38,
       "vat_note": "Displayed in CAD. Authentic sealed retail boxes.",
-      "seo_title": "PerfumeIndex Canada — Authentic Designer & Niche Perfume Index",
-      "seo_intro": "Compare official Canadian retail fragrance prices against verified sealed deals in CAD."
+      "seo_title": "PerfumeIndex Canada — Authentic Designer & Niche Perfume Store",
+      "seo_intro": "Compare official Canadian retail fragrance prices against direct sealed deals in CAD."
     },
     "AU": {
       "name": "Australia",
@@ -54,7 +54,7 @@
       "rate_to_usd": 1.52,
       "vat_note": "Displayed in AUD. Factory-sealed bottles with batch codes.",
       "seo_title": "PerfumeIndex Australia — Authentic Designer & Niche Perfumes",
-      "seo_intro": "Compare official Australian retail perfume prices against verified sealed deals in AUD."
+      "seo_intro": "Compare official Australian retail perfume prices against direct sealed deals in AUD."
     }
   },
   "products": [
@@ -74,7 +74,6 @@
       "index_usd": 73,
       "direct_usd": null,
       "retail_url": "https://www.giorgioarmanibeauty-usa.com",
-      "ebay_url": "https://www.ebay.com/sch/i.html?_nkw=Giorgio+Armani+Acqua+Di+Gio+Eau+de+Toilette+100ml+sealed",
       "fragrancex_url": "https://www.fragrancex.com/search/search_results?stext=416544",
       "direct_url": "#direct-checkout-coming-soon",
       "image_url": "./images/416544.jpg"
@@ -95,7 +94,6 @@
       "index_usd": 72,
       "direct_usd": null,
       "retail_url": "https://www.versace.com",
-      "ebay_url": "https://www.ebay.com/sch/i.html?_nkw=Versace+Versace+Pour+Homme+Eau+de+Toilette+100ml+sealed",
       "fragrancex_url": "https://www.fragrancex.com/search/search_results?stext=454936",
       "direct_url": "#direct-checkout-coming-soon",
       "image_url": "./images/454936.jpg"
@@ -116,7 +114,6 @@
       "index_usd": 58,
       "direct_usd": null,
       "retail_url": "https://www.dolcegabbana.com",
-      "ebay_url": "https://www.ebay.com/sch/i.html?_nkw=Dolce+&+Gabbana+Light+Blue+Pour+Homme+Eau+de+Toilette+125ml+sealed",
       "fragrancex_url": "https://www.fragrancex.com/search/search_results?stext=435355",
       "direct_url": "#direct-checkout-coming-soon",
       "image_url": "./images/435355.jpg"
@@ -137,7 +134,6 @@
       "index_usd": 38,
       "direct_usd": null,
       "retail_url": "https://www.azzaro.com",
-      "ebay_url": "https://www.ebay.com/sch/i.html?_nkw=Azzaro+Chrome+Eau+de+Toilette+100ml+sealed",
       "fragrancex_url": "https://www.fragrancex.com/search/search_results?stext=418648",
       "direct_url": "#direct-checkout-coming-soon",
       "image_url": "./images/418648.jpg"
@@ -158,7 +154,6 @@
       "index_usd": 54,
       "direct_usd": null,
       "retail_url": "https://www.isseymiyakeparfums.com",
-      "ebay_url": "https://www.ebay.com/sch/i.html?_nkw=Issey+Miyake+L'Eau+d'Issey+Pour+Homme+Eau+de+Toilette+125ml+sealed",
       "fragrancex_url": "https://www.fragrancex.com/search/search_results?stext=418167",
       "direct_url": "#direct-checkout-coming-soon",
       "image_url": "./images/418167.jpg"
@@ -179,7 +174,6 @@
       "index_usd": 64,
       "direct_usd": null,
       "retail_url": "https://www.ralphlauren.com",
-      "ebay_url": "https://www.ebay.com/sch/i.html?_nkw=Ralph+Lauren+Polo+Blue+Eau+de+Toilette+125ml+sealed",
       "fragrancex_url": "https://www.fragrancex.com/search/search_results?stext=402820",
       "direct_url": "#direct-checkout-coming-soon",
       "image_url": "./images/402820.jpg"
@@ -200,7 +194,6 @@
       "index_usd": 26,
       "direct_usd": null,
       "retail_url": "https://www.zinodavidoff.com",
-      "ebay_url": "https://www.ebay.com/sch/i.html?_nkw=Davidoff+Cool+Water+Eau+de+Toilette+125ml+sealed",
       "fragrancex_url": "https://www.fragrancex.com/search/search_results?stext=402086",
       "direct_url": "#direct-checkout-coming-soon",
       "image_url": "./images/402086.jpg"
@@ -221,7 +214,6 @@
       "index_usd": 16,
       "direct_usd": null,
       "retail_url": "https://www.nautica.com",
-      "ebay_url": "https://www.ebay.com/sch/i.html?_nkw=Nautica+Nautica+Voyage+Eau+de+Toilette+100ml+sealed",
       "fragrancex_url": "https://www.fragrancex.com/search/search_results?stext=425075",
       "direct_url": "#direct-checkout-coming-soon",
       "image_url": "./images/425075.jpg"
@@ -243,7 +235,6 @@
       "index_usd": 125,
       "direct_usd": null,
       "retail_url": "https://www.prada.com",
-      "ebay_url": "https://www.ebay.com/sch/i.html?_nkw=Prada+Prada+L'Homme+Eau+de+Toilette+100ml+sealed",
       "fragrancex_url": "https://www.fragrancex.com/search/search_results?stext=535823",
       "direct_url": "#direct-checkout-coming-soon",
       "image_url": "./images/535823.jpg"
@@ -264,7 +255,6 @@
       "index_usd": 47,
       "direct_usd": null,
       "retail_url": "https://www.montblanc.com",
-      "ebay_url": "https://www.ebay.com/sch/i.html?_nkw=Montblanc+Montblanc+Legend+Spirit+Eau+de+Toilette+100ml+sealed",
       "fragrancex_url": "https://www.fragrancex.com/search/search_results?stext=533327",
       "direct_url": "#direct-checkout-coming-soon",
       "image_url": "./images/533327.jpg"
@@ -286,7 +276,6 @@
       "index_usd": 163,
       "direct_usd": null,
       "retail_url": "https://www.dior.com",
-      "ebay_url": "https://www.ebay.com/sch/i.html?_nkw=Dior+Sauvage+Parfum+100ml+sealed",
       "fragrancex_url": "https://www.fragrancex.com/search/search_results?stext=548707",
       "direct_url": "#direct-checkout-coming-soon",
       "image_url": "./images/548707.jpg"
@@ -308,7 +297,6 @@
       "index_usd": 418,
       "direct_usd": null,
       "retail_url": "https://creedboutique.com",
-      "ebay_url": "https://www.ebay.com/sch/i.html?_nkw=Creed+Aventus+Eau+de+Parfum+100ml+sealed",
       "fragrancex_url": "https://www.fragrancex.com/search/search_results?stext=546573",
       "direct_url": "#direct-checkout-coming-soon",
       "image_url": "./images/546573.jpg"
@@ -330,7 +318,6 @@
       "index_usd": 78,
       "direct_usd": null,
       "retail_url": "https://www.montblanc.com",
-      "ebay_url": "https://www.ebay.com/sch/i.html?_nkw=Montblanc+Montblanc+Explorer+Eau+de+Parfum+100ml+sealed",
       "fragrancex_url": "https://www.fragrancex.com/search/search_results?stext=545976",
       "direct_url": "#direct-checkout-coming-soon",
       "image_url": "./images/545976.jpg"
@@ -352,7 +339,6 @@
       "index_usd": 69,
       "direct_usd": null,
       "retail_url": "https://www.versace.com",
-      "ebay_url": "https://www.ebay.com/sch/i.html?_nkw=Versace+Versace+Pour+Homme+Dylan+Blue+Eau+de+Toilette+100ml+sealed",
       "fragrancex_url": "https://www.fragrancex.com/search/search_results?stext=534152",
       "direct_url": "#direct-checkout-coming-soon",
       "image_url": "./images/534152.jpg"
@@ -374,7 +360,6 @@
       "index_usd": 100,
       "direct_usd": null,
       "retail_url": "https://www.giorgioarmanibeauty-usa.com",
-      "ebay_url": "https://www.ebay.com/sch/i.html?_nkw=Giorgio+Armani+Acqua+Di+Gio+Profondo+Eau+de+Parfum+125ml+sealed",
       "fragrancex_url": "https://www.fragrancex.com/search/search_results?stext=551096",
       "direct_url": "#direct-checkout-coming-soon",
       "image_url": "./images/551096.jpg"
@@ -395,7 +380,6 @@
       "index_usd": 110,
       "direct_usd": null,
       "retail_url": "https://www.hermes.com",
-      "ebay_url": "https://www.ebay.com/sch/i.html?_nkw=Hermès+Terre+d'Hermès+Eau+de+Toilette+100ml+sealed",
       "fragrancex_url": "https://www.fragrancex.com/search/search_results?stext=425072",
       "direct_url": "#direct-checkout-coming-soon",
       "image_url": "./images/425072.jpg"
@@ -416,7 +400,6 @@
       "index_usd": 107,
       "direct_usd": null,
       "retail_url": "https://www.valentino-beauty.us",
-      "ebay_url": "https://www.ebay.com/sch/i.html?_nkw=Valentino+Valentino+Uomo+Born+In+Roma+Eau+de+Toilette+100ml+sealed",
       "fragrancex_url": "https://www.fragrancex.com/search/search_results?stext=558510",
       "direct_url": "#direct-checkout-coming-soon",
       "image_url": "./images/558510.jpg"
@@ -438,7 +421,6 @@
       "index_usd": 69,
       "direct_usd": null,
       "retail_url": "https://www.rabanne.com",
-      "ebay_url": "https://www.ebay.com/sch/i.html?_nkw=Rabanne+Invictus+Eau+de+Toilette+100ml+sealed",
       "fragrancex_url": "https://www.fragrancex.com/search/search_results?stext=501445",
       "direct_url": "#direct-checkout-coming-soon",
       "image_url": "./images/501445.jpg"
@@ -460,7 +442,6 @@
       "index_usd": 121,
       "direct_usd": null,
       "retail_url": "https://www.prada.com",
-      "ebay_url": "https://www.ebay.com/sch/i.html?_nkw=Prada+Prada+Luna+Rossa+Carbon+Eau+de+Toilette+100ml+sealed",
       "fragrancex_url": "https://www.fragrancex.com/search/search_results?stext=536935",
       "direct_url": "#direct-checkout-coming-soon",
       "image_url": "./images/536935.jpg"
@@ -481,7 +462,6 @@
       "index_usd": 119,
       "direct_usd": null,
       "retail_url": "https://www.jeanpaulgaultier.com",
-      "ebay_url": "https://www.ebay.com/sch/i.html?_nkw=Jean+Paul+Gaultier+Le+Beau+Eau+de+Toilette+125ml+sealed",
       "fragrancex_url": "https://www.fragrancex.com/search/search_results?stext=559334",
       "direct_url": "#direct-checkout-coming-soon",
       "image_url": "./images/559334.jpg"
@@ -502,7 +482,6 @@
       "index_usd": 80,
       "direct_usd": null,
       "retail_url": "https://www.versace.com",
-      "ebay_url": "https://www.ebay.com/sch/i.html?_nkw=Versace+Versace+Eros+Eau+de+Parfum+100ml+sealed",
       "fragrancex_url": "https://www.fragrancex.com/search/search_results?stext=554295",
       "direct_url": "#direct-checkout-coming-soon",
       "image_url": "./images/554295.jpg"
@@ -523,7 +502,6 @@
       "index_usd": 72,
       "direct_usd": null,
       "retail_url": "https://www.rabanne.com",
-      "ebay_url": "https://www.ebay.com/sch/i.html?_nkw=Rabanne+1+Million+Eau+de+Toilette+100ml+sealed",
       "fragrancex_url": "https://www.fragrancex.com/search/search_results?stext=453437",
       "direct_url": "#direct-checkout-coming-soon",
       "image_url": "./images/453437.jpg"
@@ -544,7 +522,6 @@
       "index_usd": 149,
       "direct_usd": null,
       "retail_url": "https://www.jeanpaulgaultier.com",
-      "ebay_url": "https://www.ebay.com/sch/i.html?_nkw=Jean+Paul+Gaultier+Le+Male+Elixir+Parfum+125ml+sealed",
       "fragrancex_url": "https://www.fragrancex.com/search/search_results?stext=566681",
       "direct_url": "#direct-checkout-coming-soon",
       "image_url": "./images/566681.jpg"
@@ -565,7 +542,6 @@
       "index_usd": 98,
       "direct_usd": null,
       "retail_url": "https://www.giorgioarmanibeauty-usa.com",
-      "ebay_url": "https://www.ebay.com/sch/i.html?_nkw=Emporio+Armani+Stronger+With+You+Intensely+Eau+de+Parfum+100ml+sealed",
       "fragrancex_url": "https://www.fragrancex.com/search/search_results?stext=547632",
       "direct_url": "#direct-checkout-coming-soon",
       "image_url": "./images/547632.jpg"
@@ -586,7 +562,6 @@
       "index_usd": 94,
       "direct_usd": null,
       "retail_url": "https://www.azzaro.com",
-      "ebay_url": "https://www.ebay.com/sch/i.html?_nkw=Azzaro+The+Most+Wanted+Eau+de+Parfum+Intense+100ml+sealed",
       "fragrancex_url": "https://www.fragrancex.com/search/search_results?stext=559047",
       "direct_url": "#direct-checkout-coming-soon",
       "image_url": "./images/559047.jpg"
@@ -607,7 +582,6 @@
       "index_usd": 104,
       "direct_usd": null,
       "retail_url": "https://us.viktor-rolf.com",
-      "ebay_url": "https://www.ebay.com/sch/i.html?_nkw=Viktor+&+Rolf+Spicebomb+Extreme+Eau+de+Parfum+90ml+sealed",
       "fragrancex_url": "https://www.fragrancex.com/search/search_results?stext=533525",
       "direct_url": "#direct-checkout-coming-soon",
       "image_url": "./images/533525.jpg"
@@ -628,7 +602,6 @@
       "index_usd": 56,
       "direct_usd": null,
       "retail_url": "https://www.dolcegabbana.com",
-      "ebay_url": "https://www.ebay.com/sch/i.html?_nkw=Dolce+&+Gabbana+The+One+for+Men+Eau+de+Parfum+100ml+sealed",
       "fragrancex_url": "https://www.fragrancex.com/search/search_results?stext=531952",
       "direct_url": "#direct-checkout-coming-soon",
       "image_url": "./images/531952.jpg"
@@ -649,7 +622,6 @@
       "index_usd": 218,
       "direct_usd": null,
       "retail_url": "https://www.tomfordbeauty.com",
-      "ebay_url": "https://www.ebay.com/sch/i.html?_nkw=Tom+Ford+Noir+Extreme+Eau+de+Parfum+100ml+sealed",
       "fragrancex_url": "https://www.fragrancex.com/search/search_results?stext=528953",
       "direct_url": "#direct-checkout-coming-soon",
       "image_url": "./images/528953.jpg"
@@ -671,7 +643,6 @@
       "index_usd": 367,
       "direct_usd": null,
       "retail_url": "https://us.parfums-de-marly.com",
-      "ebay_url": "https://www.ebay.com/sch/i.html?_nkw=Parfums+de+Marly+Layton+Royal+Essence+Eau+de+Parfum+125ml+sealed",
       "fragrancex_url": "https://www.fragrancex.com/search/search_results?stext=537553",
       "direct_url": "#direct-checkout-coming-soon",
       "image_url": "./images/537553.jpg"
@@ -692,7 +663,6 @@
       "index_usd": 117,
       "direct_usd": null,
       "retail_url": "https://www.bulgari.com",
-      "ebay_url": "https://www.ebay.com/sch/i.html?_nkw=Bvlgari+Bvlgari+Man+In+Black+Eau+de+Parfum+100ml+sealed",
       "fragrancex_url": "https://www.fragrancex.com/search/search_results?stext=515868",
       "direct_url": "#direct-checkout-coming-soon",
       "image_url": "./images/515868.jpg"
@@ -713,7 +683,6 @@
       "index_usd": 54,
       "direct_usd": null,
       "retail_url": "https://www.dolcegabbana.com",
-      "ebay_url": "https://www.ebay.com/sch/i.html?_nkw=Dolce+&+Gabbana+Light+Blue+Eau+de+Toilette+100ml+sealed",
       "fragrancex_url": "https://www.fragrancex.com/search/search_results?stext=418217",
       "direct_url": "#direct-checkout-coming-soon",
       "image_url": "./images/418217.jpg"
@@ -734,7 +703,6 @@
       "index_usd": 73,
       "direct_usd": null,
       "retail_url": "https://www.versace.com",
-      "ebay_url": "https://www.ebay.com/sch/i.html?_nkw=Versace+Bright+Crystal+Eau+de+Toilette+90ml+sealed",
       "fragrancex_url": "https://www.fragrancex.com/search/search_results?stext=427251",
       "direct_url": "#direct-checkout-coming-soon",
       "image_url": "./images/427251.jpg"
@@ -755,7 +723,6 @@
       "index_usd": 107,
       "direct_usd": null,
       "retail_url": "https://www.giorgioarmanibeauty-usa.com",
-      "ebay_url": "https://www.ebay.com/sch/i.html?_nkw=Giorgio+Armani+Acqua+Di+Gioia+Eau+de+Parfum+100ml+sealed",
       "fragrancex_url": "https://www.fragrancex.com/search/search_results?stext=464476",
       "direct_url": "#direct-checkout-coming-soon",
       "image_url": "./images/464476.jpg"
@@ -776,7 +743,6 @@
       "index_usd": 62,
       "direct_usd": null,
       "retail_url": "https://www.marcjacobs.com",
-      "ebay_url": "https://www.ebay.com/sch/i.html?_nkw=Marc+Jacobs+Daisy+Eau+de+Toilette+100ml+sealed",
       "fragrancex_url": "https://www.fragrancex.com/search/search_results?stext=440158",
       "direct_url": "#direct-checkout-coming-soon",
       "image_url": "./images/440158.jpg"
@@ -797,7 +763,6 @@
       "index_usd": 46,
       "direct_usd": null,
       "retail_url": "https://www.donnakaran.com",
-      "ebay_url": "https://www.ebay.com/sch/i.html?_nkw=DKNY+Be+Delicious+Eau+de+Parfum+100ml+sealed",
       "fragrancex_url": "https://www.fragrancex.com/search/search_results?stext=424002",
       "direct_url": "#direct-checkout-coming-soon",
       "image_url": "./images/424002.jpg"
@@ -818,7 +783,6 @@
       "index_usd": 58,
       "direct_usd": null,
       "retail_url": "https://www.isseymiyakeparfums.com",
-      "ebay_url": "https://www.ebay.com/sch/i.html?_nkw=Issey+Miyake+L'Eau+d'Issey+Eau+de+Toilette+100ml+sealed",
       "fragrancex_url": "https://www.fragrancex.com/search/search_results?stext=418170",
       "direct_url": "#direct-checkout-coming-soon",
       "image_url": "./images/418170.jpg"
@@ -839,7 +803,6 @@
       "index_usd": 27,
       "direct_usd": null,
       "retail_url": "https://www.zinodavidoff.com",
-      "ebay_url": "https://www.ebay.com/sch/i.html?_nkw=Davidoff+Cool+Water+Woman+Eau+de+Toilette+100ml+sealed",
       "fragrancex_url": "https://www.fragrancex.com/search/search_results?stext=402092",
       "direct_url": "#direct-checkout-coming-soon",
       "image_url": "./images/402092.jpg"
@@ -860,7 +823,6 @@
       "index_usd": 32,
       "direct_usd": null,
       "retail_url": "https://www.clinique.com",
-      "ebay_url": "https://www.ebay.com/sch/i.html?_nkw=Clinique+Happy+Eau+de+Parfum+100ml+sealed",
       "fragrancex_url": "https://www.fragrancex.com/search/search_results?stext=413912",
       "direct_url": "#direct-checkout-coming-soon",
       "image_url": "./images/413912.jpg"
@@ -881,7 +843,6 @@
       "index_usd": 71,
       "direct_usd": null,
       "retail_url": "https://www.versace.com",
-      "ebay_url": "https://www.ebay.com/sch/i.html?_nkw=Versace+Versace+Pour+Femme+Dylan+Turquoise+Eau+de+Toilette+100ml+sealed",
       "fragrancex_url": "https://www.fragrancex.com/search/search_results?stext=558119",
       "direct_url": "#direct-checkout-coming-soon",
       "image_url": "./images/558119.jpg"
@@ -902,7 +863,6 @@
       "index_usd": 16,
       "direct_usd": null,
       "retail_url": "https://www.elizabetharden.com",
-      "ebay_url": "https://www.ebay.com/sch/i.html?_nkw=Elizabeth+Arden+Green+Tea+Eau+Parfumée+100ml+sealed",
       "fragrancex_url": "https://www.fragrancex.com/search/search_results?stext=413708",
       "direct_url": "#direct-checkout-coming-soon",
       "image_url": "./images/413708.jpg"
@@ -923,7 +883,6 @@
       "index_usd": 139,
       "direct_usd": null,
       "retail_url": "https://www.yslbeautyus.com",
-      "ebay_url": "https://www.ebay.com/sch/i.html?_nkw=Yves+Saint+Laurent+Libre+Eau+de+Parfum+90ml+sealed",
       "fragrancex_url": "https://www.fragrancex.com/search/search_results?stext=547531",
       "direct_url": "#direct-checkout-coming-soon",
       "image_url": "./images/547531.jpg"
@@ -944,7 +903,6 @@
       "index_usd": 104,
       "direct_usd": null,
       "retail_url": "https://www.lancome-usa.com",
-      "ebay_url": "https://www.ebay.com/sch/i.html?_nkw=Lancôme+La+Vie+Est+Belle+Eau+de+Parfum+100ml+sealed",
       "fragrancex_url": "https://www.fragrancex.com/search/search_results?stext=514857",
       "direct_url": "#direct-checkout-coming-soon",
       "image_url": "./images/514857.jpg"
@@ -965,7 +923,6 @@
       "index_usd": 82,
       "direct_usd": null,
       "retail_url": "https://us.burberry.com",
-      "ebay_url": "https://www.ebay.com/sch/i.html?_nkw=Burberry+Burberry+Her+Eau+de+Parfum+100ml+sealed",
       "fragrancex_url": "https://www.fragrancex.com/search/search_results?stext=543982",
       "direct_url": "#direct-checkout-coming-soon",
       "image_url": "./images/543982.jpg"
@@ -986,7 +943,6 @@
       "index_usd": 118,
       "direct_usd": null,
       "retail_url": "https://www.giorgioarmanibeauty-usa.com",
-      "ebay_url": "https://www.ebay.com/sch/i.html?_nkw=Giorgio+Armani+My+Way+Eau+de+Parfum+90ml+sealed",
       "fragrancex_url": "https://www.fragrancex.com/search/search_results?stext=554117",
       "direct_url": "#direct-checkout-coming-soon",
       "image_url": "./images/554117.jpg"
@@ -1008,7 +964,6 @@
       "index_usd": 149,
       "direct_usd": null,
       "retail_url": "https://www.gucci.com",
-      "ebay_url": "https://www.ebay.com/sch/i.html?_nkw=Gucci+Flora+Gorgeous+Gardenia+Eau+de+Parfum+100ml+sealed",
       "fragrancex_url": "https://www.fragrancex.com/search/search_results?stext=563393",
       "direct_url": "#direct-checkout-coming-soon",
       "image_url": "./images/563393.jpg"
@@ -1029,7 +984,6 @@
       "index_usd": 82,
       "direct_usd": null,
       "retail_url": "https://www.gucci.com",
-      "ebay_url": "https://www.ebay.com/sch/i.html?_nkw=Gucci+Gucci+Bloom+Eau+de+Parfum+100ml+sealed",
       "fragrancex_url": "https://www.fragrancex.com/search/search_results?stext=537069",
       "direct_url": "#direct-checkout-coming-soon",
       "image_url": "./images/537069.jpg"
@@ -1051,7 +1005,6 @@
       "index_usd": 139,
       "direct_usd": null,
       "retail_url": "https://www.valentino-beauty.us",
-      "ebay_url": "https://www.ebay.com/sch/i.html?_nkw=Valentino+Valentino+Donna+Born+In+Roma+Eau+de+Parfum+100ml+sealed",
       "fragrancex_url": "https://www.fragrancex.com/search/search_results?stext=558931",
       "direct_url": "#direct-checkout-coming-soon",
       "image_url": "./images/558931.jpg"
@@ -1073,7 +1026,6 @@
       "index_usd": 183,
       "direct_usd": null,
       "retail_url": "https://www.prada.com",
-      "ebay_url": "https://www.ebay.com/sch/i.html?_nkw=Prada+Prada+Paradoxe+Intense+Eau+de+Parfum+90ml+sealed",
       "fragrancex_url": "https://www.fragrancex.com/search/search_results?stext=564642",
       "direct_url": "#direct-checkout-coming-soon",
       "image_url": "./images/564642.jpg"
@@ -1094,7 +1046,6 @@
       "index_usd": 94,
       "direct_usd": null,
       "retail_url": "https://www.narcisorodriguez.com",
-      "ebay_url": "https://www.ebay.com/sch/i.html?_nkw=Narciso+Rodriguez+For+Her+Eau+de+Parfum+100ml+sealed",
       "fragrancex_url": "https://www.fragrancex.com/search/search_results?stext=459344",
       "direct_url": "#direct-checkout-coming-soon",
       "image_url": "./images/459344.jpg"
@@ -1115,7 +1066,6 @@
       "index_usd": 64,
       "direct_usd": null,
       "retail_url": "https://www.coach.com",
-      "ebay_url": "https://www.ebay.com/sch/i.html?_nkw=Coach+Coach+Eau+de+Parfum+90ml+sealed",
       "fragrancex_url": "https://www.fragrancex.com/search/search_results?stext=534592",
       "direct_url": "#direct-checkout-coming-soon",
       "image_url": "./images/534592.jpg"
@@ -1136,7 +1086,6 @@
       "index_usd": 158,
       "direct_usd": null,
       "retail_url": "https://www.yslbeautyus.com",
-      "ebay_url": "https://www.ebay.com/sch/i.html?_nkw=Yves+Saint+Laurent+Black+Opium+Eau+de+Parfum+90ml+sealed",
       "fragrancex_url": "https://www.fragrancex.com/search/search_results?stext=517436",
       "direct_url": "#direct-checkout-coming-soon",
       "image_url": "./images/517436.jpg"
@@ -1157,7 +1106,6 @@
       "index_usd": 110,
       "direct_usd": null,
       "retail_url": "https://www.carolinaherrera.com",
-      "ebay_url": "https://www.ebay.com/sch/i.html?_nkw=Carolina+Herrera+Good+Girl+Eau+de+Parfum+80ml+sealed",
       "fragrancex_url": "https://www.fragrancex.com/search/search_results?stext=534193",
       "direct_url": "#direct-checkout-coming-soon",
       "image_url": "./images/534193.jpg"
@@ -1178,7 +1126,6 @@
       "index_usd": 117,
       "direct_usd": null,
       "retail_url": "https://us.viktor-rolf.com",
-      "ebay_url": "https://www.ebay.com/sch/i.html?_nkw=Viktor+&+Rolf+Flowerbomb+Eau+de+Parfum+100ml+sealed",
       "fragrancex_url": "https://www.fragrancex.com/search/search_results?stext=429839",
       "direct_url": "#direct-checkout-coming-soon",
       "image_url": "./images/429839.jpg"
@@ -1199,7 +1146,6 @@
       "index_usd": 101,
       "direct_usd": null,
       "retail_url": "https://www.jeanpaulgaultier.com",
-      "ebay_url": "https://www.ebay.com/sch/i.html?_nkw=Jean+Paul+Gaultier+Scandal+Eau+de+Parfum+80ml+sealed",
       "fragrancex_url": "https://www.fragrancex.com/search/search_results?stext=539314",
       "direct_url": "#direct-checkout-coming-soon",
       "image_url": "./images/539314.jpg"
@@ -1220,7 +1166,6 @@
       "index_usd": 97,
       "direct_usd": null,
       "retail_url": "https://www.jeanpaulgaultier.com",
-      "ebay_url": "https://www.ebay.com/sch/i.html?_nkw=Jean+Paul+Gaultier+La+Belle+Eau+de+Parfum+100ml+sealed",
       "fragrancex_url": "https://www.fragrancex.com/search/search_results?stext=547603",
       "direct_url": "#direct-checkout-coming-soon",
       "image_url": "./images/547603.jpg"
@@ -1241,7 +1186,6 @@
       "index_usd": 91,
       "direct_usd": null,
       "retail_url": "https://www.versace.com",
-      "ebay_url": "https://www.ebay.com/sch/i.html?_nkw=Versace+Crystal+Noir+Eau+de+Parfum+90ml+sealed",
       "fragrancex_url": "https://www.fragrancex.com/search/search_results?stext=420446",
       "direct_url": "#direct-checkout-coming-soon",
       "image_url": "./images/420446.jpg"
@@ -1263,7 +1207,6 @@
       "index_usd": 109,
       "direct_usd": null,
       "retail_url": "https://www.giorgioarmanibeauty-usa.com",
-      "ebay_url": "https://www.ebay.com/sch/i.html?_nkw=Giorgio+Armani+Sì+Passione+Eau+de+Parfum+100ml+sealed",
       "fragrancex_url": "https://www.fragrancex.com/search/search_results?stext=541918",
       "direct_url": "#direct-checkout-coming-soon",
       "image_url": "./images/541918.jpg"
@@ -1284,7 +1227,6 @@
       "index_usd": 74,
       "direct_usd": null,
       "retail_url": "https://www.rabanne.com",
-      "ebay_url": "https://www.ebay.com/sch/i.html?_nkw=Rabanne+Lady+Million+Eau+de+Parfum+80ml+sealed",
       "fragrancex_url": "https://www.fragrancex.com/search/search_results?stext=467211",
       "direct_url": "#direct-checkout-coming-soon",
       "image_url": "./images/467211.jpg"
@@ -1305,7 +1247,6 @@
       "index_usd": 73,
       "direct_usd": null,
       "retail_url": "https://www.rabanne.com",
-      "ebay_url": "https://www.ebay.com/sch/i.html?_nkw=Rabanne+Olympéa+Eau+de+Parfum+80ml+sealed",
       "fragrancex_url": "https://www.fragrancex.com/search/search_results?stext=531590",
       "direct_url": "#direct-checkout-coming-soon",
       "image_url": "./images/531590.jpg"
@@ -1326,7 +1267,6 @@
       "index_usd": 102,
       "direct_usd": null,
       "retail_url": "https://us.jimmychoo.com",
-      "ebay_url": "https://www.ebay.com/sch/i.html?_nkw=Jimmy+Choo+I+Want+Choo+Eau+de+Parfum+100ml+sealed",
       "fragrancex_url": "https://www.fragrancex.com/search/search_results?stext=557563",
       "direct_url": "#direct-checkout-coming-soon",
       "image_url": "./images/557563.jpg"
