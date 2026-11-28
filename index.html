@@ -2267,14 +2267,27 @@
 
     async function init() {
       try {
-        const res = await fetch("./data.json?v=" + Date.now());
+        const res = await fetch("./data.json", { cache: "no-store" });
         if (!res.ok) throw new Error("HTTP " + res.status);
-        siteData = await res.json();
+
+        const rawText = await res.text();
+        const trimmed = rawText.trim();
+        const contentType = (res.headers.get("content-type") || "").toLowerCase();
+
+        if (trimmed.startsWith("<!DOCTYPE") || trimmed.startsWith("<html") || contentType.includes("text/html")) {
+          throw new Error("Server returned HTML instead of JSON (check that ./data.json is deployed at the site root and not rewritten to index.html)");
+        }
+
+        siteData = JSON.parse(rawText);
+        if (!siteData || !Array.isArray(siteData.products)) {
+          throw new Error("data.json is missing a valid 'products' array");
+        }
+
         setGateStatus(`Loaded ${siteData.products.length} perfumes`);
 
         const params = new URLSearchParams(window.location.search);
         const urlCountry = params.get("country")?.toUpperCase();
-        activeCountry = (urlCountry && siteData.countries[urlCountry])
+        activeCountry = (urlCountry && siteData.countries && siteData.countries[urlCountry])
           ? urlCountry
           : (siteData.default_country || "US");
 
@@ -2291,7 +2304,7 @@
         console.error("Failed to load data.json:", err);
         setGateStatus(`data.json error: ${err.message}`);
         document.getElementById("product-grid").innerHTML =
-          `<div style="grid-column:1/-1; text-align:center; color:#ef4444; padding:24px;">Failed to load data.json (${err.message}). Check JSON syntax/commas.</div>`;
+          `<div style="grid-column:1/-1; text-align:center; color:#ef4444; padding:24px;">Failed to load data.json (${err.message}).</div>`;
       }
     }
 
