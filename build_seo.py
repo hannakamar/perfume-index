@@ -8,9 +8,9 @@ VIBE_META = {
     "feeling fresh": {
         "slug": "feeling-fresh",
         "gender": "Women",
-        "title": "Best Fresh Women's Perfumes for Hot Weather (2026 Price Index)",
+        "title": "Best Fresh Women's Perfumes for Hot Weather (2026 Store)",
         "h1": "Feeling Fresh — Cooling Women's Perfumes for Hot Weather",
-        "desc": "Compare official retail vs. verified discounter prices on crisp, cooling women's perfumes built for warm and hot weather.",
+        "desc": "Compare official retail vs. direct factory-sealed prices on crisp, cooling women's perfumes built for warm and hot weather.",
         "accent": "#38bdf8",
         "bg": "#06131d",
         "surface": "rgba(11, 29, 43, 0.9)",
@@ -21,7 +21,7 @@ VIBE_META = {
         "gender": "Women",
         "title": "Best All-Day Office & Everyday Perfumes for Women (9 to 5 Energy)",
         "h1": "9 to 5 Energy — All-Day Signature Perfumes for Women",
-        "desc": "Compare official retail vs. verified deals on polished, long-lasting all-day women's fragrances that transition from desk to dinner.",
+        "desc": "Compare official retail vs. direct deals on polished, long-lasting all-day women's fragrances that transition from desk to dinner.",
         "accent": "#10b981",
         "bg": "#071410",
         "surface": "rgba(12, 31, 25, 0.9)",
@@ -30,9 +30,9 @@ VIBE_META = {
     "sexy nights": {
         "slug": "sexy-nights",
         "gender": "Women",
-        "title": "Best Sexy Night Perfumes for Women — Date Night & Evening Price Index",
+        "title": "Best Sexy Night Perfumes for Women — Date Night & Evening Store",
         "h1": "Sexy Nights — Magnetic Evening & Date-Night Perfumes for Women",
-        "desc": "Compare official retail vs. verified deals on seductive, long-lasting women's evening perfumes with vanilla, amber, and white florals.",
+        "desc": "Compare official retail vs. direct deals on seductive, long-lasting women's evening perfumes with vanilla, amber, and white florals.",
         "accent": "#f97316",
         "bg": "#14080c",
         "surface": "rgba(31, 13, 19, 0.9)",
@@ -41,9 +41,9 @@ VIBE_META = {
     "24/7 fresh": {
         "slug": "24-7-fresh",
         "gender": "Men",
-        "title": "Best Daily Fresh Men's Colognes for Cool Weather (24/7 Fresh Index)",
+        "title": "Best Daily Fresh Men's Colognes for Cool Weather (24/7 Fresh)",
         "h1": "24/7 Fresh — Versatile Daily Men's Fragrances",
-        "desc": "Compare official retail vs. verified discounter prices on crisp, clean daily men's colognes with bergamot, mint, and cedarwood.",
+        "desc": "Compare official retail vs. direct factory-sealed prices on crisp, clean daily men's colognes with bergamot, mint, and cedarwood.",
         "accent": "#38bdf8",
         "bg": "#06131d",
         "surface": "rgba(11, 29, 43, 0.9)",
@@ -52,9 +52,9 @@ VIBE_META = {
     "main character": {
         "slug": "main-character",
         "gender": "Men",
-        "title": "Best Bold Men's Perfumes for Day or Night (Main Character Index)",
+        "title": "Best Bold Men's Perfumes for Day or Night (Main Character)",
         "h1": "Main Character — Bold Day-to-Night Perfumes for Men",
-        "desc": "Compare official retail vs. verified deals on bold, compliment-getting men's fragrances engineered for standout projection day or night.",
+        "desc": "Compare official retail vs. direct deals on bold, compliment-getting men's fragrances engineered for standout projection day or night.",
         "accent": "#10b981",
         "bg": "#071410",
         "surface": "rgba(12, 31, 25, 0.9)",
@@ -63,9 +63,9 @@ VIBE_META = {
     "alpha male": {
         "slug": "alpha-male",
         "gender": "Men",
-        "title": "Best Night & Clubbing Perfumes for Men (Alpha Male Price Index)",
+        "title": "Best Night & Clubbing Perfumes for Men (Alpha Male)",
         "h1": "Alpha Male — High-Projection Night Perfumes for Men",
-        "desc": "Compare official retail vs. verified deals on dark, spicy, high-longevity men's night colognes built for after-hours dominance.",
+        "desc": "Compare official retail vs. direct deals on dark, spicy, high-longevity men's night colognes built for after-hours dominance.",
         "accent": "#f97316",
         "bg": "#14080c",
         "surface": "rgba(31, 13, 19, 0.9)",
@@ -84,6 +84,17 @@ BRAND_AUTH_GUIDES = {
     "Carolina Herrera": "Check the batch code engraved on the base of the stiletto heel/bottle and the bottom of the velvet-textured box. The gold spray trigger mechanism moves smoothly without loose rattle.",
     "Calvin Klein": "Verify the 4-digit Coty batch code printed on the bottom of the box and etched onto the glass base, alongside clear regulatory text on the rear label."
 }
+
+BASKET_SCRIPT = """<script>
+  function quickAddBasket(pid) {
+    let b = [];
+    try { b = JSON.parse(localStorage.getItem("perfumeindex_basket") || "[]"); } catch (_) {}
+    const existing = b.find(i => i.id === pid);
+    if (existing) existing.qty += 1; else b.push({ id: pid, qty: 1 });
+    localStorage.setItem("perfumeindex_basket", JSON.stringify(b));
+    window.location.href = "/?basket=open";
+  }
+</script>"""
 
 
 def parse_ml(size_str):
@@ -114,21 +125,12 @@ def build_card_html(p, img_prefix=""):
     vibes = p.get("vibes") or []
     img_src = html.escape(normalize_img_src(p.get("image_url", ""), img_prefix))
 
-    has_direct = p.get("direct_url") and p["direct_url"] != "#direct-checkout-coming-soon" and p.get("direct_usd")
-    best_price = min(p["index_usd"], p["direct_usd"]) if has_direct else p["index_usd"]
-    discount_pct = round(((p["retail_usd"] - best_price) / p["retail_usd"]) * 100)
-
-    sep = "&" if "?" in p["ebay_url"] else "?"
-    ebay_url = html.escape(f"{p['ebay_url']}{sep}ref=perfumeindex_US_{p['id']}")
+    discount_pct = round(((p["retail_usd"] - p["index_usd"]) / p["retail_usd"]) * 100)
     retail_url = html.escape(p.get("retail_url") or "")
 
     retail_verify = (
         f'<a href="{retail_url}" target="_blank" rel="nofollow noopener" class="verify-link">Verify ↗</a>'
         if retail_url else ""
-    )
-    direct_btn = (
-        f'<a href="{html.escape(p["direct_url"])}" target="_blank" rel="noopener" class="btn btn-direct">Direct ${p["direct_usd"]}</a>'
-        if has_direct else ""
     )
     vibe_badges = ""
     if vibes:
@@ -167,13 +169,12 @@ def build_card_html(p, img_prefix=""):
               </div>
             </div>
             <div class="price-row">
-              <span style="color:var(--muted);">Verified Deal:</span>
+              <span style="color:var(--muted);">PerfumeIndex Price:</span>
               <span class="index-price">${p['index_usd']}</span>
             </div>
           </div>
           <div class="card-actions">
-            <a href="{ebay_url}" target="_blank" rel="noopener" class="btn btn-ebay">Buy on eBay (${p['index_usd']})</a>
-            {direct_btn}
+            <button type="button" onclick="quickAddBasket('{pid}')" class="btn" style="border:none; cursor:pointer;">Add to Basket — ${p['index_usd']}</button>
           </div>
         </div>
       </article>"""
@@ -187,8 +188,6 @@ def build_table_row_html(p):
     gender = html.escape(p["gender"])
     notes = html.escape(p["notes"])
     img_src = html.escape(normalize_img_src(p.get("image_url", ""), "/"))
-    sep = "&" if "?" in p["ebay_url"] else "?"
-    ebay_url = html.escape(f"{p['ebay_url']}{sep}ref=perfumeindex_US_{p['id']}")
     retail_url = html.escape(p.get("retail_url") or "")
     retail_verify = (
         f'<a href="{retail_url}" target="_blank" rel="nofollow noopener" class="verify-link">Official ↗</a>'
@@ -206,7 +205,7 @@ def build_table_row_html(p):
         <td><span class="index-price">${p['index_usd']}</span></td>
         <td>
           <div style="display:flex; gap:8px;">
-            <a href="{ebay_url}" target="_blank" rel="noopener" class="btn btn-ebay">eBay (${p['index_usd']})</a>
+            <button type="button" onclick="quickAddBasket('{pid}')" class="btn" style="border:none; cursor:pointer;">Add to Basket (${p['index_usd']})</button>
           </div>
         </td>
       </tr>"""
@@ -226,11 +225,9 @@ def build_home_schema(data, base_url):
                 "brand": {"@type": "Brand", "name": p["brand"]},
                 "image": f"{base_url}/{p['image_url'].lstrip('./')}",
                 "offers": {
-                    "@type": "AggregateOffer",
+                    "@type": "Offer",
                     "priceCurrency": "USD",
-                    "lowPrice": str(p["index_usd"]),
-                    "highPrice": str(p["retail_usd"]),
-                    "offerCount": "2",
+                    "price": str(p["index_usd"]),
                     "availability": "https://schema.org/InStock"
                 }
             }
@@ -238,7 +235,7 @@ def build_home_schema(data, base_url):
     schema = {
         "@context": "https://schema.org",
         "@type": "ItemList",
-        "name": "PerfumeIndex Authentic Designer & Niche Fragrance Price Index",
+        "name": "PerfumeIndex Authentic Designer & Niche Fragrance Store",
         "numberOfItems": len(items),
         "itemListElement": items
     }
@@ -259,11 +256,9 @@ def build_perfume_page(p, all_products, base_url, last_optimized):
     ml = parse_ml(p["size"])
     retail_per_ml = round(p["retail_usd"] / ml, 2)
     deal_per_ml = round(p["index_usd"] / ml, 2)
-    savings_usd = p["retail_usd"] - p["index_usd"]
+    savings_usd = round(p["retail_usd"] - p["index_usd"], 2)
     discount_pct = round((savings_usd / p["retail_usd"]) * 100)
 
-    sep = "&" if "?" in p["ebay_url"] else "?"
-    ebay_url = html.escape(f"{p['ebay_url']}{sep}ref=perfumeindex_seo_{pid}")
     retail_url = html.escape(p.get("retail_url") or "")
 
     auth_tip = BRAND_AUTH_GUIDES.get(
@@ -314,24 +309,22 @@ def build_perfume_page(p, all_products, base_url, last_optimized):
                 "@type": "Product",
                 "name": f"{p['brand']} {p['name']} ({p['size']})",
                 "image": [img_abs],
-                "description": f"Compare official retail (${p['retail_usd']}) vs. verified sealed discounter pricing (${p['index_usd']}) for {p['brand']} {p['name']} {p['size']}. Notes: {p['notes']}.",
+                "description": f"Buy 100% authentic, factory-sealed {p['brand']} {p['name']} {p['size']} for ${p['index_usd']} (Official Retail ${p['retail_usd']}). Notes: {p['notes']}.",
                 "brand": {"@type": "Brand", "name": p["brand"]},
                 "category": f"{p['gender']}'s Fragrance",
                 "offers": {
-                    "@type": "AggregateOffer",
+                    "@type": "Offer",
                     "url": page_url,
                     "priceCurrency": "USD",
-                    "lowPrice": str(p["index_usd"]),
-                    "highPrice": str(p["retail_usd"]),
-                    "offerCount": "2",
+                    "price": str(p["index_usd"]),
                     "availability": "https://schema.org/InStock"
                 }
             }
         ]
     }
 
-    title_tag = f"{p['brand']} {p['name']} ({p['size']}) Price Index — Retail ${p['retail_usd']} vs. Verified ${p['index_usd']}"
-    meta_desc = f"Save {discount_pct}% (${savings_usd} off) on 100% authentic, factory-sealed {p['brand']} {p['name']} {p['size']}. Compare official retail (${p['retail_usd']}) vs. verified deals (${p['index_usd']})."
+    title_tag = f"{p['brand']} {p['name']} ({p['size']}) — Retail ${p['retail_usd']} vs. Our Price ${p['index_usd']}"
+    meta_desc = f"Save {discount_pct}% (${savings_usd} off) on 100% authentic, factory-sealed {p['brand']} {p['name']} {p['size']}. Direct checkout with PayPal Buyer Protection."
 
     return f"""<!DOCTYPE html>
 <html lang="en">
@@ -367,7 +360,7 @@ def build_perfume_page(p, all_products, base_url, last_optimized):
     .panel {{ background: #121216; border: 1px solid #262630; border-radius: 16px; padding: 22px; margin-bottom: 20px; }}
     .price-compare {{ display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; margin: 18px 0; }}
     .p-box {{ background: #09090b; border: 1px solid #262630; border-radius: 12px; padding: 14px; }}
-    .cta-btn {{ display: block; width: 100%; text-align: center; background: #e5b869; color: #09090b; font-weight: 800; padding: 14px 20px; border-radius: 10px; text-decoration: none; font-size: 1rem; }}
+    .cta-btn {{ display: block; width: 100%; text-align: center; background: #e5b869; color: #09090b; font-weight: 800; padding: 14px 20px; border-radius: 10px; text-decoration: none; font-size: 1rem; border: none; cursor: pointer; }}
     .cta-btn:hover {{ opacity: 0.9; }}
     .section-h2 {{ font-size: 1.25rem; font-weight: 800; margin-bottom: 10px; color: #e5b869; }}
     .related-grid {{ display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 14px; }}
@@ -378,7 +371,7 @@ def build_perfume_page(p, all_products, base_url, last_optimized):
   <header>
     <div class="container nav">
       <a href="/" class="brand">Perfume<span>Index</span></a>
-      <a href="/" style="color:#e5b869; font-size:0.88rem; font-weight:700; text-decoration:none;">← Full Price Index</a>
+      <a href="/?basket=open" style="color:#e5b869; font-size:0.88rem; font-weight:700; text-decoration:none;">View Basket →</a>
     </div>
   </header>
 
@@ -405,14 +398,14 @@ def build_perfume_page(p, all_products, base_url, last_optimized):
             <div style="font-size:0.8rem; color:#a1a1aa;">${retail_per_ml}/ml • <a href="{retail_url}" target="_blank" rel="nofollow noopener" style="color:#e5b869;">Verify MSRP ↗</a></div>
           </div>
           <div class="p-box" style="border-color:#10b981;">
-            <div style="font-size:0.78rem; color:#10b981; text-transform:uppercase; font-weight:700;">PerfumeIndex Verified Deal</div>
+            <div style="font-size:0.78rem; color:#10b981; text-transform:uppercase; font-weight:700;">PerfumeIndex Price</div>
             <div style="font-size:1.65rem; font-weight:800; color:#faf8f5; margin-top:2px;">${p['index_usd']}</div>
             <div style="font-size:0.8rem; color:#10b981;">${deal_per_ml}/ml (Save ${round(retail_per_ml - deal_per_ml, 2)}/ml)</div>
           </div>
         </div>
 
-        <a href="{ebay_url}" target="_blank" rel="noopener" class="cta-btn">Check Verified Sealed Listings on eBay (${p['index_usd']}) ↗</a>
-        <p style="font-size:0.8rem; color:#a1a1aa; margin-top:10px; text-align:center;">100% factory-sealed retail boxes backed by eBay Money Back Guarantee.</p>
+        <button type="button" onclick="quickAddBasket('{html.escape(pid)}')" class="cta-btn">Add to Basket — ${p['index_usd']}</button>
+        <p style="font-size:0.8rem; color:#a1a1aa; margin-top:10px; text-align:center;">100% factory-sealed retail boxes backed by PayPal Buyer Protection.</p>
       </div>
     </section>
 
@@ -429,7 +422,7 @@ def build_perfume_page(p, all_products, base_url, last_optimized):
     <section class="panel">
       <h2 class="section-h2">How to Verify {brand} Authenticity &amp; Batch Codes</h2>
       <p style="color:#d4d4d8; margin-bottom:10px;">{html.escape(auth_tip)}</p>
-      <p style="color:#a1a1aa; font-size:0.88rem;">Always avoid unsealed "tester" bottles without caps or listings shipped from unverified drop-ship locations with stock-only photos.</p>
+      <p style="color:#a1a1aa; font-size:0.88rem;">Every bottle ships brand-new in its factory-sealed retail box with intact batch codes.</p>
     </section>
 
     <section style="margin-top:32px;">
@@ -439,8 +432,9 @@ def build_perfume_page(p, all_products, base_url, last_optimized):
   </main>
 
   <footer>
-    <div class="container">© 2026 PerfumeIndex. Independent Fragrance Price Index &amp; Authenticity Guide.</div>
+    <div class="container">© 2026 PerfumeIndex. 100% Authentic Factory-Sealed Fragrances.</div>
   </footer>
+  {BASKET_SCRIPT}
   <script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{{"token": "62a49852409e4a2faf39b4fe379b7759"}}'></script>
 </body>
 </html>"""
@@ -542,7 +536,7 @@ def build_vibe_page(vibe_name, meta, matching_products, base_url, last_optimized
   <header>
     <div class="container nav">
       <a href="/" class="brand">Perfume<span>Index</span></a>
-      <a href="/" style="color:var(--accent); font-size:0.88rem; font-weight:700; text-decoration:none;">← Interactive Vibe Finder</a>
+      <a href="/?basket=open" style="color:var(--accent); font-size:0.88rem; font-weight:700; text-decoration:none;">View Basket →</a>
     </div>
   </header>
 
@@ -570,6 +564,7 @@ def build_vibe_page(vibe_name, meta, matching_products, base_url, last_optimized
   <footer>
     <div class="container">© 2026 PerfumeIndex. 100% Factory-Sealed Designer &amp; Niche Fragrances.</div>
   </footer>
+  {BASKET_SCRIPT}
   <script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{{"token": "62a49852409e4a2faf39b4fe379b7759"}}'></script>
 </body>
 </html>"""
@@ -611,19 +606,19 @@ def build_all():
 
         idx_html = re.sub(
             r"<!-- SSR_SCHEMA_START -->.*?<!-- SSR_SCHEMA_END -->",
-            f"<!-- SSR_SCHEMA_START -->\n  {ssr_schema}\n  <!-- SSR_SCHEMA_END -->",
+            lambda _: f"<!-- SSR_SCHEMA_START -->\n  {ssr_schema}\n  <!-- SSR_SCHEMA_END -->",
             idx_html,
             flags=re.S
         )
         idx_html = re.sub(
             r"<!-- SSR_GRID_START -->.*?<!-- SSR_GRID_END -->",
-            f"<!-- SSR_GRID_START -->\n{ssr_cards}\n    <!-- SSR_GRID_END -->",
+            lambda _: f"<!-- SSR_GRID_START -->\n{ssr_cards}\n    <!-- SSR_GRID_END -->",
             idx_html,
             flags=re.S
         )
         idx_html = re.sub(
             r"<!-- SSR_TABLE_START -->.*?<!-- SSR_TABLE_END -->",
-            f"<!-- SSR_TABLE_START -->\n{ssr_rows}\n        <!-- SSR_TABLE_END -->",
+            lambda _: f"<!-- SSR_TABLE_START -->\n{ssr_rows}\n        <!-- SSR_TABLE_END -->",
             idx_html,
             flags=re.S
         )
