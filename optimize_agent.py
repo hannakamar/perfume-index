@@ -91,8 +91,8 @@ def run_optimization():
             "retail_url": p.get("retail_url"),
             "index_usd": p["index_usd"],
             "direct_usd": p.get("direct_usd"),
-            "ebay_url": p["ebay_url"],
             "direct_url": p.get("direct_url"),
+            "fragrancex_url": p.get("fragrancex_url"),
             "vibes": p.get("vibes", []),
             "image_url": p.get("image_url")
         }
@@ -103,7 +103,7 @@ def run_optimization():
     today_str = datetime.date.today().isoformat()
 
     prompt = f"""
-You are an autonomous SEO and geo-arbitrage optimization agent for PerfumeIndex, an online fragrance price comparison index.
+You are an autonomous SEO and e-commerce optimization agent for PerfumeIndex, an online fragrance store offering factory-sealed designer and niche perfumes below official retail.
 
 Analyze the 28-day Google Search Console country performance telemetry and the current site configuration (`data.json`):
 
@@ -115,13 +115,14 @@ Current data.json:
 
 Your tasks:
 1. Determine the highest-opportunity `default_country` code from the supported keys in `countries` (e.g., "US", "UK", "EU", "IL", "CA", "AU") based on clicks and impressions. If all clicks are 0, keep "US".
-2. Refine `seo_title`, `seo_intro`, and `vat_note` inside each entry of `countries` to maximize organic search CTR and buyer trust for local shoppers comparing official retail prices against verified discounter/eBay prices.
-3. Update `badge` labels on products (e.g., "Top Arbitrage Deal", "Best Seller", "High Savings") to highlight strong discounts, and refine `notes` if needed for clarity.
+2. Refine `seo_title`, `seo_intro`, and `vat_note` inside each entry of `countries` to maximize organic search CTR and buyer trust for local shoppers comparing official retail prices against direct factory-sealed prices.
+3. Update `badge` labels on products (e.g., "Top Value", "Best Seller", "High Savings") to highlight strong discounts, and refine `notes` if needed for clarity.
 4. Set `last_optimized` to "{today_str}".
 
 STRICT RULES:
 - Return ONLY valid JSON matching the exact schema of `current_data`.
-- Do NOT alter `base_url`, `id`, `brand`, `name`, `size`, `gender`, `vibes`, `image_url`, `retail_usd`, `retail_url`, `index_usd`, `direct_usd`, `ebay_url`, `direct_url`, `currency`, `symbol`, or `rate_to_usd`.
+- Do NOT alter `base_url`, `id`, `brand`, `name`, `size`, `gender`, `vibes`, `image_url`, `retail_usd`, `retail_url`, `index_usd`, `direct_usd`, `direct_url`, `fragrancex_url`, `currency`, `symbol`, or `rate_to_usd`.
+- Do NOT add any eBay references or links.
 """
 
     updated_data = None
@@ -160,12 +161,14 @@ STRICT RULES:
             product["index_usd"] = snap["index_usd"]
             if snap["direct_usd"] is not None:
                 product["direct_usd"] = snap["direct_usd"]
-            product["ebay_url"] = snap["ebay_url"]
             if snap["direct_url"] is not None:
                 product["direct_url"] = snap["direct_url"]
+            if snap["fragrancex_url"] is not None:
+                product["fragrancex_url"] = snap["fragrancex_url"]
             product["vibes"] = snap["vibes"]
             if snap["image_url"] is not None:
                 product["image_url"] = snap["image_url"]
+            product.pop("ebay_url", None)
 
     updated_data["last_optimized"] = today_str
 
